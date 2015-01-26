@@ -17,6 +17,8 @@
 
     <import file="${common.build.dir}/common-build.xml"/>
 
+    <property name="build.notwebapp" value="true"/>
+
     <!-- Distribution settings -->
     <!--suppress AntResolveInspection -->
     <property name="dist.out.dir" value="${dist.dir}/${target}-${version}"/>

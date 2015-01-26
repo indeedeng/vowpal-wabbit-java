@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<project name="%%CHANGEME%%" default="compile" basedir=".">
+    <property environment="env"/>
+    <!-- cross-platform hack to get the host name -->
+    <property name="env.HOSTNAME" value="${env.COMPUTERNAME}"/>
+
+    <!-- ====================================================================== -->
+    <!-- Load properties files                                                  -->
+    <!-- ====================================================================== -->
+    <!-- first load local settings in build.properties (ant properties are immutable so we load this first) -->
+    <property file="build.properties"/>
+    <!-- then load defaults from build.properties.default -->
+    <property file="build.properties.default"/>
+
+    <property name="indeed.project.dir" value="${env.INDEED_PROJECT_DIR}"/>
+    <property name="common.build.dir" value="${indeed.project.dir}/javadev/build"/>
+
+    <import file="${common.build.dir}/common-build.xml"/>
+
+    <!-- Distribution settings -->
+    <!--suppress AntResolveInspection -->
+    <property name="dist.out.dir" value="${dist.dir}/${target}-${version}"/>
+    <property name="dist.lib.dir" value="${dist.out.dir}/lib"/>
+</project>

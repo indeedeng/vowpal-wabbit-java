@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://incubator.apache.org/ivy/schemas/ivy.xsd">
+
+    <info organisation="indeed" module="%%CHANGEME%%" status="integration"/>
+
+    <configurations defaultconfmapping="master->default(master)">
+        <conf name="master"/>
+        <conf name="test" extends="master"/>
+        <conf name="runtime" extends="master"/>
+        <conf name="webapp" extends="master"/>
+        <conf name="compile" extends="runtime,webapp"/>
+        <conf name="default" extends="master"/>
+        <!-- Specialization of the 'compile' configuration for closure tools, since some of them contain
+             embedded versions of the google guava libraries that differ from the versions used by our
+             projects -->
+        <conf name="closure" extends="compile"/>
+        <conf name="tools" extends="master"/>
+        <conf name="war"/>
+        <conf name="tarball"/>
+    </configurations>
+
+    <publications>
+        <artifact name="%%CHANGEME%%" type="jar" conf="master"/>
+        <artifact name="ROOT" type="war" conf="war"/>
+        <artifact name="%%CHANGEME%%-tests" type="tar.bz2" conf="master"/>
+    </publications>
+
+</ivy-module>

@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://incubator.apache.org/ivy/schemas/ivy.xsd">
 
-    <info organisation="indeed" module="%%CHANGEME%%" status="integration"/>
+    <info organisation="indeed" module="${ant.project.name}" status="integration"/>
 
     <configurations defaultconfmapping="master->default(master)">
         <conf name="master"/>
@@ -21,8 +21,8 @@
     </configurations>
 
     <publications>
-        <artifact name="%%CHANGEME%%" type="jar" conf="master"/>
-        <artifact name="%%CHANGEME%%-tests" type="tar.bz2" conf="master"/>
+        <artifact name="${ant.project.name}" type="jar" conf="master"/>
+        <artifact name="${ant.project.name}-tests" type="tar.bz2" conf="master"/>
     </publications>
 
     <dependencies>

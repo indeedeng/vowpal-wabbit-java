@@ -28,6 +28,9 @@
     <dependencies>
         <!-- indeed -->
         <dependency org="indeed" name="common-util" rev="${common-util.version}"/>
+
+        <!-- test only -->
+        <dependency org="indeed" name="testutils" rev="${testutils.version}" conf="test->default"/>
     </dependencies>
         
 </ivy-module>

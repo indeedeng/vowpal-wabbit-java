@@ -9,7 +9,7 @@
         <conf name="master"/>
         <conf name="test" extends="master"/>
         <conf name="runtime" extends="master"/>
-        <conf name="compile" extends="runtime,webapp"/>
+        <conf name="compile" extends="runtime"/>
         <conf name="default" extends="master"/>
         <!-- Specialization of the 'compile' configuration for closure tools, since some of them contain
              embedded versions of the google guava libraries that differ from the versions used by our

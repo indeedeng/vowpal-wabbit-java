@@ -6,6 +6,7 @@ import com.indeed.vw.wrapper.learner.VWFloatLearner;
 import com.indeed.vw.wrapper.learner.VWIntArrayLearner;
 import com.indeed.vw.wrapper.learner.VWIntLearner;
 import com.indeed.vw.wrapper.learner.VWLearners;
+import org.apache.log4j.Logger;
 
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -16,22 +17,25 @@ import java.util.Arrays;
  * For better parameters documentation read: https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments
  */
 public class VowpalWabbit {
+    private static final Logger logger = Logger.getLogger(VowpalWabbit.class);
+    public static final String ANY_NAMESPACE = ":";
+
     private VowpalWabbit() {
     }
 
-    enum Hash {
+    public enum Hash {
         strings, all
     }
 
-    enum Loss {
+    public enum Loss {
         squared, classic, hinge, logistic, quantile, poisson
     }
 
-    enum LDF {
+    public enum LDF {
         singleline, multiline
     }
 
-    enum Link {
+    public enum Link {
         identity, logistic, glf1, poisson
     }
 
@@ -49,6 +53,17 @@ public class VowpalWabbit {
 
         private final StringBuilder argumentsStringBuilder = new StringBuilder();
         private boolean verbose = false;
+
+        /**
+         * Make vowpal wabbit writing debug and performance information to stderr
+         *
+         * @return builder
+         */
+        public Builder verbose() {
+            verbose = true;
+            return this;
+        }
+
         /**
          * seed random number generator
          *
@@ -78,6 +93,7 @@ public class VowpalWabbit {
          * @param learningRate
          * @return builder
          */
+        @Override
         public Builder learning_rate(final double learningRate) {
             argumentsStringBuilder.append("--learning_rate " + learningRate + " ");
             return this;
@@ -185,28 +201,26 @@ public class VowpalWabbit {
         }
 
         /**
-         * ignore namespaces beginning with character <arg>
+         * ignore namespace  <arg>
          *
-         * @param namespaceChar
+         * @param namespace
          * @return builder
          */
-        public Builder ignore(final char namespaceChar) {
-            argumentsStringBuilder.append("--ignore " + namespaceChar + " ");
+        public Builder ignore(final String namespace) {
+            argumentsStringBuilder.append("--ignore " + namespace.charAt(0) + " ");
             return this;
         }
 
         /**
-         * keep namespaces beginning with character <arg>
+         * keep namespace <arg>
          *
-         * @param namespaceChar
+         * @param namespace
          * @return builder
          */
-        public Builder keep(final char namespaceChar) {
-            argumentsStringBuilder.append("--keep " + namespaceChar + " ");
+        public Builder keep(final String namespace) {
+            argumentsStringBuilder.append("--keep " + namespace.charAt(0) + " ");
             return this;
         }
-
-        public static final char ANY_NAMESPACE = ':';
 
         /**
          * redefine namespaces beginning with characters of string S as namespace N.
@@ -217,9 +231,13 @@ public class VowpalWabbit {
          * @param namespaces
          * @return builder
          */
-        public Builder redefine(final String newNamespace, final char... namespaces) {
+        public Builder redefine(final String newNamespace, final String ... namespaces) {
+            final StringBuilder oldNamespaces = new StringBuilder();
+            for (final String namespace : namespaces) {
+                oldNamespaces.append(namespace.charAt(0));
+            }
             argumentsStringBuilder.append("--redefine " +
-                    newNamespace + ":=" + Joiner.on("").join(Arrays.asList(namespaces)) +
+                    newNamespace + ":=" + oldNamespaces +
                     " ");
             return this;
         }
@@ -267,12 +285,12 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder ngram(final char namespace, final int n) {
+        public Builder ngram(final String namespace, final int n) {
             if (namespace == ANY_NAMESPACE) {
                 argumentsStringBuilder.append("--ngram " + n + " ");
                 return this;
             }
-            argumentsStringBuilder.append("--ngram " + namespace + "" + n + " ");
+            argumentsStringBuilder.append("--ngram " + namespace.charAt(0) + "" + n + " ");
             return this;
         }
 
@@ -285,12 +303,12 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder skips(final char namespace, final int n) {
+        public Builder skips(final String namespace, final int n) {
             if (namespace == ANY_NAMESPACE) {
                 argumentsStringBuilder.append("--skips " + n + " ");
                 return this;
             }
-            argumentsStringBuilder.append("--skips " + namespace + "" + n + " ");
+            argumentsStringBuilder.append("--skips " + namespace.charAt(0) + "" + n + " ");
             return this;
         }
 
@@ -324,8 +342,8 @@ public class VowpalWabbit {
          * @param namespace
          * @return builder
          */
-        public Builder spelling(final char namespace) {
-            argumentsStringBuilder.append("--spelling " + namespace + " ");
+        public Builder spelling(final String namespace) {
+            argumentsStringBuilder.append("--spelling " + namespace.charAt(0) + " ");
             return this;
         }
 
@@ -357,9 +375,13 @@ public class VowpalWabbit {
          * @param namespaces
          * @return builder
          */
-        public Builder interactions(final char... namespaces) {
+        public Builder interactions(final String ... namespaces) {
+            final StringBuilder namespacesChars = new StringBuilder();
+            for (final String namespace : namespaces) {
+                namespacesChars.append(namespace.charAt(0));
+            }
             argumentsStringBuilder.append("--interactions " +
-                    Joiner.on("").join(Arrays.asList(namespaces)) + " ");
+                    namespacesChars + " ");
             return this;
         }
 
@@ -387,27 +409,29 @@ public class VowpalWabbit {
         /**
          * Create and use quadratic features
          *
-         * @param firstNameSpace  - first char of namespace of ":" for any
-         * @param secondNamespace - second char of namespace of ":" for any
+         * @param firstNameSpace - namespace or ":" for any
+         * @param secondNamespace - namespace or ":" for any
          * @return builder
          */
         @Override
-        public Builder quadratic(final char firstNameSpace, final char secondNamespace) {
-            argumentsStringBuilder.append("--quadratic " + firstNameSpace + secondNamespace + " ");
+        public Builder quadratic(final String firstNameSpace, final String secondNamespace) {
+            argumentsStringBuilder.append("--quadratic " + firstNameSpace.charAt(0) + "" + secondNamespace.charAt(0) + " ");
             return this;
         }
 
         /**
          * Create and use cubic features
          *
-         * @param firstNameSpace  - first char of namespace of ":" for any
-         * @param secondNamespace - second char of namespace of ":" for any
-         * @param thirdNamespace  - third char of namespace of ":" for any
+         * @param firstNameSpace  - namespace or ":" for any
+         * @param secondNamespace - namespace or ":" for any
+         * @param thirdNamespace  - namespace or ":" for any
          * @return builder
          */
         @Override
-        public Builder cubic(final char firstNameSpace, final char secondNamespace, final char thirdNamespace) {
-            argumentsStringBuilder.append("--cubic " + firstNameSpace + secondNamespace + thirdNamespace + " ");
+        public Builder cubic(final String firstNameSpace, final String secondNamespace, final String thirdNamespace) {
+            argumentsStringBuilder.append("--cubic " + firstNameSpace.charAt(0) +
+                    "" + secondNamespace.charAt(0) +
+                    "" + thirdNamespace.charAt(0) + " ");
             return this;
         }
 
@@ -464,7 +488,7 @@ public class VowpalWabbit {
         @Override
         public Builder passes(final int passes) {
             argumentsStringBuilder.append("--passes " + passes + " ");
-            return this;
+            return cache();
         }
 
         /**
@@ -568,7 +592,7 @@ public class VowpalWabbit {
          */
         @Override
         public Builder l2(final double l2) {
-            argumentsStringBuilder.append("--l2 " + l2 + " ");
+            argumentsStringBuilder.append("--l2 " + String.format("%f", l2) + " ");
             return this;
         }
 
@@ -603,20 +627,9 @@ public class VowpalWabbit {
          * @param model
          * @return builder
          */
+        @Override
         public Builder readable_model(final Path model) {
             argumentsStringBuilder.append("--readable_model " + model + " ");
-            return this;
-        }
-
-        /**
-         * Output human-readable final regressor with feature names.  Computationally expensive.
-         *
-         * @param model
-         * @return builder
-         */
-        @Override
-        public Builder invert_hash(final Path model) {
-            argumentsStringBuilder.append("--invert_hash " + model + " ");
             return this;
         }
 
@@ -670,29 +683,6 @@ public class VowpalWabbit {
          */
         public Builder id(final String id) {
             argumentsStringBuilder.append("--id " + id + " ");
-            return this;
-        }
-
-        /**
-         * File to output predictions to
-         *
-         * @param predictionFile
-         * @return builder
-         */
-        @Override
-        public Builder predictions(final Path predictionFile) {
-            argumentsStringBuilder.append("--predictions " + predictionFile + " ");
-            return this;
-        }
-
-        /**
-         * File to output unnormalized predictions to
-         *
-         * @param regularizationFile
-         * @return builder
-         */
-        public Builder raw_predictions(final Path regularizationFile) {
-            argumentsStringBuilder.append("--raw_predictions " + regularizationFile + " ");
             return this;
         }
 
@@ -974,27 +964,29 @@ public class VowpalWabbit {
         /**
          * use low rank quadratic features with field aware weights
          *
-         * @param firstNamespace  - first char of namespace of ":" for any
-         * @param secondNamespace - second char of namespace of ":" for any
+         * @param firstNamespace  - namespace or ":" for any
+         * @param secondNamespace - namespace or ":" for any
          * @param k
          * @return builder
          */
-        public Builder lrqfa(final char firstNamespace, final char secondNamespace, final int k) {
-            argumentsStringBuilder.append("--lrqfa " + firstNamespace + secondNamespace + k + " ");
+        @Override
+        public Builder lrqfa(final String firstNamespace, final String secondNamespace, final int k) {
+            argumentsStringBuilder.append("--lrqfa " + firstNamespace.charAt(0) + "" +
+                    secondNamespace.charAt(0) + "" + k + " ");
             return this;
         }
 
         /**
          * use low rank quadratic features
          *
-         * @param firstNamespace  - first char of namespace of ":" for any
-         * @param secondNamespace - second char of namespace of ":" for any
+         * @param firstNamespace  - namespace or ":" for any
+         * @param secondNamespace - namespace or ":" for any
          * @param k
          * @return builder
          */
-        @Override
-        public Builder lrq(final char firstNamespace, final char secondNamespace, final int k) {
-            argumentsStringBuilder.append("--lrq " + firstNamespace + secondNamespace + k + " ");
+        public Builder lrq(final String firstNamespace, final String secondNamespace, final int k) {
+            argumentsStringBuilder.append("--lrq " + firstNamespace.charAt(0) + "" +
+                    secondNamespace.charAt(0) + "" + k + " ");
             return this;
         }
 
@@ -1004,7 +996,6 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        @Override
         public Builder lrqdropout() {
             argumentsStringBuilder.append("--lrqdropout ");
             return this;
@@ -1253,18 +1244,6 @@ public class VowpalWabbit {
         }
 
         /**
-         * Example Set
-         *
-         * @param dataFile
-         * @return builder
-         */
-        @Override
-        public Builder data(final Path dataFile) {
-            argumentsStringBuilder.append("--data " + dataFile + " ");
-            return this;
-        }
-
-        /**
          * Use a cache.  The default is <data>.cache
          *
          * @return builder
@@ -1280,7 +1259,6 @@ public class VowpalWabbit {
          * @param cacheFile
          * @return builder
          */
-        @Override
         public Builder cache_file(final Path cacheFile) {
             argumentsStringBuilder.append("--cache_file " + cacheFile + " ");
             return this;
@@ -1334,6 +1312,7 @@ public class VowpalWabbit {
          */
         @Override
         public VWFloatLearner buildFloatLearner() {
+            logger.info("Vowpal wabbit command: " + getCommand());
             return (VWFloatLearner) VWLearners.create(getCommand());
         }
 
@@ -1342,6 +1321,7 @@ public class VowpalWabbit {
          * @return VWIntLearner object
          */
         public VWIntLearner buildIntLearner() {
+            logger.info("Vowpal wabbit command: " + getCommand());
             return (VWIntLearner) VWLearners.create(getCommand());
         }
 
@@ -1350,6 +1330,7 @@ public class VowpalWabbit {
          * @return VWFloatArrayLearner object
          */
         public VWFloatArrayLearner buildFloatArrayLearner() {
+            logger.info("Vowpal wabbit command: " + getCommand());
             return (VWFloatArrayLearner) VWLearners.create(getCommand());
         }
 
@@ -1358,6 +1339,7 @@ public class VowpalWabbit {
          * @return VWIntArrayLearner object
          */
         public VWIntArrayLearner buildIntArrayLearner() {
+            logger.info("Vowpal wabbit command: " + getCommand());
             return (VWIntArrayLearner) VWLearners.create(getCommand());
         }
     }

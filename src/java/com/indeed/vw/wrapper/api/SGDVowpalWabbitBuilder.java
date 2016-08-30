@@ -61,6 +61,14 @@ public interface SGDVowpalWabbitBuilder {
      */
     SGDVowpalWabbitBuilder normalized();
 
+    /**
+     * Set learning rate
+     *
+     * @param learningRate
+     * @return builder
+     */
+    public SGDVowpalWabbitBuilder learning_rate(final double learningRate);
+
     // Regularization options
     // ======================
     //
@@ -169,7 +177,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param n
      * @return builder
      */
-    SGDVowpalWabbitBuilder ngram(char namespace, int n);
+    SGDVowpalWabbitBuilder ngram(String namespace, int n);
 
     /**
      * Generate skips in N grams. This in conjunction with the ngram tag can be used to generate generalized n-skip-k-gram.
@@ -179,44 +187,37 @@ public interface SGDVowpalWabbitBuilder {
      * @param n
      * @return builder
      */
-    SGDVowpalWabbitBuilder skips(char namespace, int n);
+    SGDVowpalWabbitBuilder skips(String namespace, int n);
 
     /**
      * Create and use quadratic features
      *
-     * @param firstNameSpace - first char of namespace of ":" for any
-     * @param secondNamespace - second char of namespace of ":" for any
+     * @param firstNameSpace - namespace or ":" for any
+     * @param secondNamespace - namespace or ":" for any
      * @return builder
      */
-    SGDVowpalWabbitBuilder quadratic(char firstNameSpace, char secondNamespace);
+    SGDVowpalWabbitBuilder quadratic(String firstNameSpace, String secondNamespace);
 
     /**
      * Create and use cubic features
      *
-     * @param firstNameSpace - first char of namespace of ":" for any
-     * @param secondNamespace - second char of namespace of ":" for any
-     * @param thirdNamespace - third char of namespace of ":" for any
+     * @param firstNameSpace - namespace or ":" for any
+     * @param secondNamespace - namespace or ":" for any
+     * @param thirdNamespace - namespace or ":" for any
      * @return builder
      */
-    SGDVowpalWabbitBuilder cubic(char firstNameSpace, char secondNamespace, char thirdNamespace);
+    SGDVowpalWabbitBuilder cubic(String firstNameSpace, String secondNamespace, String thirdNamespace);
 
     /**
-     * use low rank quadratic features
+     * use low rank quadratic feature-aware weights
      *
-     * @param firstNamespace  - first char of namespace of ":" for any
-     * @param secondNamespace - second char of namespace of ":" for any
+     * @param firstNamespace  - namespace or ":" for any
+     * @param secondNamespace - namespace or ":" for any
      * @param k
      * @return builder
      */
-    SGDVowpalWabbitBuilder lrq(char firstNamespace, char secondNamespace, int k);
+    SGDVowpalWabbitBuilder lrqfa(String firstNamespace, String secondNamespace, int k);
 
-
-    /**
-     * use dropout training for low rank quadratic features
-     *
-     * @return builder
-     */
-    SGDVowpalWabbitBuilder lrqdropout();
     // Options to save and load model
     // ==============================
 
@@ -236,40 +237,22 @@ public interface SGDVowpalWabbitBuilder {
      */
     SGDVowpalWabbitBuilder final_regressor(Path regressor);
 
-    // Options for input and output data
-    // =================================
-    //
-    // Notice that you can pass train examples and get predictions directly in java
-    // using learn and predict methods of VWFloatLearner.
-    // In this case you don't have sepcify these options
-
-    /**
-     * Example Set
-     *
-     * @param dataFile
-     * @return builder
-     */
-    SGDVowpalWabbitBuilder data(Path dataFile);
-
-    /**
-     * File to output predictions to
-     *
-     * @param predictionFile
-     * @return builder
-     */
-    SGDVowpalWabbitBuilder predictions(Path predictionFile);
-
-
     // Option for debugging model
     // =========================
-
     /**
-     * Output human-readable final regressor with feature names.  Computationally expensive.
+     * Output human-readable final regressor with numeric features
      *
      * @param model
      * @return builder
      */
-    SGDVowpalWabbitBuilder invert_hash(Path model);
+    SGDVowpalWabbitBuilder readable_model(final Path model);
+
+    /**
+     * Make vowpal wabbit writing debug and performance information to stderr
+     *
+     * @return builder
+     */
+    SGDVowpalWabbitBuilder verbose();
 
     // Multi-pass options
     // ==================
@@ -283,14 +266,6 @@ public interface SGDVowpalWabbitBuilder {
      * @return builder
      */
     SGDVowpalWabbitBuilder passes(int passes);
-
-    /**
-     * The location(s) of cache_file.
-     *
-     * @param cacheFile
-     * @return builder
-     */
-    SGDVowpalWabbitBuilder cache_file(Path cacheFile);
 
     // Option to exchange RAM for some quality
     // =======================================

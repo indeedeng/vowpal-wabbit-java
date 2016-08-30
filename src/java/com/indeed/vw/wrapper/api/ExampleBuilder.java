@@ -8,36 +8,60 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * OOP wrapper for vowpal-wabbit input format
+ * OOP wrapper for vowpal-wabbit input format.
+ *
+ * By default each namespace should start with unique character.
+ * because you refer namespace in vowpal wabbit parameters using only one character.
+ *
  * Check https://github.com/JohnLangford/vowpal_wabbit/wiki/Input-format for documentation
  */
 public class ExampleBuilder {
     private static final Pattern VW_CONTROL_CHARACTERS = Pattern.compile("[\\s:\\|]+");
-    private ExampleBuilder() {
+
+    private final boolean doNotCheckNamespaces;
+
+    @Nullable
+    private String label;
+
+    @Nullable
+    private String tag;
+
+    @Nullable
+    private Double exampleWeight;
+
+    private final List<NamespaceBuilder> namespaceBuilders = new ArrayList<>();
+
+    private final Set<Character> namespaceFirstCharacters = new HashSet<>();
+
+    private ExampleBuilder(final boolean doNotCheckNamespaces) {
+        this.doNotCheckNamespaces = doNotCheckNamespaces;
     }
 
     /**
+     * Create method
      *
      * @return example builder
      */
     public static ExampleBuilder create() {
-        return new ExampleBuilder();
+        return new ExampleBuilder(false);
     }
 
     /**
-     * You can decide in any moment of the training that you want to save the current model in arbitrary file,
-     * using a dummy example returned by this method
+     * By default each namespace should start with unique character.
+     * If you want to have multiple namespaces starting with same character use this method.
      *
-     * @param modelPath
-     * @return save command string
+     * @return example builder
      */
-    public static String buildSaveModelOnDemandCommand(@Nonnull final Path modelPath) {
-        return "save_" + modelPath;
+    public static ExampleBuilder createAndDoNotCheckNamespace() {
+        return new ExampleBuilder(true);
     }
+
     /**
      * Builder for namespace
      * Use ExampleBuilder to create an instance
@@ -66,6 +90,7 @@ public class ExampleBuilder {
             this.weight = weight;
             return this;
         }
+
         /**
          * Add a categorical feature to this namespace (e.g. userId, jobId)
          *
@@ -76,6 +101,21 @@ public class ExampleBuilder {
             Preconditions.checkArgument(!VW_CONTROL_CHARACTERS.matcher(feature).find(),
                     "Bad feature name! " +
                         "Namespace=" + name + " feature=" + feature);
+            features.append(feature).append(" ");
+            return this;
+        }
+
+        /**
+         * Add a categorical feature to this namespace (e.g. userId, jobId)
+         *
+         * @param subNamespace sub namespace - e.g. namespace=person, subNamespace=gender, feature=Female
+         * @param feature - categorical value
+         * @return builder
+         */
+        public NamespaceBuilder addCategoricalFeature(@Nonnull String subNamespace, @Nonnull final String feature) {
+            Preconditions.checkArgument(!VW_CONTROL_CHARACTERS.matcher(feature).find(),
+                    "Bad feature name! " +
+                            "Namespace=" + name + " feature=" + feature);
             features.append(feature).append(" ");
             return this;
         }
@@ -126,29 +166,47 @@ public class ExampleBuilder {
         }
     }
 
-    @Nullable
-    private String label;
-
-    @Nullable
-    private String tag;
-
-    @Nullable
-    private Double exampleWeight;
-
-    private final List<NamespaceBuilder> namespaceBuilders = new ArrayList<>();
-
     /**
      * Label is the real number that we are trying to predict for this example.
      * <b>Important note:</b> when using logistic or hinge loss, the labels need to be from the set {+1,-1}
      *
      * @param label
-     * @return
+     * @return builder
      */
     public ExampleBuilder label(final double label) {
         Preconditions.checkArgument(Doubles.isFinite(label),
                 "Incorrect label: " + label);
         this.label = Double.toString(label);
         return this;
+    }
+
+    /**
+     * This is convenient method to set label when you use logistic or hinge loss you.
+     * This label will convert labels to be from the set {+1,-1}.
+     *
+     * @param binaryLabel
+     * @return builder
+     */
+    public ExampleBuilder binaryLabel(final boolean binaryLabel) {
+        this.label = binaryLabel ? "1" : "-1";
+        return this;
+    }
+
+    /**
+     * Get example label
+     *
+     * @return label
+     */
+    public double getLabel() {
+        return Double.parseDouble(label);
+    }
+    /**
+     * Get example tag
+     *
+     * @return tag
+     */
+    public String getTag() {
+        return tag;
     }
 
     /**
@@ -206,12 +264,31 @@ public class ExampleBuilder {
     }
 
     public NamespaceBuilder createNamespace(@Nonnull final String namespace) {
+        Preconditions.checkArgument(!namespace.isEmpty(), "Namespace should not be empty!");
         Preconditions.checkArgument(!VW_CONTROL_CHARACTERS.matcher(namespace).find(),
                 "Bad namespace name!" +
                         "Namespace=" + namespace);
+        Preconditions.checkArgument(doNotCheckNamespaces || !namespaceFirstCharacters.contains(namespace.charAt(0)),
+                        "By default each namespace should start with unique character.\n" +
+                        "The reason fo it is that we can use only first character of namespace " +
+                        "in vowpal wabbit options such as 'quadratic', 'ngram', etc.\n" +
+                        "If you want to have multiple namspaces that start with same character - " +
+                        "create ExampleBuilder instance using ExampleBuilder.createAndDoNotCheckNamespace() method.\n" +
+                        "These namespaces start with same character: " + namespace + ", " +
+                                namespaceThatStartWithSameCharacter(namespace));
         final NamespaceBuilder namespaceBuilder = new NamespaceBuilder(this, namespace);
         namespaceBuilders.add(namespaceBuilder);
+        namespaceFirstCharacters.add(namespace.charAt(0));
         return namespaceBuilder;
+    }
+
+    private String namespaceThatStartWithSameCharacter(final String namespace) {
+        for (final NamespaceBuilder anotherNameSpace : namespaceBuilders) {
+            if (namespace.charAt(0) == anotherNameSpace.name.charAt(0)) {
+                return anotherNameSpace.name;
+            }
+        }
+        return "";
     }
 
     @Override

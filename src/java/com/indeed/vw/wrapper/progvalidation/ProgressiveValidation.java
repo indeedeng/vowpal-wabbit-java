@@ -2,16 +2,19 @@ package com.indeed.vw.wrapper.progvalidation;
 
 import org.apache.log4j.Logger;
 
+import java.text.DecimalFormat;
+
 /**
  *
  */
 public abstract class ProgressiveValidation {
-    private static final Logger logger = Logger.getLogger(ProgressiveValidation.class);
-    protected int examplesCount = 0;
-    private final int printScoreEveryNExamples;
 
-    protected ProgressiveValidation(final int printScoreEveryNExamples) {
-        this.printScoreEveryNExamples = printScoreEveryNExamples;
+    private final String metric;
+    private final boolean biggerIsBetter;
+
+    protected ProgressiveValidation(final String metric, final boolean biggerIsBetter) {
+        this.metric = metric;
+        this.biggerIsBetter = biggerIsBetter;
     }
 
     /**
@@ -19,25 +22,20 @@ public abstract class ProgressiveValidation {
      * @param prediction
      * @param actual
      */
-    public synchronized void updateScore(double prediction, double actual) {
-        doUpdateScore(prediction, actual);
-        examplesCount++;
-        if (printScoreEveryNExamples > 0) {
-            if (examplesCount % printScoreEveryNExamples == 0) {
-                printScore();
-            }
-        }
-    }
-
-
-    public synchronized void printScore() {
-        logger.info("Rows=" + examplesCount + " " + metric() + "=" + getScore());
-    }
+    public abstract void updateScore(double prediction, double actual);
 
     public abstract double getScore();
 
+    public String getMetric() {
+        return metric;
+    }
 
-    protected abstract String metric();
+    public boolean isBiggerIsBetter() {
+        return biggerIsBetter;
+    }
 
-    protected abstract void doUpdateScore(final double prediction, final double actual);
+    @Override
+    public synchronized String toString() {
+        return getMetric() + "=" + new DecimalFormat("0.000000").format(getScore());
+    }
 }

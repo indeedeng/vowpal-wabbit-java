@@ -4,15 +4,14 @@ import com.indeed.vw.wrapper.api.ExampleBuilder;
 import com.indeed.vw.wrapper.api.SGDVowpalWabbitBuilder;
 import com.indeed.vw.wrapper.api.VowpalWabbit;
 import com.indeed.vw.wrapper.integration.IntegrationSuite;
-import org.junit.Test;
+import com.indeed.vw.wrapper.progvalidation.Metrics;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This is example of how vowpal-wabbit can be used for recomendation systems
+ * This is example of how vowpal-wabbit can be used for recommendation systems
  */
 public class TestOnMovieLensDataset extends IntegrationSuite {
     private static final int RATING_POS = 0;
@@ -27,8 +26,8 @@ public class TestOnMovieLensDataset extends IntegrationSuite {
     private static final int M_GENRES_POS = 9;
 
     @Override
-    protected VowpalWabbit.Builder configureVowpalWabbit() {
-        return VowpalWabbit.advancedBuilder()
+    protected SGDVowpalWabbitBuilder configureVowpalWabbit() {
+        return VowpalWabbit.builder()
                 // Bit precision increases consumption of RAM
                 // and decreases chances of hash collision - so improves quality.
                 .bit_precision(29)
@@ -62,9 +61,7 @@ public class TestOnMovieLensDataset extends IntegrationSuite {
     @Override
     protected ExampleBuilder parseWvExample(final List<String> columns) {
         final double rating = Double.parseDouble(columns.get(RATING_POS));
-        final String id = columns.get(USER_ID_POS) + "_" + columns.get(MOVIE_ID_POS);
         final ExampleBuilder exampleBuilder = ExampleBuilder.create()
-                .exampleTag(id)
                 .label(rating);
         exampleBuilder.createNamespace("user_id")
                 .addCategoricalFeature(columns.get(USER_ID_POS));
@@ -94,8 +91,23 @@ public class TestOnMovieLensDataset extends IntegrationSuite {
     }
 
     @Override
+    protected String getMetricToVerify() {
+        return "RMSE";
+    }
+
+    @Override
+    protected Metrics createProgressiveValidation(final int printEveryN) {
+        return Metrics.regressionMetrics(printEveryN);
+    }
+
+    @Override
+    protected char getInputCsvSeparator() {
+        return ',';
+    }
+
+    @Override
     protected double expectedTestScore() {
-        return 0.8996;
+        return 0.898;
     }
 
     @Override

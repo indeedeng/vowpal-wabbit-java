@@ -117,16 +117,16 @@ Output format
 
 Columns description:
 
-# rating - are made on a 5-star scale (whole-star ratings only) - this is target variable
-# timestamp - is represented in seconds since the epoch as returned by time(2)
-# user_id - range between 1 and 6040
-# movie_id - range between 1 and 3952
-# u_gender - Gender is denoted by a "M" for male and "F" for female
-# u_age - Age is chosen from the following ranges: [1]
-# u_ocupation - Occupation is chosen from the following choices: [2]
-# u_zip_code - Zip-code
-# m_title - Titles are identical to titles provided by the IMDB (including year of release)
-# m_genres - Genres are pipe-separated and are selected from the following genres: [3]
+1. rating - are made on a 5-star scale (whole-star ratings only) - this is target variable
+2. timestamp - is represented in seconds since the epoch as returned by time(2)
+3. user_id - range between 1 and 6040
+4. movie_id - range between 1 and 3952
+5. u_gender - Gender is denoted by a "M" for male and "F" for female
+6. u_age - Age is chosen from the following ranges: [1]
+7. u_ocupation - Occupation is chosen from the following choices: [2]
+8. u_zip_code - Zip-code
+9. m_title - Titles are identical to titles provided by the IMDB (including year of release)
+10 m_genres - Genres are pipe-separated and are selected from the following genres: [3]
 
 
 [1] - _Ages ranges:_

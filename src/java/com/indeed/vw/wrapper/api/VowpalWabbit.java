@@ -139,6 +139,7 @@ public class VowpalWabbit {
          * @param featureMask
          * @return builder
          */
+        @Override
         public Builder feature_mask(final Path featureMask) {
             argumentsStringBuilder.append("--feature_mask " + featureMask + " ");
             return this;
@@ -485,7 +486,6 @@ public class VowpalWabbit {
          * @param passes
          * @return builder
          */
-        @Override
         public Builder passes(final int passes) {
             argumentsStringBuilder.append("--passes " + passes + " ");
             return cache();
@@ -1163,6 +1163,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
+        @Override
         public Builder ftrl() {
             argumentsStringBuilder.append("--ftrl ");
             return this;

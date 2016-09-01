@@ -1,28 +1,25 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- *
+ * See https://www.kaggle.com/wiki/RootMeanSquaredError
  */
 public class RMSEValidation extends ProgressiveValidation {
 
     private double sumOfSquares = 0;
+    private int count = 0;
 
-    public RMSEValidation(final int printScoreEveryNExamples) {
-        super(printScoreEveryNExamples);
+    public RMSEValidation() {
+        super("RMSE", false);
     }
 
     @Override
-    public double getScore() {
-        return Math.sqrt(sumOfSquares / examplesCount);
+    public synchronized double getScore() {
+        return Math.sqrt(sumOfSquares / count);
     }
 
     @Override
-    protected String metric() {
-        return "RMSE";
-    }
-
-    @Override
-    protected void doUpdateScore(final double prediction, final double actual) {
+    public synchronized void updateScore(final double prediction, final double actual) {
         sumOfSquares += (prediction - actual) * (prediction - actual);
+        count++;
     }
 }

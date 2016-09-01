@@ -1,28 +1,25 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- *
+ * https://www.kaggle.com/wiki/MeanAbsoluteError
  */
 public class MAEValidation extends ProgressiveValidation {
 
     private double absoluteError = 0;
+    private int count = 0;
 
-    protected MAEValidation(final int printScoreEveryNExamples) {
-        super(printScoreEveryNExamples);
+    public MAEValidation() {
+        super("MAE", false);
     }
 
     @Override
-    public double getScore() {
-        return absoluteError / examplesCount;
+    public synchronized double getScore() {
+        return absoluteError / count;
     }
 
     @Override
-    protected String metric() {
-        return "MAE";
-    }
-
-    @Override
-    protected void doUpdateScore(final double prediction, final double actual) {
+    public synchronized void updateScore(final double prediction, final double actual) {
         absoluteError += Math.abs(prediction - actual);
+        count++;
     }
 }

@@ -7,7 +7,8 @@ import java.nio.file.Path;
 /**
  * This interface specify small subset of available options with some additional.
  *
- * In 90% of cases you will need only these options
+ * In 90% [1] of cases you will need only these options.
+ *
  * Though I highly recommend to follow https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments
  * and read some tutorials.
  */
@@ -254,18 +255,39 @@ public interface SGDVowpalWabbitBuilder {
      */
     SGDVowpalWabbitBuilder verbose();
 
-    // Multi-pass options
-    // ==================
+    // Feature selection options
+    // =========================
     //
-    // If you have small train dataset then you may try to pass through it several times
-    // in this case you need to specify cache file - optimized input representation - path
+    // Usual way to do feature selection in GLM framework is to set l1 regularization.
+    // This type of regularization will tend to zero weights of unrellevant variables.
+    // Although this a good way to go, setting l1 usually decreases model quality.
+    //
+    // Vowpal wabbit has two workarounds. One of them is ftrl-proximal optimization algorithm.
+    // This algorithm accumulates updates in a buffer vector and changes actual model
+    // weights only if updates are big enough. As result, the produced model tends to be very sparse.
+    // I order to get benefit from this option you still need to set l1. Also this is the algorithm described
+    // in famous google paper "ctr-modeling, a view from trenches".
+    //
+    // Other option is feature mask. The idea of feature mask is that you train a model with very big l1 regularization
+    // to do feature selection in a first pass. Then in a second pass you use previous model to zero unrellevant features
+    // and you can train without l1 regularization at all.
+
     /**
-     * Number of Training Passes
+     * FTRL: Follow the Proximal Regularized Leader
      *
-     * @param passes
      * @return builder
      */
-    SGDVowpalWabbitBuilder passes(int passes);
+    SGDVowpalWabbitBuilder ftrl();
+
+    /**
+     * Use existing regressor to determine which parameters may be updated.
+     * If no initial_regressor given, also used for initial weights.
+     *
+     * @param featureMask
+     * @return builder
+     */
+    SGDVowpalWabbitBuilder feature_mask(final Path featureMask);
+
 
     // Option to exchange RAM for some quality
     // =======================================
@@ -290,7 +312,7 @@ public interface SGDVowpalWabbitBuilder {
 
 
     /**
-     * seed random number generator
+     * Seed random number generator
      *
      * @param seed
      * @return builder
@@ -298,8 +320,11 @@ public interface SGDVowpalWabbitBuilder {
     SGDVowpalWabbitBuilder random_seed(int seed);
 
     /**
+     * Build learner
      *
-     * @return VWFloatLearner inctance
+     * @return VWFloatLearner instance
      */
     VWFloatLearner buildFloatLearner();
 }
+
+// [1] - this number is calculated using Data Science.

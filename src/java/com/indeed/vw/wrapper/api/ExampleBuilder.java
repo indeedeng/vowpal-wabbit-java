@@ -309,13 +309,4 @@ public class ExampleBuilder {
         sb.append(Joiner.on(" ").join(namespaceBuilders));
         return sb.toString();
     }
-
-    /**
-     * Serialize example in vowpal wabbit input format
-     *
-     * @return string
-     */
-    public String build() {
-        return toString();
-    }
 }

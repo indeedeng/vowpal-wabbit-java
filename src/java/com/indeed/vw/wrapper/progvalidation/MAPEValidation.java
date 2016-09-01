@@ -1,28 +1,25 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- *
+ * See https://en.wikipedia.org/wiki/Mean_absolute_percentage_error
  */
 public class MAPEValidation extends ProgressiveValidation {
 
     private double absolutePercentageError = 0;
+    private int count = 0;
 
-    protected MAPEValidation(final int printScoreEveryNExamples) {
-        super(printScoreEveryNExamples);
+    public MAPEValidation() {
+        super("MAPE", false);
     }
 
     @Override
-    public double getScore() {
-        return 100 * absolutePercentageError / examplesCount;
+    public synchronized double getScore() {
+        return 100 * absolutePercentageError / count;
     }
 
     @Override
-    protected String metric() {
-        return "MAPE";
-    }
-
-    @Override
-    protected void doUpdateScore(final double prediction, final double actual) {
+    public synchronized void updateScore(final double prediction, final double actual) {
         absolutePercentageError += Math.abs(prediction - actual) / actual;
+        count++;
     }
 }

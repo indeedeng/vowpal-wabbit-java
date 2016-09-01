@@ -592,7 +592,7 @@ public class VowpalWabbit {
          */
         @Override
         public Builder l2(final double l2) {
-            argumentsStringBuilder.append("--l2 " + String.format("%f", l2) + " ");
+            argumentsStringBuilder.append("--l2 " + l2 + " ");
             return this;
         }
 

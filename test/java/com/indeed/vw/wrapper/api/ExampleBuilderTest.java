@@ -1,6 +1,5 @@
 package com.indeed.vw.wrapper.api;
 
-import com.indeed.vw.wrapper.api.ExampleBuilder.NamespaceBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -23,14 +22,14 @@ public class ExampleBuilderTest {
         example1.createNamespace("job_description")
                 .addTextAsFeatures(
                         "||We are Korea’s largest online: retailer\n and our\n goal is\n to create ");
-        example1.createNamespace("statistcs")
+        example1.createNamespace("aggregations")
                 .addNumericalFeature("min", -2.2)
                 .addNumericalFeature("median", 0.9)
                 .addNumericalFeature("max", 4);
-        String expected = "1.0 2.0 'wewerewf" +
+        String expected = "3.2 2.0 'wewerewf" +
                 "|states:2.5 tx ca " +
                 "|job_description  We are Korea’s largest online retailer and our goal is to create " +
-                "|statistcs min:-2.2 median:0.9 max:4.0\n";
+                "|aggregations min:-2.2 median:0.9 max:4.0";
         assertEquals(expected, example1.toString());
     }
 
@@ -47,7 +46,6 @@ public class ExampleBuilderTest {
         exampleBuilder
                 .createNamespace("query")
                 .addTextAsFeatures("query word and so on");
-        System.out.println(exampleBuilder);
         assertEquals(
                 "-1.0 |user_id uid123 |ad_id ad123 |query query word and so on",
                 exampleBuilder.toString());

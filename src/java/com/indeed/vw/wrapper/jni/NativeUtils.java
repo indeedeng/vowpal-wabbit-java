@@ -1,5 +1,7 @@
 package com.indeed.vw.wrapper.jni;
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
@@ -25,7 +27,7 @@ import java.util.regex.Pattern;
  * @author Jon Morra
  */
 public class NativeUtils {
-
+    private static final Logger logger = Logger.getLogger(NativeUtils.class);
     /**
      * Private constructor - this class will never be instanced
      */
@@ -147,10 +149,12 @@ public class NativeUtils {
             }
         }
         if (osDependentLib != null) {
+            logger.info("Loading " + osDependentLib);
             loadLibraryFromJar(osDependentLib);
         }
         else {
             try {
+                logger.info("Loading " + path + suffix);
                 loadLibraryFromJar(path + suffix);
             }
             catch (final FileNotFoundException e) {

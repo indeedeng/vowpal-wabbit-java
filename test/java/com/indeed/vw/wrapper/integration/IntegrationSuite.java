@@ -171,7 +171,7 @@ public abstract class IntegrationSuite {
         final List<List<String>> table = new ArrayList<>();
         try (final GZIPInputStream trainInputStream = new GZIPInputStream(
                 getClass().getResourceAsStream(path))) {
-            for (final String line : Iterables.skip(IOUtils.readLines(trainInputStream), 1)) {
+            for (final String line : Iterables.skip((List<String>) IOUtils.readLines(trainInputStream), 1)) {
                 final List<String> columns = Splitter.on(getInputCsvSeparator()).splitToList(line);
                 table.add(columns);
             }

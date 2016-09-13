@@ -1,4 +1,4 @@
-package com.indeed.vw.wrapper.integration.movielens;
+package com.indeed.vw.wrapper.integration.tests;
 
 import com.indeed.vw.wrapper.api.ExampleBuilder;
 import com.indeed.vw.wrapper.api.SGDVowpalWabbitBuilder;
@@ -30,7 +30,8 @@ public class TestOnMovieLensDataset extends IntegrationSuite {
         return VowpalWabbit.builder()
                 // Bit precision increases consumption of RAM
                 // and decreases chances of hash collision - so improves quality.
-                .bit_precision(29)
+                // You can increase this parameter even more
+                .bit_precision(22)
                         // Always try to play with adaptive, invariant and normalized.
                 .adaptive().invariant()
                 .loss_function(VowpalWabbit.Loss.squared)
@@ -107,7 +108,7 @@ public class TestOnMovieLensDataset extends IntegrationSuite {
 
     @Override
     protected double expectedTestScore() {
-        return 0.898;
+        return 0.908;
     }
 
     @Override

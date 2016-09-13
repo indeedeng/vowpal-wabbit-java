@@ -1,4 +1,4 @@
-package com.indeed.vw.wrapper.integration.movielens;
+package com.indeed.vw.wrapper.integration.tests;
 
 import com.indeed.vw.wrapper.api.ExampleBuilder;
 import com.indeed.vw.wrapper.api.SGDVowpalWabbitBuilder;
@@ -32,7 +32,8 @@ public class TestOnTwitterSentimentDataset extends IntegrationSuite {
                 .l1(0.5)
                 // Bit precision increases consumption of RAM and improves quality
                 // Notice that feature mask must have same bit precision as a final model
-                .bit_precision(29)
+                // You can increase this parameter even more
+                .bit_precision(22)
                 // When you have text data it's always good thing to try ngrams and skip-ngrams.
                 // Nice thing about vowpal wabbit is that it is very easy to try these features
                 .ngram("clean", 2)
@@ -59,7 +60,7 @@ public class TestOnTwitterSentimentDataset extends IntegrationSuite {
                 // Though you still can try to use l2 regularization if your model is not stable enough
                 // Also notice that we use regular sgd  (i.e. adaptive, invariant, normalized) to train final model
                 .feature_mask(featureMaskModel)
-                .bit_precision(29)
+                .bit_precision(22)
                 // We need to specify same feature engineering
                 .ngram("clean", 2)
                 .skips("clean", 1)
@@ -104,7 +105,7 @@ public class TestOnTwitterSentimentDataset extends IntegrationSuite {
 
     @Override
     protected double expectedTestScore() {
-        return 0.822;
+        return 0.819;
     }
 
     @Override

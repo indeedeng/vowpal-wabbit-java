@@ -82,7 +82,7 @@ public abstract class IntegrationSuite {
         try (final VWFloatLearner learner = VowpalWabbit.builder()
                 .verbose()
                 .testonly()
-                .initial_regressor(modelPath)
+                .initialRegressor(modelPath)
                 .buildFloatLearner()) {
             final Metrics testValidation = createProgressiveValidation(-1);
             for (final List<String> columns : readColumnsFromCsv(getTestPath())) {
@@ -139,7 +139,7 @@ public abstract class IntegrationSuite {
         final Metrics trainValidation = createProgressiveValidation(100000);
         try (final VWFloatLearner learner = configureVowpalWabbit()
                 .verbose()
-                .final_regressor(modelPath)
+                .finalRegressor(modelPath)
                 .buildFloatLearner()) {
             for (final List<String> columns : readColumnsFromCsv(getTrainPath())) {
                 final ExampleBuilder wvExample = parseWvExample(columns);
@@ -152,7 +152,7 @@ public abstract class IntegrationSuite {
         }
 
         try (final VWFloatLearner testLearner = VowpalWabbit.builder()
-                .initial_regressor(modelPath)
+                .initialRegressor(modelPath)
                 .verbose()
                 .testonly()
                 .buildFloatLearner()) {

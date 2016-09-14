@@ -22,7 +22,7 @@ public class Metrics {
     public static Metrics zeroOneClassificationMetrics(final int printEveryN, double decisionThreashold) {
         return new Metrics(
                 printEveryN,
-                new AccuracyValidation(decisionThreashold), new FScoreValidation(decisionThreashold)
+                new AccuracyValidation(decisionThreashold), new FOneScoreValidation(decisionThreashold)
         );
     }
 

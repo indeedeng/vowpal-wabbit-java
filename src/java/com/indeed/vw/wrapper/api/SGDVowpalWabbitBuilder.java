@@ -68,7 +68,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param learningRate
      * @return builder
      */
-    public SGDVowpalWabbitBuilder learning_rate(final double learningRate);
+    public SGDVowpalWabbitBuilder learningRate(final double learningRate);
 
     // Regularization options
     // ======================
@@ -111,7 +111,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param loss
      * @return builder
      */
-    SGDVowpalWabbitBuilder loss_function(VowpalWabbit.Loss loss);
+    SGDVowpalWabbitBuilder lossFunction(VowpalWabbit.Loss loss);
 
     /**
      * Parameter \tau associated with Quantile loss. Defaults to 0.5 (=0.5)
@@ -119,7 +119,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param tau
      * @return builder
      */
-    SGDVowpalWabbitBuilder quantile_tau(double tau);
+    SGDVowpalWabbitBuilder quantileTau(double tau);
 
     /**
      * Specify the link function: identity, logistic, glf1 or poisson  (=identity)
@@ -139,7 +139,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param min
      * @return builder
      */
-    SGDVowpalWabbitBuilder min_prediction(double min);
+    SGDVowpalWabbitBuilder minPrediction(double min);
 
     /**
      * Largest prediction to output
@@ -147,7 +147,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param max
      * @return builder
      */
-    SGDVowpalWabbitBuilder max_prediction(double max);
+    SGDVowpalWabbitBuilder maxPrediction(double max);
 
     // Feature engineering functions
     // =============================
@@ -228,7 +228,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param initialRegressor
      * @return builder
      */
-    SGDVowpalWabbitBuilder initial_regressor(Path initialRegressor);
+    SGDVowpalWabbitBuilder initialRegressor(Path initialRegressor);
 
     /**
      * Final regressor
@@ -236,7 +236,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param regressor
      * @return builder
      */
-    SGDVowpalWabbitBuilder final_regressor(Path regressor);
+    SGDVowpalWabbitBuilder finalRegressor(Path regressor);
 
     // Option for debugging model
     // =========================
@@ -246,7 +246,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param model
      * @return builder
      */
-    SGDVowpalWabbitBuilder readable_model(final Path model);
+    SGDVowpalWabbitBuilder readableModel(final Path model);
 
     /**
      * Make vowpal wabbit writing debug and performance information to stderr
@@ -281,12 +281,12 @@ public interface SGDVowpalWabbitBuilder {
 
     /**
      * Use existing regressor to determine which parameters may be updated.
-     * If no initial_regressor given, also used for initial weights.
+     * If no initialRegressor given, also used for initial weights.
      *
      * @param featureMask
      * @return builder
      */
-    SGDVowpalWabbitBuilder feature_mask(final Path featureMask);
+    SGDVowpalWabbitBuilder featureMask(final Path featureMask);
 
 
     // Option to exchange RAM for some quality
@@ -298,7 +298,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param bitsNum
      * @return builder
      */
-    SGDVowpalWabbitBuilder bit_precision(int bitsNum);
+    SGDVowpalWabbitBuilder bitPrecision(int bitsNum);
 
     // Misc
     // ====
@@ -317,7 +317,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param seed
      * @return builder
      */
-    SGDVowpalWabbitBuilder random_seed(int seed);
+    SGDVowpalWabbitBuilder randomSeed(int seed);
 
     /**
      * Build learner

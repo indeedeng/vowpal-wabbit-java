@@ -14,6 +14,9 @@ public class MAPEValidation extends ProgressiveValidation {
 
     @Override
     public synchronized double getScore() {
+        if (count == 0) {
+            return Double.POSITIVE_INFINITY;
+        }
         return 100 * absolutePercentageError / count;
     }
 

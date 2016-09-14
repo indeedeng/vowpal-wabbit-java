@@ -17,6 +17,9 @@ public class RecallValidation extends ProgressiveValidation {
 
     @Override
     public synchronized double getScore() {
+        if (truePositives + falseNegatives == 0) {
+            return 0;
+        }
         return truePositives / (truePositives + falseNegatives);
     }
 

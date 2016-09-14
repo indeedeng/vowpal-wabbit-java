@@ -3,6 +3,7 @@ package com.indeed.vw.wrapper.integration.tests;
 import com.indeed.vw.wrapper.api.ExampleBuilder;
 import com.indeed.vw.wrapper.api.SGDVowpalWabbitBuilder;
 import com.indeed.vw.wrapper.api.VowpalWabbit;
+import com.indeed.vw.wrapper.api.VowpalWabbit.Loss;
 import com.indeed.vw.wrapper.integration.IntegrationSuite;
 import com.indeed.vw.wrapper.progvalidation.Metrics;
 
@@ -31,11 +32,11 @@ public class TestOnMovieLensDataset extends IntegrationSuite {
                 // Bit precision increases consumption of RAM
                 // and decreases chances of hash collision - so improves quality.
                 // You can increase this parameter even more
-                .bit_precision(22)
+                .bitPrecision(22)
                         // Always try to play with adaptive, invariant and normalized.
                 .adaptive().invariant()
-                .loss_function(VowpalWabbit.Loss.squared)
-                .learning_rate(0.15)
+                .lossFunction(Loss.squared)
+                .learningRate(0.15)
                         // Most of the magic happens here.
                         // LRQFA - low rank quadratic feature aware interactions.
                         // This option allows to learn latent interaction
@@ -50,8 +51,8 @@ public class TestOnMovieLensDataset extends IntegrationSuite {
                 .quadratic("user_id", "film_features")
                 .quadratic("demographics_features", "movie_id")
                         // Useful constraints.
-                .min_prediction(1)
-                .max_prediction(5)
+                .minPrediction(1)
+                .maxPrediction(5)
                         // Regularization term should be small in high dimension feature space
                         // otherwise you will go out of loss minimum.
                 .l2(0.000001);

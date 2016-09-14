@@ -16,6 +16,9 @@ public class AccuracyValidation extends ProgressiveValidation {
 
     @Override
     public synchronized double getScore() {
+        if (count == 0) {
+            return 0;
+        }
         return correctPredictions / count;
     }
 

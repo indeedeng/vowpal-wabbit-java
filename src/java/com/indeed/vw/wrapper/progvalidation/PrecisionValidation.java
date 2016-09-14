@@ -15,6 +15,9 @@ public class PrecisionValidation extends ProgressiveValidation {
 
     @Override
     public synchronized double getScore() {
+        if (truePositives + falsePositives == 0) {
+            return 0;
+        }
         return truePositives / (truePositives + falsePositives);
     }
 

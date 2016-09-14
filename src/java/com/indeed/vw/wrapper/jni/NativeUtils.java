@@ -51,7 +51,7 @@ public class NativeUtils {
      * @return A system dependent string identifying the OS.
      * @throws IOException If an error occurs while running shell command
      */
-    public static String lsbRelease(final String lsb_args, final Pattern regexp) throws IOException {
+    private static String lsbRelease(final String lsb_args, final Pattern regexp) throws IOException {
         BufferedReader reader = null;
         try {
             Process process = Runtime.getRuntime().exec("lsb_release " + lsb_args);
@@ -76,7 +76,7 @@ public class NativeUtils {
      * @return The Linux distribution or null if the version cannot be found.
      * @throws IOException If an I/O error occurs
      */
-    public static String getDistroName() throws IOException {
+    private static String getDistroName() throws IOException {
         return lsbRelease("-i", Pattern.compile("Distributor ID:\\s*(.*)\\s*$"));
     }
 
@@ -85,7 +85,7 @@ public class NativeUtils {
      * @return The Linux version or null if the version cannot be determined.
      * @throws IOException If an I/O error occurs
      */
-    public static String getLinuxVersion() throws IOException {
+    private static String getLinuxVersion() throws IOException {
         return lsbRelease("-r", Pattern.compile("Release:\\s*(.*)\\s*$"));
     }
 
@@ -99,7 +99,7 @@ public class NativeUtils {
      * @throws IOException If an I/O error occurs
      * @throws IllegalStateException If the os.name property returns an unsupported OS.
      */
-    public static List<String> getOsFamilies() throws IOException {
+   private static List<String> getOsFamilies() throws IOException {
         final String osName = System.getProperty("os.name");
         final String primaryName;
         if (osName.toLowerCase().contains("mac")) {
@@ -150,11 +150,13 @@ public class NativeUtils {
         }
         if (osDependentLib != null) {
             logger.info("Loading " + osDependentLib);
+            System.out.println("Loading " + osDependentLib);
             loadLibraryFromJar(osDependentLib);
         }
         else {
             try {
                 logger.info("Loading " + path + suffix);
+                System.out.println("Loading " + path + suffix);
                 loadLibraryFromJar(path + suffix);
             }
             catch (final FileNotFoundException e) {

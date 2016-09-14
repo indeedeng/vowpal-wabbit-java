@@ -14,7 +14,7 @@ public class VowpalWabbitBuilderTest {
         final String command = VowpalWabbit.advancedBuilder()
                 .adaptive().invariant()
                 .link(VowpalWabbit.Link.logistic)
-                .loss_function(VowpalWabbit.Loss.logistic)
+                .lossFunction(VowpalWabbit.Loss.logistic)
                 .l2(0.0001).getCommand();
         final String expected = "--adaptive --invariant --link logistic --loss_function logistic --l2 1.0E-4  --quiet";
         assertEquals(expected, command);

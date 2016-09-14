@@ -30,7 +30,7 @@ public abstract class ProgressiveValidation {
         return metric;
     }
 
-    public boolean isBiggerIsBetter() {
+    public boolean biggerIsBetter() {
         return biggerIsBetter;
     }
 

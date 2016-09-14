@@ -33,15 +33,15 @@ public class TestOnTwitterSentimentDataset extends IntegrationSuite {
                 // Bit precision increases consumption of RAM and improves quality
                 // Notice that feature mask must have same bit precision as a final model
                 // You can increase this parameter even more
-                .bit_precision(22)
+                .bitPrecision(22)
                 // When you have text data it's always good thing to try ngrams and skip-ngrams.
                 // Nice thing about vowpal wabbit is that it is very easy to try these features
                 .ngram("clean", 2)
                 .skips("clean", 1)
                 .ngram("raw", 2)
                 // Loss function defines whether this task is classification or regression
-                .loss_function(Loss.logistic)
-                .final_regressor(featureMask);
+                .lossFunction(Loss.logistic)
+                .finalRegressor(featureMask);
 
         try (final VWFloatLearner learner = vowpalWabbitBuilder.buildFloatLearner()) {
             for (final List<String> columns : readColumnsFromCsv(getTrainPath())) {
@@ -59,13 +59,13 @@ public class TestOnTwitterSentimentDataset extends IntegrationSuite {
                 // Notice that once we trained feature mask we don't need to use l1 regularization
                 // Though you still can try to use l2 regularization if your model is not stable enough
                 // Also notice that we use regular sgd  (i.e. adaptive, invariant, normalized) to train final model
-                .feature_mask(featureMaskModel)
-                .bit_precision(22)
+                .featureMask(featureMaskModel)
+                .bitPrecision(22)
                 // We need to specify same feature engineering
                 .ngram("clean", 2)
                 .skips("clean", 1)
                 .ngram("raw", 2)
-                .loss_function(Loss.logistic);
+                .lossFunction(Loss.logistic);
     }
 
     private final Pattern notWordPattern = Pattern.compile("[^a-zA-Z]+");

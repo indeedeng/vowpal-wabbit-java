@@ -94,7 +94,7 @@ public class ExampleBuilder {
         /**
          * Add a categorical feature to this namespace (e.g. userId, jobId)
          *
-         * @param feature - categorical value
+         * @param feature - categorical feature
          * @return builder
          */
         public NamespaceBuilder addCategoricalFeature(@Nonnull final String feature) {
@@ -269,9 +269,9 @@ public class ExampleBuilder {
                 "Bad namespace name!" +
                         "Namespace=" + namespace);
         Preconditions.checkArgument(doNotCheckNamespaces || !namespaceFirstCharacters.contains(namespace.charAt(0)),
-                        "By default each namespace should start with unique character.\n" +
-                        "The reason fo it is that we can use only first character of namespace " +
-                        "in vowpal wabbit options such as 'quadratic', 'ngram', etc.\n" +
+                        "Please use a unique first character for each namespace. \n" +
+                        "This is necessary because vowpal wabbit options like '--keep', '--quadratic', '--cubic' \n" +
+                        "only look at the first character of the namespace for performance reasons.\n" +
                         "If you want to have multiple namspaces that start with same character - " +
                         "create ExampleBuilder instance using ExampleBuilder.createAndDoNotCheckNamespace() method.\n" +
                         "These namespaces start with same character: " + namespace + ", " +

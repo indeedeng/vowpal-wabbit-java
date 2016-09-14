@@ -71,7 +71,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder random_seed(final int seed) {
+        public Builder randomSeed(final int seed) {
             argumentsStringBuilder.append("--random_seed " + seed + " ");
             return this;
         }
@@ -82,7 +82,7 @@ public class VowpalWabbit {
          * @param ringSize
          * @return builder
          */
-        public Builder ring_size(final int ringSize) {
+        public Builder ringSize(final int ringSize) {
             argumentsStringBuilder.append("--ring_size " + ringSize + " ");
             return this;
         }
@@ -94,7 +94,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder learning_rate(final double learningRate) {
+        public Builder learningRate(final double learningRate) {
             argumentsStringBuilder.append("--learning_rate " + learningRate + " ");
             return this;
         }
@@ -105,7 +105,7 @@ public class VowpalWabbit {
          * @param powerT
          * @return builder
          */
-        public Builder power_t(final double powerT) {
+        public Builder powerT(final double powerT) {
             argumentsStringBuilder.append("--power_t " + powerT + " ");
             return this;
         }
@@ -116,7 +116,7 @@ public class VowpalWabbit {
          * @param decay
          * @return builder
          */
-        public Builder decay_learning_rate(final double decay) {
+        public Builder decayLearningRate(final double decay) {
             argumentsStringBuilder.append("--decay_learning_rate " + decay + " ");
             return this;
         }
@@ -127,20 +127,20 @@ public class VowpalWabbit {
          * @param initialT
          * @return builder
          */
-        public Builder initial_t(final double initialT) {
+        public Builder initialT(final double initialT) {
             argumentsStringBuilder.append("--initial_t " + initialT + " ");
             return this;
         }
 
         /**
          * Use existing regressor to determine which parameters may be updated.
-         * If no initial_regressor given, also used for initial weights.
+         * If no initialRegressor given, also used for initial weights.
          *
          * @param featureMask
          * @return builder
          */
         @Override
-        public Builder feature_mask(final Path featureMask) {
+        public Builder featureMask(final Path featureMask) {
             argumentsStringBuilder.append("--feature_mask " + featureMask + " ");
             return this;
         }
@@ -152,7 +152,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder initial_regressor(final Path initialRegressor) {
+        public Builder initialRegressor(final Path initialRegressor) {
             argumentsStringBuilder.append("--initial_regressor " + initialRegressor + " ");
             return this;
         }
@@ -163,7 +163,7 @@ public class VowpalWabbit {
          * @param weight
          * @return builder
          */
-        public Builder initial_weight(final double weight) {
+        public Builder initialWeight(final double weight) {
             argumentsStringBuilder.append("--initial_weight " + weight + " ");
             return this;
         }
@@ -174,7 +174,7 @@ public class VowpalWabbit {
          * @param arg
          * @return builder
          */
-        public Builder random_weights(final double arg) {
+        public Builder randomWeights(final double arg) {
             argumentsStringBuilder.append("--random_weights " + arg + " ");
             return this;
         }
@@ -185,7 +185,7 @@ public class VowpalWabbit {
          * @param regularizationPath
          * @return builder
          */
-        public Builder input_feature_regularizer(final Path regularizationPath) {
+        public Builder inputFeatureRegularizer(final Path regularizationPath) {
             argumentsStringBuilder.append("--input_feature_regularizer " + regularizationPath + " ");
             return this;
         }
@@ -250,7 +250,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder bit_precision(final int bitsNum) {
+        public Builder bitPrecision(final int bitsNum) {
             argumentsStringBuilder.append("--bit_precision " + bitsNum + " ");
             return this;
         }
@@ -319,7 +319,7 @@ public class VowpalWabbit {
          * @param n
          * @return builder
          */
-        public Builder feature_limit(final int n) {
+        public Builder featureLimit(final int n) {
             argumentsStringBuilder.append("--feature_limit " + n + " ");
             return this;
         }
@@ -365,7 +365,7 @@ public class VowpalWabbit {
          * @param dir
          * @return builder
          */
-        public Builder dictionary_path(final Path dir) {
+        public Builder dictionaryPath(final Path dir) {
             argumentsStringBuilder.append("--dictionary_path " + dir + " ");
             return this;
         }
@@ -402,7 +402,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder leave_duplicate_interactions() {
+        public Builder leaveDuplicateInteractions() {
             argumentsStringBuilder.append("--leave_duplicate_interactions ");
             return this;
         }
@@ -453,18 +453,18 @@ public class VowpalWabbit {
          * @param holdout
          * @return builder
          */
-        public Builder holdout_period(final int holdout) {
+        public Builder holdoutPeriod(final int holdout) {
             argumentsStringBuilder.append("--holdout_period " + holdout + " ");
             return this;
         }
 
         /**
-         * holdout after n training examples, default off (disables holdout_period)
+         * holdout after n training examples, default off (disables holdoutPeriod)
          *
          * @param n
          * @return builder
          */
-        public Builder holdout_after(final int n) {
+        public Builder holdoutAfter(final int n) {
             argumentsStringBuilder.append("--holdout_after " + n + " ");
             return this;
         }
@@ -475,7 +475,7 @@ public class VowpalWabbit {
          * @param passes
          * @return builder
          */
-        public Builder early_terminate(final int passes) {
+        public Builder earlyTerminate(final int passes) {
             argumentsStringBuilder.append("--early_terminate " + passes + " ");
             return this;
         }
@@ -497,7 +497,7 @@ public class VowpalWabbit {
          * @param examples
          * @return builder
          */
-        public Builder initial_pass_length(final int examples) {
+        public Builder initialPassLength(final int examples) {
             argumentsStringBuilder.append("--initial_pass_length " + examples + " ");
             return this;
         }
@@ -520,7 +520,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder min_prediction(final double min) {
+        public Builder minPrediction(final double min) {
             argumentsStringBuilder.append("--min_prediction " + min + " ");
             return this;
         }
@@ -532,7 +532,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder max_prediction(final double max) {
+        public Builder maxPrediction(final double max) {
             argumentsStringBuilder.append("--max_prediction " + max + " ");
             return this;
         }
@@ -542,7 +542,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder sort_features() {
+        public Builder sortFeatures() {
             argumentsStringBuilder.append("--sort_features ");
             return this;
         }
@@ -555,7 +555,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder loss_function(final Loss loss) {
+        public Builder lossFunction(final Loss loss) {
             argumentsStringBuilder.append("--loss_function " + loss + " ");
             return this;
         }
@@ -567,7 +567,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder quantile_tau(final double tau) {
+        public Builder quantileTau(final double tau) {
             argumentsStringBuilder.append("--quantile_tau " + tau + " ");
             return this;
         }
@@ -598,12 +598,12 @@ public class VowpalWabbit {
 
         /**
          * use names for labels (multiclass, etc.) rather than integers, argument specified all possible labels, comma-sep,
-         * eg "--named_labels Noun,Verb,Adj,Punc"
+         * eg "--namedLabels Noun,Verb,Adj,Punc"
          *
          * @param labels
          * @return builder
          */
-        public Builder named_labels(final String... labels) {
+        public Builder namedLabels(final String... labels) {
             argumentsStringBuilder.append("--named_labels " +
                     Joiner.on(",").join(Arrays.asList(labels)) + " ");
             return this;
@@ -616,7 +616,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder final_regressor(final Path regressor) {
+        public Builder finalRegressor(final Path regressor) {
             argumentsStringBuilder.append("--final_regressor " + regressor + " ");
             return this;
         }
@@ -628,7 +628,7 @@ public class VowpalWabbit {
          * @return builder
          */
         @Override
-        public Builder readable_model(final Path model) {
+        public Builder readableModel(final Path model) {
             argumentsStringBuilder.append("--readable_model " + model + " ");
             return this;
         }
@@ -638,7 +638,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder save_resume() {
+        public Builder saveResume() {
             argumentsStringBuilder.append("--save_resume ");
             return this;
         }
@@ -648,7 +648,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder save_per_pass() {
+        public Builder savePerPass() {
             argumentsStringBuilder.append("--save_per_pass ");
             return this;
         }
@@ -659,7 +659,7 @@ public class VowpalWabbit {
          * @param regularizationFile
          * @return builder
          */
-        public Builder output_feature_regularizer_binary(final Path regularizationFile) {
+        public Builder outputFeatureRegularizerBinary(final Path regularizationFile) {
             argumentsStringBuilder.append("--output_feature_regularizer_binary " + regularizationFile + " ");
             return this;
         }
@@ -670,7 +670,7 @@ public class VowpalWabbit {
          * @param regularizationFile
          * @return builder
          */
-        public Builder output_feature_regularizer_text(final Path regularizationFile) {
+        public Builder outputFeatureRegularizerText(final Path regularizationFile) {
             argumentsStringBuilder.append("--output_feature_regularizer_text " + regularizationFile + " ");
             return this;
         }
@@ -693,7 +693,7 @@ public class VowpalWabbit {
          * @param regressor
          * @return builder
          */
-        public Builder audit_regressor(final Path regressor) {
+        public Builder auditRegressor(final Path regressor) {
             argumentsStringBuilder.append("--audit_regressor " + regressor + " ");
             return this;
         }
@@ -727,7 +727,7 @@ public class VowpalWabbit {
          * @param arg
          * @return builder
          */
-        public Builder replay_c(final String arg) {
+        public Builder replayC(final String arg) {
             argumentsStringBuilder.append("--replay_c " + arg + " ");
             return this;
         }
@@ -748,7 +748,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder cb_explore_adf() {
+        public Builder cbExploreAdf() {
             argumentsStringBuilder.append("--cb_explore_adf ");
             return this;
         }
@@ -759,7 +759,7 @@ public class VowpalWabbit {
          * @param k
          * @return builder
          */
-        public Builder cb_explore(final int k) {
+        public Builder cbExplore(final int k) {
             argumentsStringBuilder.append("--cb_explore " + k + " ");
             return this;
         }
@@ -770,7 +770,7 @@ public class VowpalWabbit {
          * @param
          * @return builder
          */
-        public Builder multiworld_test(final String arg) {
+        public Builder multiworldTest(final String arg) {
             argumentsStringBuilder.append("--multiworld_test " + arg + " ");
             return this;
         }
@@ -780,7 +780,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder cb_adf() {
+        public Builder cbAdf() {
             argumentsStringBuilder.append("--cb_adf ");
             return this;
         }
@@ -802,7 +802,7 @@ public class VowpalWabbit {
          * @param ldf
          * @return builder
          */
-        public Builder csoaa_ldf(final LDF ldf) {
+        public Builder csoaaLdf(final LDF ldf) {
             argumentsStringBuilder.append("--csoaa_ldf " + ldf + " ");
             return this;
         }
@@ -813,7 +813,7 @@ public class VowpalWabbit {
          * @param ldf
          * @return builder
          */
-        public Builder wap_ldf(final LDF ldf) {
+        public Builder wapLdf(final LDF ldf) {
             argumentsStringBuilder.append("--wap_ldf " + ldf + " ");
             return this;
         }
@@ -846,7 +846,7 @@ public class VowpalWabbit {
          * @param k
          * @return builder
          */
-        public Builder multilabel_oaa(final int k) {
+        public Builder multilabelOaa(final int k) {
             argumentsStringBuilder.append("--multilabel_oaa " + k + " ");
             return this;
         }
@@ -857,7 +857,7 @@ public class VowpalWabbit {
          * @param k
          * @return builder
          */
-        public Builder recall_tree(final int k) {
+        public Builder recallTree(final int k) {
             argumentsStringBuilder.append("--recall_tree " + k + " ");
             return this;
         }
@@ -868,7 +868,7 @@ public class VowpalWabbit {
          * @param k
          * @return builder
          */
-        public Builder log_multi(final int k) {
+        public Builder logMulti(final int k) {
             argumentsStringBuilder.append("--log_multi " + k + " ");
             return this;
         }
@@ -924,7 +924,7 @@ public class VowpalWabbit {
          * @param arg
          * @return builder
          */
-        public Builder replay_m(final String arg) {
+        public Builder replayM(final String arg) {
             argumentsStringBuilder.append("--replay_m " + arg + " ");
             return this;
         }
@@ -956,7 +956,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder stage_poly() {
+        public Builder stagePoly() {
             argumentsStringBuilder.append("--stage_poly ");
             return this;
         }
@@ -1018,7 +1018,7 @@ public class VowpalWabbit {
          * @param rank
          * @return builder
          */
-        public Builder new_mf(final int rank) {
+        public Builder newMf(final int rank) {
             argumentsStringBuilder.append("--new_mf " + rank + " ");
             return this;
         }
@@ -1039,7 +1039,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder confidence_after_training() {
+        public Builder confidenceAfterTraining() {
             argumentsStringBuilder.append("--confidence_after_training ");
             return this;
         }
@@ -1059,7 +1059,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder active_cover() {
+        public Builder activeCover() {
             argumentsStringBuilder.append("--active_cover ");
             return this;
         }
@@ -1081,7 +1081,7 @@ public class VowpalWabbit {
          * @param arg
          * @return builder
          */
-        public Builder replay_b(final String arg) {
+        public Builder replayB(final String arg) {
             argumentsStringBuilder.append("--replay_b " + arg + " ");
             return this;
         }
@@ -1091,7 +1091,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder OjaNewton() {
+        public Builder ojaNewton() {
             argumentsStringBuilder.append("--OjaNewton ");
             return this;
         }
@@ -1111,7 +1111,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder conjugate_gradient() {
+        public Builder conjugateGradient() {
             argumentsStringBuilder.append("--conjugate_gradient ");
             return this;
         }
@@ -1239,7 +1239,7 @@ public class VowpalWabbit {
          * @param l2
          * @return builder
          */
-        public Builder sparse_l2(final double l2) {
+        public Builder sparseL2(final double l2) {
             argumentsStringBuilder.append("--sparse_l2 " + l2 + " ");
             return this;
         }
@@ -1255,12 +1255,12 @@ public class VowpalWabbit {
         }
 
         /**
-         * The location(s) of cache_file.
+         * The location(s) of cacheFile.
          *
          * @param cacheFile
          * @return builder
          */
-        public Builder cache_file(final Path cacheFile) {
+        public Builder cacheFile(final Path cacheFile) {
             argumentsStringBuilder.append("--cache_file " + cacheFile + " ");
             return this;
         }
@@ -1270,7 +1270,7 @@ public class VowpalWabbit {
          *
          * @return builder
          */
-        public Builder kill_cache() {
+        public Builder killCache() {
             argumentsStringBuilder.append("--kill_cache ");
             return this;
         }

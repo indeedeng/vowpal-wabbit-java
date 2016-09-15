@@ -26,11 +26,12 @@
     </publications>
 
     <dependencies>
+        <dependency org="googlecode" name="jsr-305" rev="${jsr-305.version}" conf="compile->default"/>        
+        <dependency org="google" name="guava" rev="${google-guava.version}"/>
+        <dependency org="apache" name="log4j" rev="${log4j.version}"/>
+        <dependency org="apache" name="commons-io" rev="${commons-io.version}" conf="test->default"/>
+	<dependency org="junit" name="junit" rev="${junit.version}" conf="test->default"/>
         <!-- indeed -->
-        <dependency org="indeed" name="common-util" rev="${common-util.version}"/>
-
-        <!-- test only -->
-        <dependency org="indeed" name="testutils" rev="${testutils.version}" conf="test->default"/>
     </dependencies>
         
 </ivy-module>

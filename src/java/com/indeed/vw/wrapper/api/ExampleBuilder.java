@@ -108,10 +108,11 @@ public class ExampleBuilder {
          * Add a categorical feature to this namespace (e.g. userId, jobId)
          *
          * @param subNamespace sub namespace - e.g. namespace=person, subNamespace=gender, feature=Female
-         * @param feature - categorical value
+         * @param categoricalValue - categorical value
          * @return builder
          */
-        public NamespaceBuilder addCategoricalFeature(@Nonnull final String subNamespace, @Nonnull final String feature) {
+        public NamespaceBuilder addCategoricalFeature(@Nonnull final String subNamespace, @Nonnull final String categoricalValue) {
+            final String feature = subNamespace + "=" + categoricalValue;
             Preconditions.checkArgument(!VW_CONTROL_CHARACTERS.matcher(feature).find(),
                     "Bad feature name! " +
                             "Namespace=" + name + " feature=" + feature);

@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://incubator.apache.org/ivy/schemas/ivy.xsd">
 
-    <info organisation="indeed" module="blank-skeleton" status="integration"/>
+    <info organisation="indeed" module="vw-wrapper" status="integration"/>
 
     <configurations defaultconfmapping="master->default(master)">
         <conf name="master"/>
@@ -21,8 +21,9 @@
     </configurations>
 
     <publications>
-        <artifact name="blank-skeleton" type="jar" conf="master"/>
-        <artifact name="blank-skeleton-tests" type="tar.bz2" conf="master"/>
+        <artifact name="vw-wrapper" type="jar" conf="master"/>
+        <artifact name="vw-wrapper-src" conf="master" type="source" ext="zip"/>
+        <artifact name="vw-wrapper-tests" type="tar.bz2" conf="master"/>
     </publications>
 
     <dependencies>

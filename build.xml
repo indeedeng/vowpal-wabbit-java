@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="blank-skeleton" default="compile" basedir=".">
+<project name="vw-wrapper" default="compile" basedir=".">
     <property environment="env"/>
     <!-- cross-platform hack to get the host name -->
     <property name="env.HOSTNAME" value="${env.COMPUTERNAME}"/>

@@ -87,7 +87,7 @@ public abstract class IntegrationSuite {
             final Metrics testValidation = createProgressiveValidation(-1);
             for (final List<String> columns : readColumnsFromCsv(getTestPath())) {
                 final ExampleBuilder wvExample = parseWvExample(columns);
-                final double label = wvExample.getLabel();
+                final double label = wvExample.getLabelAsDouble();
                 float prediction = learner.predict(wvExample.toString());
                 testValidation.updateScore(prediction, label);
             }
@@ -109,7 +109,7 @@ public abstract class IntegrationSuite {
             for (final List<String> columns : readColumnsFromCsv(getTrainPath())) {
                 final ExampleBuilder wvExample = parseWvExample(columns);
                 float prediction = learner.learn(wvExample.toString());
-                trainValidation.updateScore(prediction, wvExample.getLabel());
+                trainValidation.updateScore(prediction, wvExample.getLabelAsDouble());
             }
             trainValidation.printScores();
             assertTrue(trainValidation.getScores().get(getMetricToVerify()) > 0);
@@ -117,7 +117,7 @@ public abstract class IntegrationSuite {
             final Metrics testValidation = createProgressiveValidation(-1);
             for (final List<String> columns : readColumnsFromCsv(getTestPath())) {
                 final ExampleBuilder wvExample = parseWvExample(columns);
-                final double label = wvExample.getLabel();
+                final double label = wvExample.getLabelAsDouble();
                 float prediction = learner.predict(wvExample.toString());
                 testValidation.updateScore(prediction, label);
             }
@@ -144,7 +144,7 @@ public abstract class IntegrationSuite {
             for (final List<String> columns : readColumnsFromCsv(getTrainPath())) {
                 final ExampleBuilder wvExample = parseWvExample(columns);
                 float prediction = learner.learn(wvExample.toString());
-                trainValidation.updateScore(prediction, wvExample.getLabel());
+                trainValidation.updateScore(prediction, wvExample.getLabelAsDouble());
             }
             trainValidation.printScores();
             assertTrue(trainValidation.getScores().get(getMetricToVerify()) > 0);
@@ -159,7 +159,7 @@ public abstract class IntegrationSuite {
             final Metrics testValidation = createProgressiveValidation(-1);
             for (final List<String> columns : readColumnsFromCsv(getTestPath())) {
                 final ExampleBuilder wvExample = parseWvExample(columns);
-                final double label = wvExample.getLabel();
+                final double label = wvExample.getLabelAsDouble();
                 final float prediction = testLearner.predict(wvExample.toString());
                 testValidation.updateScore(prediction, label);
             }

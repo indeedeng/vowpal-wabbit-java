@@ -1,5 +1,6 @@
 package com.indeed.vw.wrapper.api;
 
+import com.indeed.vw.wrapper.api.VowpalWabbit.Link;
 import com.indeed.vw.wrapper.learner.VWFloatLearner;
 
 import java.nio.file.Path;
@@ -68,7 +69,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param learningRate
      * @return builder
      */
-    public SGDVowpalWabbitBuilder learningRate(final double learningRate);
+    SGDVowpalWabbitBuilder learningRate(final double learningRate);
 
     // Regularization options
     // ======================
@@ -84,7 +85,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param l1
      * @return builder
      */
-    SGDVowpalWabbitBuilder l1(double l1);
+    SGDVowpalWabbitBuilder l1(final double l1);
 
     /**
      * l_2 lambda
@@ -92,7 +93,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param l2
      * @return builder
      */
-    SGDVowpalWabbitBuilder l2(double l2);
+    SGDVowpalWabbitBuilder l2(final double l2);
 
 
     // Link and loss functions
@@ -111,7 +112,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param loss
      * @return builder
      */
-    SGDVowpalWabbitBuilder lossFunction(VowpalWabbit.Loss loss);
+    SGDVowpalWabbitBuilder lossFunction(final VowpalWabbit.Loss loss);
 
     /**
      * Parameter \tau associated with Quantile loss. Defaults to 0.5 (=0.5)
@@ -119,7 +120,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param tau
      * @return builder
      */
-    SGDVowpalWabbitBuilder quantileTau(double tau);
+    SGDVowpalWabbitBuilder quantileTau(final double tau);
 
     /**
      * Specify the link function: identity, logistic, glf1 or poisson  (=identity)
@@ -127,7 +128,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param link
      * @return builder
      */
-    SGDVowpalWabbitBuilder link(VowpalWabbit.Link link);
+    SGDVowpalWabbitBuilder link(final Link link);
 
 
     // Prediction boundary options
@@ -139,7 +140,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param min
      * @return builder
      */
-    SGDVowpalWabbitBuilder minPrediction(double min);
+    SGDVowpalWabbitBuilder minPrediction(final double min);
 
     /**
      * Largest prediction to output
@@ -147,7 +148,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param max
      * @return builder
      */
-    SGDVowpalWabbitBuilder maxPrediction(double max);
+    SGDVowpalWabbitBuilder maxPrediction(final double max);
 
     // Feature engineering functions
     // =============================
@@ -169,7 +170,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param initialValue
      * @return builder
      */
-    SGDVowpalWabbitBuilder constant(double initialValue);
+    SGDVowpalWabbitBuilder constant(final double initialValue);
 
     /**
      * Generate N grams. To generate N grams for a single namespace 'foo', arg should be fN.
@@ -178,7 +179,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param n
      * @return builder
      */
-    SGDVowpalWabbitBuilder ngram(String namespace, int n);
+    SGDVowpalWabbitBuilder ngram(final String namespace, final int n);
 
     /**
      * Generate skips in N grams. This in conjunction with the ngram tag can be used to generate generalized n-skip-k-gram.
@@ -188,7 +189,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param n
      * @return builder
      */
-    SGDVowpalWabbitBuilder skips(String namespace, int n);
+    SGDVowpalWabbitBuilder skips(final String namespace, final int n);
 
     /**
      * Create and use quadratic features
@@ -197,7 +198,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param secondNamespace - namespace or ":" for any
      * @return builder
      */
-    SGDVowpalWabbitBuilder quadratic(String firstNameSpace, String secondNamespace);
+    SGDVowpalWabbitBuilder quadratic(final String firstNameSpace, final String secondNamespace);
 
     /**
      * Create and use cubic features
@@ -207,7 +208,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param thirdNamespace - namespace or ":" for any
      * @return builder
      */
-    SGDVowpalWabbitBuilder cubic(String firstNameSpace, String secondNamespace, String thirdNamespace);
+    SGDVowpalWabbitBuilder cubic(final String firstNameSpace, final String secondNamespace, final String thirdNamespace);
 
     /**
      * use low rank quadratic feature-aware weights
@@ -217,7 +218,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param k
      * @return builder
      */
-    SGDVowpalWabbitBuilder lrqfa(String firstNamespace, String secondNamespace, int k);
+    SGDVowpalWabbitBuilder lrqfa(final String firstNamespace, final String secondNamespace, final int k);
 
     // Options to save and load model
     // ==============================
@@ -228,7 +229,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param initialRegressor
      * @return builder
      */
-    SGDVowpalWabbitBuilder initialRegressor(Path initialRegressor);
+    SGDVowpalWabbitBuilder initialRegressor(final Path initialRegressor);
 
     /**
      * Final regressor
@@ -236,7 +237,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param regressor
      * @return builder
      */
-    SGDVowpalWabbitBuilder finalRegressor(Path regressor);
+    SGDVowpalWabbitBuilder finalRegressor(final Path regressor);
 
     // Option for debugging model
     // =========================
@@ -317,7 +318,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param seed
      * @return builder
      */
-    SGDVowpalWabbitBuilder randomSeed(int seed);
+    SGDVowpalWabbitBuilder randomSeed(final int seed);
 
     /**
      * Build learner

@@ -6,7 +6,6 @@ import com.google.common.primitives.Doubles;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -112,7 +111,7 @@ public class ExampleBuilder {
          * @param feature - categorical value
          * @return builder
          */
-        public NamespaceBuilder addCategoricalFeature(@Nonnull String subNamespace, @Nonnull final String feature) {
+        public NamespaceBuilder addCategoricalFeature(@Nonnull final String subNamespace, @Nonnull final String feature) {
             Preconditions.checkArgument(!VW_CONTROL_CHARACTERS.matcher(feature).find(),
                     "Bad feature name! " +
                             "Namespace=" + name + " feature=" + feature);
@@ -197,7 +196,8 @@ public class ExampleBuilder {
      *
      * @return label
      */
-    public double getLabel() {
+    public double getLabelAsDouble() {
+        Preconditions.checkNotNull(label, "This example doesn't have a label! Set it using label() method.");
         return Double.parseDouble(label);
     }
     /**

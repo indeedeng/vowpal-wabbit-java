@@ -8,9 +8,9 @@ public class PrecisionValidation extends ProgressiveValidation {
     private double truePositives = 0;
     private double falsePositives = 0;
 
-    public PrecisionValidation(final double decisionThreashold) {
+    public PrecisionValidation(final double decisionThreshold) {
         super("Pr", true);
-        this.decisionThreashold = decisionThreashold;
+        this.decisionThreashold = decisionThreshold;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class PrecisionValidation extends ProgressiveValidation {
 
     @Override
     public synchronized void updateScore(final double prediction, final double actual) {
-        boolean actualPositive = actual > 0;
+        boolean actualPositive = actual  > 0.0000000000001;
         boolean predictionPositive = prediction > decisionThreashold;
         if (actualPositive && predictionPositive) {
             truePositives++;

@@ -10,9 +10,9 @@ public class RecallValidation extends ProgressiveValidation {
     private double truePositives = 0;
     private double falseNegatives = 0;
 
-    public RecallValidation(final double decisionThreashold) {
+    public RecallValidation(final double decisionThreshold) {
         super("Re", true);
-        this.decisionThreashold = decisionThreashold;
+        this.decisionThreashold = decisionThreshold;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class RecallValidation extends ProgressiveValidation {
 
     @Override
     public synchronized void updateScore(final double prediction, final double actual) {
-        boolean actualPositive = actual > 0;
+        boolean actualPositive = actual  > 0.0000000000001;
         boolean predictionPositive = prediction > decisionThreashold;
         if (actualPositive && predictionPositive) {
             truePositives++;

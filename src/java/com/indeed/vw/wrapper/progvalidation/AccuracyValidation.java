@@ -24,7 +24,7 @@ public class AccuracyValidation extends ProgressiveValidation {
 
     @Override
     public synchronized void updateScore(final double prediction, final double actual) {
-        boolean actualPositive = actual > 0;
+        boolean actualPositive = actual > 0.0000000000001;
         boolean predictionPositive = prediction > decisionThreashold;
         if ((actualPositive && predictionPositive) || (!actualPositive && !predictionPositive)) {
             correctPredictions++;

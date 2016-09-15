@@ -19,10 +19,10 @@ public class Metrics {
         );
     }
 
-    public static Metrics zeroOneClassificationMetrics(final int printEveryN, double decisionThreashold) {
+    public static Metrics zeroOneClassificationMetrics(final int printEveryN, final double decisionThreshold) {
         return new Metrics(
                 printEveryN,
-                new AccuracyValidation(decisionThreashold), new FOneScoreValidation(decisionThreashold)
+                new AccuracyValidation(decisionThreshold), new FOneScoreValidation(decisionThreshold)
         );
     }
 

@@ -21,8 +21,8 @@ public class TestOnTwitterSentimentDataset extends IntegrationSuite {
     private static final int TARGET_POS = 0;
     private static final int TEXT_POS = 1;
 
-    // To do feature selection we preliminary pass through train set and learn sparse model
-    // with a lot of zero weights.
+    // Feature selection is done with a preliminary pass through the train set and learns a linear model
+    // with many zero weights (L1 regularization)
     private Path trainFeatureMask() throws IOException {
         final Path featureMask = Paths.get(tmpDir.toString(), "feature-mask-model.bin");
         final SGDVowpalWabbitBuilder vowpalWabbitBuilder = VowpalWabbit.builder()
@@ -69,7 +69,7 @@ public class TestOnTwitterSentimentDataset extends IntegrationSuite {
     }
 
     private final Pattern notWordPattern = Pattern.compile("[^a-zA-Z]+");
-    private final Pattern splitWordsFormPunctuationPattern = Pattern.compile("([a-zA-Z])([^a-zA-Z\\s])");
+    private final Pattern splitWordsFromPunctuationPattern = Pattern.compile("([a-zA-Z])([^a-zA-Z\\s])");
 
     @Override
     protected ExampleBuilder parseWvExample(final List<String> columns) {
@@ -84,7 +84,7 @@ public class TestOnTwitterSentimentDataset extends IntegrationSuite {
                 .addTextAsFeatures(notWordPattern.matcher(rawText).replaceAll(" ").toLowerCase());
         exampleBuilder.createNamespace("raw")
                 // Add raw text to add signals such as smiles or punctuation
-                 .addTextAsFeatures(splitWordsFormPunctuationPattern.matcher(rawText).replaceAll("$1 $2"));
+                 .addTextAsFeatures(splitWordsFromPunctuationPattern.matcher(rawText).replaceAll("$1 $2"));
         return exampleBuilder;
     }
 

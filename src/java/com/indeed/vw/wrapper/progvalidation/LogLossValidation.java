@@ -1,7 +1,7 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- * See https://www.kaggle.com/wiki/LogarithmicLoss
+ * See <a href="https://www.kaggle.com/wiki/LogarithmicLoss">https://www.kaggle.com/wiki/LogarithmicLoss</a> <p>
  */
 public class LogLossValidation extends ProgressiveValidation {
 

@@ -9,15 +9,29 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Class that wraps multiple metrics and prints their scores every n examples.<p>
  *
  */
 public class Metrics {
+    /**
+     * Factory method for regression metrics <p>
+     *
+     * @param printEveryN print score every n example
+     * @return metrics
+     */
     public static Metrics regressionMetrics(final int printEveryN) {
         return new Metrics(
                 printEveryN,
                 new RMSEValidation(), new MAEValidation()
         );
     }
+    /**
+     * Factory method for classification 1-0 metrics <p>
+     *
+     * @param printEveryN print score every n example
+     * @param decisionThreshold threasold to decide whether prediction is positive or negative
+     * @return metrics
+     */
 
     public static Metrics zeroOneClassificationMetrics(final int printEveryN, final double decisionThreshold) {
         return new Metrics(
@@ -25,6 +39,12 @@ public class Metrics {
                 new AccuracyValidation(decisionThreshold), new FOneScoreValidation(decisionThreshold)
         );
     }
+    /**
+     * Factory method for classification probability metrics <p>
+     *
+     * @param printEveryN print score every n example
+     * @return metrics
+     */
 
     public static Metrics probabilityClassificationMetrics(final int printEveryN) {
         return new Metrics(

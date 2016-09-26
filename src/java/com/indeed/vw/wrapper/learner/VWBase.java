@@ -21,7 +21,7 @@ abstract class VWBase implements Closeable {
     /**
      * Load tests have shown that a Lock is faster than synchronized (this).
      * It was originally hypothesized that {@link java.util.concurrent.locks.ReadWriteLock} would be a better
-     * alternative, but at this time this is not possible cause of <a href="https://mail.google.com/mail/u/0/?ui=2&ik=cdb4bef19b&view=lg&msg=14dfe18a4f82a199#14dfe18a4f82a199_5a">this</a>.
+     * alternative, but at this time this is not possible cause of <a href="https://mail.google.com/mail/u/0/?ui=2&ik=cdb4bef19b&view=lg&msg=14dfe18a4f82a199#14dfe18a4f82a199_5a">this.
      */
     protected final Lock lock;
     protected final long nativePointer;

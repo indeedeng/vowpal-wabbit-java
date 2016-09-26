@@ -1,7 +1,7 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- * See https://en.wikipedia.org/wiki/Mean_absolute_percentage_error
+ * See <a href="https://en.wikipedia.org/wiki/Mean_absolute_percentage_error">https://en.wikipedia.org/wiki/Mean_absolute_percentage_error</a> <p>
  */
 public class MAPEValidation extends ProgressiveValidation {
 

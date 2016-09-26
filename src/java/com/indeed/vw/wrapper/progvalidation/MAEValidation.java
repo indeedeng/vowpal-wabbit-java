@@ -1,7 +1,7 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- * https://www.kaggle.com/wiki/MeanAbsoluteError
+ * <a href="https://www.kaggle.com/wiki/MeanAbsoluteError">https://www.kaggle.com/wiki/MeanAbsoluteError</a> <p>
  */
 public class MAEValidation extends ProgressiveValidation {
 

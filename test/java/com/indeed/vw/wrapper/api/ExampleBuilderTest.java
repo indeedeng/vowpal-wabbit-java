@@ -1,5 +1,6 @@
 package com.indeed.vw.wrapper.api;
 
+import com.indeed.vw.wrapper.api.example.ExampleBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

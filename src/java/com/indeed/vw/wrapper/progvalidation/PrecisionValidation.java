@@ -1,7 +1,7 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- * true positives / (true positives + false positives)
+ * true positives / (true positives + false positives) <p>
  */
 public class PrecisionValidation extends ProgressiveValidation {
     private final double decisionThreashold;

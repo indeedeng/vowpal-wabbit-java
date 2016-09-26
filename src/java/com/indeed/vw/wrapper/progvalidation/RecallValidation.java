@@ -3,7 +3,7 @@ package com.indeed.vw.wrapper.progvalidation;
 import com.google.common.base.Preconditions;
 
 /**
- * true positives / (true positives + false negatives)
+ * true positives / (true positives + false negatives) <p>
  */
 public class RecallValidation extends ProgressiveValidation {
     private final double decisionThreashold;

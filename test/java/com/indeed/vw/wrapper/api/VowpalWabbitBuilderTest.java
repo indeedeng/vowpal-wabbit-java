@@ -1,5 +1,7 @@
 package com.indeed.vw.wrapper.api;
 
+import com.indeed.vw.wrapper.api.parameters.Link;
+import com.indeed.vw.wrapper.api.parameters.Loss;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

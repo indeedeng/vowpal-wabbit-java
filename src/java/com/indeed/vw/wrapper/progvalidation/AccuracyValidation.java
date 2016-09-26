@@ -1,7 +1,7 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- * correct predictions / total
+ * correct predictions / total <p>
  */
 public class AccuracyValidation extends ProgressiveValidation {
 

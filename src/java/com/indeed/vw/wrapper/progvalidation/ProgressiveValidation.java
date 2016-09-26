@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import java.text.DecimalFormat;
 
 /**
- *
+ * Base class for all metrics
  */
 public abstract class ProgressiveValidation {
 
@@ -18,7 +18,7 @@ public abstract class ProgressiveValidation {
     }
 
     /**
-     * update score
+     * update score <p>
      * @param prediction
      * @param actual
      */

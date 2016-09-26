@@ -1,6 +1,9 @@
 package com.indeed.vw.wrapper.api;
 
 import com.google.common.base.Joiner;
+import com.indeed.vw.wrapper.api.parameters.Link;
+import com.indeed.vw.wrapper.api.parameters.Loss;
+import com.indeed.vw.wrapper.api.parameters.SGDVowpalWabbitBuilder;
 import com.indeed.vw.wrapper.learner.VWFloatArrayLearner;
 import com.indeed.vw.wrapper.learner.VWFloatLearner;
 import com.indeed.vw.wrapper.learner.VWIntArrayLearner;
@@ -12,13 +15,13 @@ import java.nio.file.Path;
 import java.util.Arrays;
 
 /**
- * This class a little bit simplifies passing vowpal wabbit parameters.
+* This class contains factory methods for VWLearner builder object. <p>
  *
- * For better parameters documentation read: https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments
+* For better parameters documentation read: <a href="https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments">https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments</a> <p>
  */
 public class VowpalWabbit {
     /**
-     * Pass this constant as namespace parameter if you want to set some feature engineering for all namespaces.
+    * Pass this constant as namespace parameter if you want to set some feature engineering for all namespaces. <p> <p>
      *
      */
     public static final String ANY_NAMESPACE = ":";
@@ -36,7 +39,7 @@ public class VowpalWabbit {
     }
 
     /**
-     * Create builder for Vowpal Wabbit learner
+     * Create builder for Vowpal Wabbit learner <p>
      *
      * @return SGDVowpalWabbitBuilder
      */
@@ -45,7 +48,7 @@ public class VowpalWabbit {
     }
 
     /**
-     * Create advanced builder for Vowpal Wabbit learner
+     * Create advanced builder for Vowpal Wabbit learner <p>
      *
      * @return SGDVowpalWabbitBuilder
      */
@@ -54,7 +57,7 @@ public class VowpalWabbit {
     }
 
     /**
-     * Builder for Vowpal Wabbit learner.
+     * Builder for Vowpal Wabbit learner. <p>
      *
      */
     public static class Builder implements SGDVowpalWabbitBuilder {
@@ -65,7 +68,7 @@ public class VowpalWabbit {
         private boolean verbose = false;
 
         /**
-         * Make vowpal wabbit writing debug and performance information to stderr
+         * Make vowpal wabbit writing debug and performance information to stderr <p>
          *
          * @return builder
          */
@@ -75,9 +78,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * seed random number generator
+         * seed random number generator <p>
          *
-         * @param seed
+         * @param seed random generator seed
          * @return builder
          */
         @Override
@@ -87,9 +90,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * size of example ring
+         * size of example ring buffer <p>
          *
-         * @param ringSize
+         * @param ringSize size of example ring
          * @return builder
          */
         public Builder ringSize(final int ringSize) {
@@ -98,9 +101,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Set learning rate
+         * Set learning rate <p>
          *
-         * @param learningRate
+         * @param learningRate learningRate learning rate. Must be positive
          * @return builder
          */
         @Override
@@ -110,9 +113,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * t power value
+         * t power value <p>
          *
-         * @param powerT
+         * @param powerT t power value
          * @return builder
          */
         public Builder powerT(final double powerT) {
@@ -121,9 +124,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Set Decay factor for learning_rate between passes
+         * Set Decay factor for learning_rate between passes <p>
          *
-         * @param decay
+         * @param decay exponential decay
          * @return builder
          */
         public Builder decayLearningRate(final double decay) {
@@ -132,9 +135,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * initial t value
+         * initial t value <p>
          *
-         * @param initialT
+         * @param initialT initial t value
          * @return builder
          */
         public Builder initialT(final double initialT) {
@@ -143,10 +146,10 @@ public class VowpalWabbit {
         }
 
         /**
-         * Use existing regressor to determine which parameters may be updated.
-         * If no initialRegressor given, also used for initial weights.
+         * Use existing regressor to determine which parameters may be updated. <p>
+         * If no initialRegressor given, also used for initial weights. <p>
          *
-         * @param featureMask
+         * @param featureMask path where to read feature mask
          * @return builder
          */
         @Override
@@ -156,9 +159,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Initial regressor(s)
+         * Initial regressor(s) <p>
          *
-         * @param initialRegressor
+         * @param initialRegressor path where to read initial regressor
          * @return builder
          */
         @Override
@@ -168,9 +171,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Set all weights to an initial value of arg.
+         * Set all weights to an initial value of arg. <p>
          *
-         * @param weight
+         * @param weight initial weight value
          * @return builder
          */
         public Builder initialWeight(final double weight) {
@@ -179,9 +182,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * make initial weights random
+         * make initial weights random <p>
          *
-         * @param arg
+         * @param arg random maximum
          * @return builder
          */
         public Builder randomWeights(final double arg) {
@@ -190,9 +193,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Per feature regularization input file
+         * Per feature regularization input file <p>
          *
-         * @param regularizationPath
+         * @param regularizationPath  path to regularization input file
          * @return builder
          */
         public Builder inputFeatureRegularizer(final Path regularizationPath) {
@@ -201,9 +204,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * how to hash the features. Available options: strings, all
+         * how to hash the features. Available options: strings, all <p>
          *
-         * @param hash
+         * @param hash hash strategy
          * @return builder
          */
         public Builder hash(final Hash hash) {
@@ -212,9 +215,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * ignore namespace  <arg>
+         * ignore namespace  &lt;arg&gt; <p>
          *
-         * @param namespace
+         * @param namespace namespace name
          * @return builder
          */
         public Builder ignore(final String namespace) {
@@ -223,9 +226,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * keep namespace <arg>
+         * keep namespace &lt;arg&gt; <p>
          *
-         * @param namespace
+         * @param namespace namespace name
          * @return builder
          */
         public Builder keep(final String namespace) {
@@ -234,12 +237,12 @@ public class VowpalWabbit {
         }
 
         /**
-         * redefine namespaces beginning with characters of string S as namespace N.
-         * <arg> shall be in form 'N:=S' where := is operator. Empty N or S are treated as default namespace.
-         * Use ':' as a wildcard in S.
+         * redefine namespaces beginning with characters of string S as namespace N. <p>
+         * &lt;arg&gt; shall be in form 'N:=S' where := is operator. Empty N or S are treated as default namespace. <p>
+         * Use ':' as a wildcard in S. <p>
          *
-         * @param newNamespace
-         * @param namespaces
+         * @param newNamespace new namespace name
+         * @param namespaces old namespaces names
          * @return builder
          */
         public Builder redefine(final String newNamespace, final String ... namespaces) {
@@ -254,9 +257,11 @@ public class VowpalWabbit {
         }
 
         /**
-         * number of bits in the feature table
+         * number of bits in the feature table. <p>
          *
-         * @param bitsNum
+         * It mean feature table will have 2^bitsNum size <p>
+         *
+         * @param bitsNum bitsNum number of bits in hash feature table.
          * @return builder
          */
         @Override
@@ -266,7 +271,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Don't add a constant feature
+         * Don't add a constant feature <p>
          *
          * @return builder
          */
@@ -277,9 +282,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Set initial value of constant
+         * Set initial value of constant <p>
          *
-         * @param initialValue
+         * @param initialValue bias initial value
          * @return builder
          */
         @Override
@@ -289,15 +294,15 @@ public class VowpalWabbit {
         }
 
         /**
-         * Generate N grams. To generate N grams for a single namespace 'foo', arg should be fN.
+         * Generate N grams. To generate N grams for a single namespace 'foo', arg should be fN. <p>
          *
-         * @param namespace
-         * @param n
+         * @param namespace namespace name, or ':' for any namespaces
+         * @param n size of n-gram.
          * @return builder
          */
         @Override
         public Builder ngram(final String namespace, final int n) {
-            if (namespace == ANY_NAMESPACE) {
+            if (namespace.equals(ANY_NAMESPACE)) {
                 argumentsStringBuilder.append("--ngram " + n + " ");
                 return this;
             }
@@ -306,16 +311,16 @@ public class VowpalWabbit {
         }
 
         /**
-         * Generate skips in N grams. This in conjunction with the ngram tag can be used to generate generalized n-skip-k-gram.
-         * To generate n-skips for a single namespace 'foo', arg should be fN.
+         * Generate skips in N grams. This in conjunction with the ngram tag can be used to generate generalized n-skip-k-gram. <p>
+         * To generate n-skips for a single namespace 'foo', arg should be fN. <p>
          *
-         * @param namespace
-         * @param n
+         * @param namespace namespace name, or ':' for any namespaces
+         * @param n size of skips n-gram.
          * @return builder
          */
         @Override
         public Builder skips(final String namespace, final int n) {
-            if (namespace == ANY_NAMESPACE) {
+            if (namespace.equals(ANY_NAMESPACE)) {
                 argumentsStringBuilder.append("--skips " + n + " ");
                 return this;
             }
@@ -324,9 +329,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * limit to N features. To apply to a single namespace 'foo', arg should be fN
+         * limit to N features. To apply to a single namespace 'foo', arg should be fN <p>
          *
-         * @param n
+         * @param n number of features
          * @return builder
          */
         public Builder featureLimit(final int n) {
@@ -335,11 +340,11 @@ public class VowpalWabbit {
         }
 
         /**
-         * generate prefixes/suffixes of features; argument '+2a,-3b,+1'
-         * means generate 2-char prefixes for namespace a, 3-char suffixes for b and 1 char
-         * prefixes for default namespace
+         * generate prefixes/suffixes of features; argument '+2a,-3b,+1' <p>
+         * means generate 2-char prefixes for namespace a, 3-char suffixes for b and 1 char <p>
+         * prefixes for default namespace <p>
          *
-         * @param arg
+         * @param arg argument
          * @return builder
          */
         public Builder affix(final String arg) {
@@ -348,9 +353,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * compute spelling features for a give namespace (use '_' for default namespace)
+         * compute spelling features for a give namespace (use '_' for default namespace) <p>
          *
-         * @param namespace
+         * @param namespace namespace
          * @return builder
          */
         public Builder spelling(final String namespace) {
@@ -359,9 +364,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * read a dictionary for additional features (arg either 'x:file' or just 'file')
+         * read a dictionary for additional features (arg either 'x:file' or just 'file') <p>
          *
-         * @param file
+         * @param file dictionary path
          * @return builder
          */
         public Builder dictionary(final Path file) {
@@ -370,9 +375,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * look in this directory for dictionaries; defaults to current directory or env{PATH}
+         * look in this directory for dictionaries; defaults to current directory or env{PATH} <p>
          *
-         * @param dir
+         * @param dir dictionaries directory path
          * @return builder
          */
         public Builder dictionaryPath(final Path dir) {
@@ -381,9 +386,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Create feature interactions of any level between namespaces.
+         * Create feature interactions of any level between namespaces. <p>
          *
-         * @param namespaces
+         * @param namespaces namspaces
          * @return builder
          */
         public Builder interactions(final String ... namespaces) {
@@ -397,7 +402,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Use permutations instead of combinations for feature interactions of same namespace.
+         * Use permutations instead of combinations for feature interactions of same namespace. <p>
          *
          * @return builder
          */
@@ -407,8 +412,8 @@ public class VowpalWabbit {
         }
 
         /**
-         * Don't remove interactions with duplicate combinations of namespaces.
-         * For ex. this is a duplicate: '-q ab -q ba' and a lot more in '-q ::'.
+         * Don't remove interactions with duplicate combinations of namespaces. <p>
+         * For ex. this is a duplicate: '-q ab -q ba' and a lot more in '-q ::'. <p>
          *
          * @return builder
          */
@@ -418,10 +423,10 @@ public class VowpalWabbit {
         }
 
         /**
-         * Create and use quadratic features
+         * Create and use quadratic features <p>
          *
-         * @param firstNameSpace - namespace or ":" for any
-         * @param secondNamespace - namespace or ":" for any
+         * @param firstNameSpace  namespace or ":" for any
+         * @param secondNamespace  namespace or ":" for any
          * @return builder
          */
         @Override
@@ -431,11 +436,11 @@ public class VowpalWabbit {
         }
 
         /**
-         * Create and use cubic features
+         * Create and use cubic features <p>
          *
-         * @param firstNameSpace  - namespace or ":" for any
-         * @param secondNamespace - namespace or ":" for any
-         * @param thirdNamespace  - namespace or ":" for any
+         * @param firstNameSpace   namespace or ":" for any
+         * @param secondNamespace  namespace or ":" for any
+         * @param thirdNamespace   namespace or ":" for any
          * @return builder
          */
         @Override
@@ -447,7 +452,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Ignore label information and just test
+         * Ignore label information and just test <p>
          *
          * @return builder
          */
@@ -458,9 +463,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * holdout period for test only, default 10
+         * holdout period for test only, default 10 <p>
          *
-         * @param holdout
+         * @param holdout holdout period size
          * @return builder
          */
         public Builder holdoutPeriod(final int holdout) {
@@ -469,9 +474,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * holdout after n training examples, default off (disables holdoutPeriod)
+         * holdout after n training examples, default off (disables holdoutPeriod) <p>
          *
-         * @param n
+         * @param n number of examples in hodout
          * @return builder
          */
         public Builder holdoutAfter(final int n) {
@@ -480,9 +485,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Specify the number of passes tolerated when holdout loss doesn't decrease before early termination, default is 3
+         * Specify the number of passes tolerated when holdout loss doesn't decrease before early termination, default is 3 <p>
          *
-         * @param passes
+         * @param passes number of passes
          * @return builder
          */
         public Builder earlyTerminate(final int passes) {
@@ -491,9 +496,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Number of Training Passes
+         * Number of Training Passes <p>
          *
-         * @param passes
+         * @param passes number of passes
          * @return builder
          */
         public Builder passes(final int passes) {
@@ -502,9 +507,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * initial number of examples per pass
+         * initial number of examples per pass <p>
          *
-         * @param examples
+         * @param examples number of examples per pass
          * @return builder
          */
         public Builder initialPassLength(final int examples) {
@@ -513,9 +518,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * number of examples to parse
+         * number of examples to parse <p>
          *
-         * @param examples
+         * @param examples number of examples to parse
          * @return builder
          */
         public Builder examples(final int examples) {
@@ -524,9 +529,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Smallest prediction to output
+         * Smallest prediction to output <p>
          *
-         * @param min
+         * @param min minimum prediction, including
          * @return builder
          */
         @Override
@@ -536,9 +541,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Largest prediction to output
+         * Largest prediction to output <p>
          *
-         * @param max
+         * @param max maximum prediction, including
          * @return builder
          */
         @Override
@@ -548,7 +553,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * turn this on to disregard order in which features have been defined. This will lead to smaller cache sizes
+         * turn this on to disregard order in which features have been defined. This will lead to smaller cache sizes <p>
          *
          * @return builder
          */
@@ -558,10 +563,10 @@ public class VowpalWabbit {
         }
 
         /**
-         * Specify the loss function to be used, uses squared by default. Currently available ones are
-         * squared, classic, hinge, logistic, quantile and poisson. (=squared)
+         * Specify the loss function to be used, uses squared by default. Currently available ones are <p>
+         * squared, classic, hinge, logistic, quantile and poisson. (=squared) <p>
          *
-         * @param loss
+         * @param loss loss function
          * @return builder
          */
         @Override
@@ -571,9 +576,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Parameter \tau associated with Quantile loss. Defaults to 0.5 (=0.5)
+         * Parameter \tau associated with Quantile loss. Defaults to 0.5 (=0.5) <p>
          *
-         * @param tau
+         * @param tau tau parameter
          * @return builder
          */
         @Override
@@ -583,9 +588,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * l_1 lambda
+         * l_1 lambda <p>
          *
-         * @param l1
+         * @param l1 l1 regularization. Must be not negative
          * @return builder
          */
         @Override
@@ -595,9 +600,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * l_2 lambda
+         * l_2 lambda <p>
          *
-         * @param l2
+         * @param l2 l2 regularization. Must be not negative
          * @return builder
          */
         @Override
@@ -607,10 +612,10 @@ public class VowpalWabbit {
         }
 
         /**
-         * use names for labels (multiclass, etc.) rather than integers, argument specified all possible labels, comma-sep,
-         * eg "--namedLabels Noun,Verb,Adj,Punc"
+         * use names for labels (multiclass, etc.) rather than integers, argument specified all possible labels, comma-sep, <p>
+         * eg "--namedLabels Noun,Verb,Adj,Punc" <p>
          *
-         * @param labels
+         * @param labels labels
          * @return builder
          */
         public Builder namedLabels(final String... labels) {
@@ -620,9 +625,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Final regressor
+         * Final regressor <p>
          *
-         * @param regressor
+         * @param regressor path where to store final regressor
          * @return builder
          */
         @Override
@@ -632,9 +637,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Output human-readable final regressor with numeric features
+         * Output human-readable final regressor with numeric features <p>
          *
-         * @param model
+         * @param model path where to store readable model
          * @return builder
          */
         @Override
@@ -644,7 +649,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * save extra state so learning can be resumed later with new data
+         * save extra state so learning can be resumed later with new data <p>
          *
          * @return builder
          */
@@ -654,7 +659,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Save the model after every pass over data
+         * Save the model after every pass over data <p>
          *
          * @return builder
          */
@@ -664,9 +669,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Per feature regularization output file
+         * Per feature regularization output file <p>
          *
-         * @param regularizationFile
+         * @param regularizationFile path where to store regularization output file
          * @return builder
          */
         public Builder outputFeatureRegularizerBinary(final Path regularizationFile) {
@@ -675,9 +680,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Per feature regularization output file, in text
+         * Per feature regularization output file, in text <p>
          *
-         * @param regularizationFile
+         * @param regularizationFile path where to store regularization output file
          * @return builder
          */
         public Builder outputFeatureRegularizerText(final Path regularizationFile) {
@@ -686,9 +691,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * User supplied ID embedded into the final regressor
+         * User supplied ID embedded into the final regressor <p>
          *
-         * @param id
+         * @param id model id
          * @return builder
          */
         public Builder id(final String id) {
@@ -697,10 +702,10 @@ public class VowpalWabbit {
         }
 
         /**
-         * stores feature names and their regressor values.
-         * Same dataset must be used for both regressor training and this mode.
+         * stores feature names and their regressor values. <p>
+         * Same dataset must be used for both regressor training and this mode. <p>
          *
-         * @param regressor
+         * @param regressor path where to read regressor for audit
          * @return builder
          */
         public Builder auditRegressor(final Path regressor) {
@@ -709,9 +714,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * k-way bootstrap by online importance resampling
+         * k-way bootstrap by online importance resampling <p>
          *
-         * @param k
+         * @param k number of bootstrap resamples
          * @return builder
          */
         public Builder bootstrap(final int k) {
@@ -720,9 +725,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Use learning to search, argument=maximum action id or 0 for LDF
+         * Use learning to search, argument=maximum action id or 0 for LDF <p>
          *
-         * @param maxActionID
+         * @param maxActionID max action id
          * @return builder
          */
         public Builder search(final int maxActionID) {
@@ -731,10 +736,10 @@ public class VowpalWabbit {
         }
 
         /**
-         * use experience replay at a specified level
-         * [b=classification/regression, m=multiclass, c=cost sensitive] with specified buffer size
+         * use experience replay at a specified level <p>
+         * [b=classification/regression, m=multiclass, c=cost sensitive] with specified buffer size <p>
          *
-         * @param arg
+         * @param arg argument
          * @return builder
          */
         public Builder replayC(final String arg) {
@@ -743,9 +748,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Convert multiclass on <k> classes into a contextual bandit problem
+         * Convert multiclass on &lt;k&gt; classes into a contextual bandit problem <p>
          *
-         * @param k
+         * @param k number of classes
          * @return builder
          */
         public Builder cbify(final int k) {
@@ -754,7 +759,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Online explore-exploit for a contextual bandit problem with multiline action dependent features
+         * Online explore-exploit for a contextual bandit problem with multiline action dependent features <p>
          *
          * @return builder
          */
@@ -764,9 +769,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Online explore-exploit for a <k> action contextual bandit problem
+         * Online explore-exploit for a &lt;k&gt; action contextual bandit problem <p>
          *
-         * @param k
+         * @param k number of actions
          * @return builder
          */
         public Builder cbExplore(final int k) {
@@ -775,9 +780,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Evaluate features as a policies
+         * Evaluate features as a policies <p>
          *
-         * @param
+         * @param arg argument
          * @return builder
          */
         public Builder multiworldTest(final String arg) {
@@ -786,7 +791,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Do Contextual Bandit learning with multiline action dependent features.
+         * Do Contextual Bandit learning with multiline action dependent features. <p>
          *
          * @return builder
          */
@@ -796,9 +801,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Use contextual bandit learning with <k> costs
+         * Use contextual bandit learning with &lt;k&gt; costs <p>
          *
-         * @param k
+         * @param k number of costs
          * @return builder
          */
         public Builder cb(final int k) {
@@ -807,9 +812,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Use one-against-all multiclass learning with label dependent features.  Specify singleline or multiline.
+         * Use one-against-all multiclass learning with label dependent features.  Specify singleline or multiline. <p>
          *
-         * @param ldf
+         * @param ldf ldf
          * @return builder
          */
         public Builder csoaaLdf(final LDF ldf) {
@@ -818,9 +823,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Use weighted all-pairs multiclass learning with label dependent features.   Specify singleline or multiline.
+         * Use weighted all-pairs multiclass learning with label dependent features.   Specify singleline or multiline. <p>
          *
-         * @param ldf
+         * @param ldf ldf
          * @return builder
          */
         public Builder wapLdf(final LDF ldf) {
@@ -829,9 +834,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Put weights on feature products from namespaces <n1> and <n2>
+         * Put weights on feature products from namespaces &lt;n1&gt; and &lt;n2&gt; <p>
          *
-         * @param arg
+         * @param arg argument
          * @return builder
          */
         public Builder interact(final String arg) {
@@ -840,9 +845,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * One-against-all multiclass with <k> costs
+         * One-against-all multiclass with &lt;k&gt; costs <p>
          *
-         * @param k
+         * @param k number of costs
          * @return builder
          */
         public Builder csoaa(final int k) {
@@ -851,9 +856,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * One-against-all multilabel with <k> labels
+         * One-against-all multilabel with &lt;k&gt; labels <p>
          *
-         * @param k
+         * @param k number of labels
          * @return builder
          */
         public Builder multilabelOaa(final int k) {
@@ -862,9 +867,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Use online tree for multiclass
+         * Use online tree for multiclass <p>
          *
-         * @param k
+         * @param k number of classes
          * @return builder
          */
         public Builder recallTree(final int k) {
@@ -873,9 +878,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Use online tree for multiclass
+         * Use online tree for multiclass <p>
          *
-         * @param k
+         * @param k number of classes
          * @return builder
          */
         public Builder logMulti(final int k) {
@@ -884,9 +889,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Error correcting tournament with <k> labels
+         * Error correcting tournament with &lt;k&gt; labels <p>
          *
-         * @param k
+         * @param k number of labels
          * @return builder
          */
         public Builder ect(final int k) {
@@ -895,9 +900,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Online boosting with <N> weak learners
+         * Online boosting with &lt;N&gt; weak learners <p>
          *
-         * @param n
+         * @param n number of weak learners
          * @return builder
          */
         public Builder boosting(final int n) {
@@ -906,9 +911,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * One-against-all multiclass with <k> labels
+         * One-against-all multiclass with &lt;k&gt; labels <p>
          *
-         * @param k
+         * @param k number of classes
          * @return builder
          */
         public Builder oaa(final int k) {
@@ -917,9 +922,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * top k recommendation
+         * top k recommendation <p>
          *
-         * @param k
+         * @param k number of top recomendations
          * @return builder
          */
         public Builder top(final int k) {
@@ -928,10 +933,10 @@ public class VowpalWabbit {
         }
 
         /**
-         * use experience replay at a specified level
-         * [b=classification/regression, m=multiclass, c=cost sensitive] with specified buffer size
+         * use experience replay at a specified level <p>
+         * [b=classification/regression, m=multiclass, c=cost sensitive] with specified buffer size <p>
          *
-         * @param arg
+         * @param arg argument
          * @return builder
          */
         public Builder replayM(final String arg) {
@@ -940,7 +945,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * report loss as binary classification on -1,1
+         * report loss as binary classification on -1,1 <p>
          *
          * @return builder
          */
@@ -950,9 +955,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Specify the link function: identity, logistic, glf1 or poisson  (=identity)
+         * Specify the link function: identity, logistic, glf1 or poisson  (=identity) <p>
          *
-         * @param link
+         * @param link link function
          * @return builder
          */
         @Override
@@ -962,7 +967,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * use stagewise polynomial feature learning
+         * use stagewise polynomial feature learning <p>
          *
          * @return builder
          */
@@ -972,11 +977,11 @@ public class VowpalWabbit {
         }
 
         /**
-         * use low rank quadratic features with field aware weights
+         * use low rank quadratic features with field aware weights <p>
          *
          * @param firstNamespace  - namespace or ":" for any
          * @param secondNamespace - namespace or ":" for any
-         * @param k
+         * @param k factorized matrices width
          * @return builder
          */
         @Override
@@ -987,11 +992,11 @@ public class VowpalWabbit {
         }
 
         /**
-         * use low rank quadratic features
+         * use low rank quadratic features <p>
          *
          * @param firstNamespace  - namespace or ":" for any
          * @param secondNamespace - namespace or ":" for any
-         * @param k
+         * @param k factorized matrices width
          * @return builder
          */
         public Builder lrq(final String firstNamespace, final String secondNamespace, final int k) {
@@ -1002,7 +1007,7 @@ public class VowpalWabbit {
 
 
         /**
-         * use dropout training for low rank quadratic features
+         * use dropout training for low rank quadratic features <p>
          *
          * @return builder
          */
@@ -1012,9 +1017,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * create link function with polynomial d
+         * create link function with polynomial d <p>
          *
-         * @param d
+         * @param d polynomial degree
          * @return builder
          */
         public Builder autolink(final int d) {
@@ -1023,9 +1028,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * rank for reduction-based matrix factorization
+         * rank for reduction-based matrix factorization <p>
          *
-         * @param rank
+         * @param rank rank
          * @return builder
          */
         public Builder newMf(final int rank) {
@@ -1034,9 +1039,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Sigmoidal feedforward network with <k> hidden units
+         * Sigmoidal feedforward network with &lt;k&gt; hidden units <p>
          *
-         * @param units
+         * @param units number of hidden units
          * @return builder
          */
         public Builder nn(final int units) {
@@ -1045,7 +1050,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Confidence after training
+         * Confidence after training <p>
          *
          * @return builder
          */
@@ -1055,7 +1060,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Get confidence for binary predictions
+         * Get confidence for binary predictions <p>
          *
          * @return builder
          */
@@ -1065,7 +1070,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * enable active learning with cover
+         * enable active learning with cover <p>
          *
          * @return builder
          */
@@ -1075,7 +1080,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * enable active learning
+         * enable active learning <p>
          *
          * @return builder
          */
@@ -1085,10 +1090,10 @@ public class VowpalWabbit {
         }
 
         /**
-         * use experience replay at a specified level
-         * [b=classification/regression, m=multiclass, c=cost sensitive] with specified buffer size
+         * use experience replay at a specified level <p>
+         * [b=classification/regression, m=multiclass, c=cost sensitive] with specified buffer size <p>
          *
-         * @param arg
+         * @param arg argument
          * @return builder
          */
         public Builder replayB(final String arg) {
@@ -1097,7 +1102,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Online Newton with Oja's Sketch
+         * Online Newton with Oja's Sketch <p>
          *
          * @return builder
          */
@@ -1107,7 +1112,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * use bfgs optimization
+         * use bfgs optimization <p>
          *
          * @return builder
          */
@@ -1117,7 +1122,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * use conjugate gradient based optimization
+         * use conjugate gradient based optimization <p>
          *
          * @return builder
          */
@@ -1127,9 +1132,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Run lda with <int> topics
+         * Run lda with &lt;int&gt; topics <p>
          *
-         * @param topics
+         * @param topics number of lda topics
          * @return builder
          */
         public Builder lda(final int topics) {
@@ -1138,7 +1143,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * do no learning
+         * do no learning <p>
          *
          * @return builder
          */
@@ -1148,9 +1153,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * rank for matrix factorization.
+         * rank for matrix factorization. <p>
          *
-         * @param rank
+         * @param rank rank for matrix factorization
          * @return builder
          */
         public Builder rank(final int rank) {
@@ -1159,7 +1164,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Streaming Stochastic Variance Reduced Gradient
+         * Streaming Stochastic Variance Reduced Gradient <p>
          *
          * @return builder
          */
@@ -1169,7 +1174,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * FTRL: Follow the Proximal Regularized Leader
+         * FTRL: Follow the Proximal Regularized Leader <p>
          *
          * @return builder
          */
@@ -1180,7 +1185,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * FTRL: Parameter-free Stochastic Learning
+         * FTRL: Parameter-free Stochastic Learning <p>
          *
          * @return builder
          */
@@ -1190,7 +1195,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * kernel svm
+         * kernel svm <p>
          *
          * @return builder
          */
@@ -1200,7 +1205,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * use regular stochastic gradient descent update.
+         * use regular stochastic gradient descent update. <p>
          *
          * @return builder
          */
@@ -1211,7 +1216,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * use adaptive, individual learning rates.
+         * use adaptive, individual learning rates. <p>
          *
          * @return builder
          */
@@ -1222,7 +1227,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * use safe/importance aware updates.
+         * use safe/importance aware updates. <p>
          *
          * @return builder
          */
@@ -1233,7 +1238,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * use per feature normalized updates
+         * use per feature normalized updates <p>
          *
          * @return builder
          */
@@ -1244,9 +1249,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * use per feature normalized updates (=0)
+         * use per feature normalized updates (=0) <p>
          *
-         * @param l2
+         * @param l2 l2 regularization. Must be not negative
          * @return builder
          */
         public Builder sparseL2(final double l2) {
@@ -1255,7 +1260,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Use a cache.  The default is <data>.cache
+         * Use a cache.  The default is &lt;data&gt;.cache <p>
          *
          * @return builder
          */
@@ -1265,9 +1270,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * The location(s) of cacheFile.
+         * The location(s) of cacheFile. <p>
          *
-         * @param cacheFile
+         * @param cacheFile path to cache file
          * @return builder
          */
         public Builder cacheFile(final Path cacheFile) {
@@ -1276,7 +1281,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * do not reuse existing cache: create a new one always
+         * do not reuse existing cache: create a new one always <p>
          *
          * @return builder
          */
@@ -1286,9 +1291,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * use gzip format whenever possible. If a cache file is being created,
-         * this option creates a compressed cache file.
-         * A mixture of raw-text & compressed inputs are supported with autodetection.
+         * use gzip format whenever possible. If a cache file is being created, <p>
+         * this option creates a compressed cache file. <p>
+         * A mixture of raw-text and compressed inputs are supported with autodetection. <p>
          *
          * @return builder
          */
@@ -1298,9 +1303,9 @@ public class VowpalWabbit {
         }
 
         /**
-         * Add vowpal wabit argument
+         * Add vowpal wabit argument <p>
          *
-         * @param argumentLine
+         * @param argumentLine parameter line
          * @return builder
          */
         public Builder parameter(final String argumentLine) {
@@ -1309,7 +1314,7 @@ public class VowpalWabbit {
         }
 
         /**
-         * Get command option will be passes to VWLearner
+         * Get command option will be passes to VWLearner <p>
          *
          * @return command options
          */

@@ -59,7 +59,7 @@ public final class VWLearners {
 
     /**
      * @param command The same string that is passed to VW, see
-     *                <a href="https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments">here</a>
+     *                <a href="https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments">here
      *                for more information
      * @return The pointer to the native object created on the C side
      */

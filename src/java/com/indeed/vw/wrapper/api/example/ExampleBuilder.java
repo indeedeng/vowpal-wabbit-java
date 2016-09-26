@@ -1,4 +1,4 @@
-package com.indeed.vw.wrapper.api;
+package com.indeed.vw.wrapper.api.example;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
@@ -13,12 +13,9 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * OOP wrapper for vowpal-wabbit input format.
+ * OOP wrapper for vowpal-wabbit input format. <p>
  *
- * By default each namespace should start with unique character.
- * because you refer namespace in vowpal wabbit parameters using only one character.
- *
- * Check https://github.com/JohnLangford/vowpal_wabbit/wiki/Input-format for documentation
+ * Check <a href="https://github.com/JohnLangford/vowpal_wabbit/wiki/Input-format">https://github.com/JohnLangford/vowpal_wabbit/wiki/Input-format</a> for format documentation. <p>
  */
 public class ExampleBuilder {
 
@@ -44,7 +41,7 @@ public class ExampleBuilder {
     }
 
     /**
-     * Create method
+     * Create method <p>
      *
      * @return example builder
      */
@@ -53,8 +50,8 @@ public class ExampleBuilder {
     }
 
     /**
-     * By default each namespace should start with unique character.
-     * If you want to have multiple namespaces starting with same character use this method.
+     * By default each namespace should start with unique character. <p>
+     * If you want to have multiple namespaces starting with same character use this method. <p>
      *
      * @return example builder
      */
@@ -63,8 +60,7 @@ public class ExampleBuilder {
     }
 
     /**
-     * Builder for namespace
-     * Use ExampleBuilder to create an instance
+     * Builder for namespace. <p>
      */
     public static class NamespaceBuilder {
         private final ExampleBuilder exampleBuilder;
@@ -78,10 +74,10 @@ public class ExampleBuilder {
         }
 
         /**
-         * Namespace weight acts as a global scaling of all the values of the features in this namespace.
-         * If value is omitted, the default is 1.
+         * Namespace weight acts as a global scaling of all the values of the features in this namespace. <p>
+         * If value is omitted, the default is 1. <p>
          *
-         * @param weight
+         * @param weight namespace weight
          * @return builder
          */
         public NamespaceBuilder namespaceWeight(final double weight) {
@@ -92,9 +88,9 @@ public class ExampleBuilder {
         }
 
         /**
-         * Add a categorical feature to this namespace (e.g. userId, jobId)
+         * Add a categorical feature to this namespace (e.g. userId, jobId) <p>
          *
-         * @param feature - categorical feature
+         * @param feature categorical feature
          * @return builder
          */
         public NamespaceBuilder addCategoricalFeature(@Nonnull final String feature) {
@@ -106,7 +102,7 @@ public class ExampleBuilder {
         }
 
         /**
-         * Add a categorical feature to this namespace (e.g. userId, jobId)
+         * Add a categorical feature to this namespace (e.g. userId, jobId) <p>
          *
          * @param subNamespace sub namespace - e.g. namespace=person, subNamespace=gender, feature=Female
          * @param categoricalValue - categorical value
@@ -122,9 +118,9 @@ public class ExampleBuilder {
         }
 
         /**
-         * Add text feature to this namespace (e.g. job description)
+         * Add text feature to this namespace (e.g. job description) <p>
          *
-         * @param text
+         * @param text raw text
          * @return builder
          */
         public NamespaceBuilder addTextAsFeatures(@Nonnull final String text) {
@@ -134,12 +130,12 @@ public class ExampleBuilder {
         }
 
         /**
-         * Add numerical feature to this namespace (e.g. time series previous values)
-         * Also you may use this method to add categorical feature with weight
-         * (e.g. bag of words model with tf-idf weights)
+         * Add numerical feature to this namespace (e.g. time series previous values) <p>
+         * Also you may use this method to add categorical feature with weight <p>
+         * (e.g. bag of words model with tf-idf weights) <p>
          *
-         * @param featureName
-         * @param numericalValue
+         * @param featureName name of numerical feature (e.g. ctr)
+         * @param numericalValue value of numerical feature (e.g. 0.032)
          * @return builder
          */
         public NamespaceBuilder addNumericalFeature(@Nonnull final String featureName, final double numericalValue) {
@@ -168,10 +164,10 @@ public class ExampleBuilder {
     }
 
     /**
-     * Label is the real number that we are trying to predict for this example.
-     * <b>Important note:</b> when using logistic or hinge loss, the labels need to be from the set {+1,-1}
+     * Label is the real number that we are trying to predict for this example. <p>
+     * <b>Important note:</b> when using logistic or hinge loss, the labels need to be from the set {+1,-1} <p>
      *
-     * @param label
+     * @param label example numerical label
      * @return builder
      */
     public ExampleBuilder label(final double label) {
@@ -182,10 +178,10 @@ public class ExampleBuilder {
     }
 
     /**
-     * This is convenient method to set label when you use logistic or hinge loss you.
-     * This label will convert labels to be from the set {+1,-1}.
+     * This is convenient method to set label when you use logistic or hinge loss you. <p>
+     * This label will convert labels to be from the set {+1,-1}. <p>
      *
-     * @param binaryLabel
+     * @param binaryLabel example binary label
      * @return builder
      */
     public ExampleBuilder binaryLabel(final boolean binaryLabel) {
@@ -194,7 +190,7 @@ public class ExampleBuilder {
     }
 
     /**
-     * Get example label
+     * Get example label <p>
      *
      * @return label
      */
@@ -203,7 +199,7 @@ public class ExampleBuilder {
         return Double.parseDouble(label);
     }
     /**
-     * Get example tag
+     * Get example tag <p>
      *
      * @return tag
      */
@@ -212,8 +208,8 @@ public class ExampleBuilder {
     }
 
     /**
-     * If the label is omitted, then no training will be performed with the corresponding example,
-     * although VW will still compute a prediction.
+     * If the label is omitted, then no training will be performed with the corresponding example, <p>
+     * although VW will still compute a prediction. <p>
      *
      * @return builder
      */
@@ -223,10 +219,9 @@ public class ExampleBuilder {
     }
 
     /**
-     * Advanced option
-     * ===============
-     * you can use it to pass labels for multi-class classification
-
+     * You can use it to pass labels for multi-class classification. <p>
+     *
+     * @param label label
      * @return builder
      */
     public ExampleBuilder setLabelString(@Nonnull final String label) {
@@ -235,11 +230,11 @@ public class ExampleBuilder {
     }
 
     /**
-     * Tag is a string that serves as an identifier for the example.
-     * It is reported back when predictions are made. It doesn't have to be unique.
-     * The default value if it is not provided is the empty string.
+     * Tag is a string that serves as an identifier for the example. <p>
+     * It is reported back when predictions are made. It doesn't have to be unique. <p>
+     * The default value if it is not provided is the empty string. <p>
      *
-     * @param tag
+     * @param tag example tag
      * @return builder
      */
     public ExampleBuilder exampleTag(@Nonnull final String tag) {
@@ -250,12 +245,12 @@ public class ExampleBuilder {
     }
 
     /**
-     * Importance (importance weight) is a non-negative real number indicating the relative importance
-     * of this example over the others. Omitting this gives a default importance of 1 to the example.
+     * Importance (importance weight) is a non-negative real number indicating the relative importance <p>
+     * of this example over the others. Omitting this gives a default importance of 1 to the example. <p>
      *
-     * Notice that you should pass --invariant option in order to properly deal with example importances.
+     * Notice that you should pass -- invariant option in order to properly deal with example importance. <p>
      *
-     * @param exampleImportance
+     * @param exampleImportance example importance. Must be not negative
      * @return builder
      */
     public ExampleBuilder exampleImportance(final double exampleImportance) {
@@ -274,7 +269,7 @@ public class ExampleBuilder {
                         "Please use a unique first character for each namespace. \n" +
                         "This is necessary because vowpal wabbit options like '--keep', '--quadratic', '--cubic' \n" +
                         "only look at the first character of the namespace for performance reasons.\n" +
-                        "If you want to have multiple namspaces that start with same character - " +
+                        "If you want to have multiple namespaces that start with same character - " +
                         "create ExampleBuilder instance using ExampleBuilder.createAndDoNotCheckNamespace() method.\n" +
                         "These namespaces start with same character: " + namespace + ", " +
                                 namespaceThatStartWithSameCharacter(namespace));
@@ -293,6 +288,11 @@ public class ExampleBuilder {
         return "";
     }
 
+    /**
+     * Build vowpal wabbit example string <p>
+     *
+     * @return vowpal wabbit example string
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

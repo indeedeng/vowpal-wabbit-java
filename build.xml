@@ -19,4 +19,18 @@
 
     <property name="build.notwebapp" value="true"/>
 
+    <!-- Create javadocs in doc directory -->
+    <target name="javadoc-api" depends="prepare,compile" description="Generates Javadocs">
+        <mkdir dir="${build.doc.dir}"/>
+        <javadoc packagenames="com.indeed.vw.wrapper.api,com.indeed.vw.wrapper.api.*, com.indeed.vw.wrapper.progvalidation"
+                 sourcepath="${java.src.dir}" destdir="${build.doc.dir}" breakiterator="yes"
+                 author="false" version="false" use="false"
+                 Package="true"
+                 source="${javac.source}" windowtitle="Wowpal wabbit wrapper OOP api">
+            <classpath>
+                <path refid="compile.classpath"/>
+            </classpath>
+        </javadoc>
+    </target>
+
 </project>

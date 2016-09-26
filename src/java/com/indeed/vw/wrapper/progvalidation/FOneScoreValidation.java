@@ -1,7 +1,7 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- * See https://www.kaggle.com/wiki/MeanFScore
+ * See <a href="https://www.kaggle.com/wiki/MeanFScore">https://www.kaggle.com/wiki/MeanFScore</a> <p>
  */
 public class FOneScoreValidation extends ProgressiveValidation {
 

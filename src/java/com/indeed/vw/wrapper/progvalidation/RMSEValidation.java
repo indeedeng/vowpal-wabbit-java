@@ -1,7 +1,7 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 /**
- * See https://www.kaggle.com/wiki/RootMeanSquaredError
+ * See <a href="https://www.kaggle.com/wiki/RootMeanSquaredError">https://www.kaggle.com/wiki/RootMeanSquaredError</a> <p>
  */
 public class RMSEValidation extends ProgressiveValidation {
 

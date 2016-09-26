@@ -32,7 +32,7 @@
         <dependency org="google" name="guava" rev="${google-guava.version}"/>
         <dependency org="apache" name="log4j" rev="${log4j.version}"/>
         <dependency org="apache" name="commons-io" rev="${commons-io.version}" conf="test->default"/>
-	<dependency org="junit" name="junit" rev="${junit.version}" conf="test->default"/>
+	    <dependency org="junit" name="junit" rev="${junit.version}" conf="test->default"/>
         <!-- indeed -->
     </dependencies>
         

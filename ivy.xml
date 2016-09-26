@@ -23,7 +23,6 @@
     <publications>
         <artifact name="vw-wrapper" type="jar" conf="master"/>
         <artifact name="vw-wrapper-src" conf="master" type="source" ext="zip"/>
-        <artifact name="vw-wrapper-javadoc" type="javadoc" ext="zip"/>
         <artifact name="vw-wrapper-tests" type="tar.bz2" conf="master"/>
     </publications>
 

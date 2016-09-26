@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
  * Check https://github.com/JohnLangford/vowpal_wabbit/wiki/Input-format for documentation
  */
 public class ExampleBuilder {
+
     private static final Pattern VW_CONTROL_CHARACTERS = Pattern.compile("[\\s:\\|]+");
 
     private final boolean doNotCheckNamespaces;

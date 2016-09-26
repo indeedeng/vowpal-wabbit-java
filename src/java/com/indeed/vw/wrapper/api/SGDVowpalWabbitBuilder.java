@@ -1,39 +1,30 @@
 package com.indeed.vw.wrapper.api;
 
-import com.indeed.vw.wrapper.api.VowpalWabbit.Link;
 import com.indeed.vw.wrapper.learner.VWFloatLearner;
 
 import java.nio.file.Path;
 
 /**
- * This interface specify small subset of available options with some additional.
+ * Updates options.
  *
- * In 90% [1] of cases you will need only these options.
+ * These options automates and hides complexity of learning rates parameter tuning.
+ * Notice that by default adaptive, invariant and normalized are turned on and to remove them
+ * you need to pass sgd parameter.
  *
- * Though I highly recommend to follow https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments
- * and read some tutorials.
+ * Adaptive option tunes learning rates individually per feature. This option is highly recommended - if you do not specify it,
+ * then rare features will have too small weights.
+ *
+ * Invariant option allows consider example's weight during online learning.
+ * Without this option example's weight will be ignored.
+ * Also this option usually improves model quality.
+ *
+ * Normalize option turns on online feature scaling.
+ * In a lot of cases you want to remove this option,
+ * specially in case of very sparse boolean feature space.
+ *
+ * Always play with these options first, it usually gives the biggest gain.
  */
-public interface SGDVowpalWabbitBuilder {
-    // Updates options
-    // ===============
-    //
-    // These options automates and hides complexity of learning rates parameter tunning
-    // Notice that by default adaptive, invariant and normalized are turned on and to remove them
-    // you need to pass sgd parameter
-    //
-    // adaptive will tune learning rates individually per feature, highly recommended option, if you not specify it
-    // rare features will have too small weights
-    //
-    // invariant option allows consider example's weight during online learning;
-    // without this option example's weight will be ignored
-    // Also this option usually improves model quality
-    //
-    // normalize option turns on online feature scaling
-    // in a lot of cases you want to remove this option
-    // specially in case of very sparse boolean feature space
-    //
-    // always play with these options first it usually gives the biggest gain
-
+interface UpdatesOptions {
     /**
      * use regular stochastic gradient descent update.
      * removes adaptive, invariant and normalized options
@@ -70,15 +61,17 @@ public interface SGDVowpalWabbitBuilder {
      * @return builder
      */
     SGDVowpalWabbitBuilder learningRate(final double learningRate);
+}
 
-    // Regularization options
-    // ======================
-    //
-    // specify these values to pervent overfitting
-    // l2 regularization will tend to keep weight small
-    // while l1 will tend to zero irrelevant weights
-    // and can be seen as feature selection
-
+/**
+ * Regularization options.
+ *
+ * Specify these values to prevent overfitting.
+ * l2 regularization will tend to keep weight small
+ * while l1 will tend to zero irrelevant weights
+ * and can be seen as feature selection
+ */
+interface RegularizationOptions {
     /**
      * l_1 lambda
      *
@@ -94,17 +87,18 @@ public interface SGDVowpalWabbitBuilder {
      * @return builder
      */
     SGDVowpalWabbitBuilder l2(final double l2);
+}
 
-
-    // Link and loss functions
-    // =======================
-    //
-    // loss function defines gradient using to update feature weights
-    // link applied to linear composition
-    // Possibility to set these to functions makes vowpal wabbit GLM framework
-    //
-    // Check https://github.com/JohnLangford/vowpal_wabbit/wiki/Loss-functions
-
+/**
+ * Link and Loss options.
+ *
+ * loss function defines gradient using to update feature weights
+ * link applied to linear composition
+ * Possibility to set these to functions makes vowpal wabbit GLM framework
+ *
+ * Check https: github.com/JohnLangford/vowpal_wabbit/wiki/Loss-functions
+ */
+interface LinkAndLossOptions {
     /**
      * Specify the loss function to be used, uses squared by default. Currently available ones are
      * squared, classic, hinge, logistic, quantile and poisson. (=squared)
@@ -112,7 +106,7 @@ public interface SGDVowpalWabbitBuilder {
      * @param loss
      * @return builder
      */
-    SGDVowpalWabbitBuilder lossFunction(final VowpalWabbit.Loss loss);
+    SGDVowpalWabbitBuilder lossFunction(final Loss loss);
 
     /**
      * Parameter \tau associated with Quantile loss. Defaults to 0.5 (=0.5)
@@ -130,10 +124,13 @@ public interface SGDVowpalWabbitBuilder {
      */
     SGDVowpalWabbitBuilder link(final Link link);
 
+}
 
-    // Prediction boundary options
-    // ===========================
-
+/**
+ * Prediction boundary options
+ *
+ */
+interface PredictionBoundaryOptions {
     /**
      * Smallest prediction to output
      *
@@ -150,13 +147,16 @@ public interface SGDVowpalWabbitBuilder {
      */
     SGDVowpalWabbitBuilder maxPrediction(final double max);
 
-    // Feature engineering functions
-    // =============================
-    //
-    // Feature engineering is a strong part of vowpal wabbit
-    // To refer namespace you its first character
-    // To refer any namespaces use ':'
+}
 
+/**
+ * Feature engineering functions.
+ *
+ * Feature engineering is a strong part of vowpal wabbit
+ * To refer namespace you its first character
+ * To refer any namespaces use ':'
+ */
+interface FeatureEngineeringFunctions {
     /**
      * Don't add a constant feature
      *
@@ -219,10 +219,13 @@ public interface SGDVowpalWabbitBuilder {
      * @return builder
      */
     SGDVowpalWabbitBuilder lrqfa(final String firstNamespace, final String secondNamespace, final int k);
+}
 
-    // Options to save and load model
-    // ==============================
-
+/**
+ * Options to save and load model.
+ *
+ */
+interface OptionsToSaveAndLoadModel {
     /**
      * Initial regressor(s)
      *
@@ -238,9 +241,13 @@ public interface SGDVowpalWabbitBuilder {
      * @return builder
      */
     SGDVowpalWabbitBuilder finalRegressor(final Path regressor);
+}
 
-    // Option for debugging model
-    // =========================
+/**
+ * Options for debugging model.
+ *
+ */
+interface DebuggingOptions {
     /**
      * Output human-readable final regressor with numeric features
      *
@@ -255,24 +262,26 @@ public interface SGDVowpalWabbitBuilder {
      * @return builder
      */
     SGDVowpalWabbitBuilder verbose();
+}
 
-    // Feature selection options
-    // =========================
-    //
-    // Usual way to do feature selection in GLM framework is to set l1 regularization.
-    // This type of regularization will tend to zero weights of unrellevant variables.
-    // Although this a good way to go, setting l1 usually decreases model quality.
-    //
-    // Vowpal wabbit has two workarounds. One of them is ftrl-proximal optimization algorithm.
-    // This algorithm accumulates updates in a buffer vector and changes actual model
-    // weights only if updates are big enough. As result, the produced model tends to be very sparse.
-    // I order to get benefit from this option you still need to set l1. Also this is the algorithm described
-    // in famous google paper "ctr-modeling, a view from trenches".
-    //
-    // Other option is feature mask. The idea of feature mask is that you train a model with very big l1 regularization
-    // to do feature selection in a first pass. Then in a second pass you use previous model to zero unrellevant features
-    // and you can train without l1 regularization at all.
-
+/**
+ * Feature selection options.
+ *
+ * Usual way to do feature selection in GLM framework is to set l1 regularization.
+ * This type of regularization will tend to zero weights of unrellevant variables.
+ * Although this a good way to go, setting l1 usually decreases model quality.
+ *
+ * Vowpal wabbit has two workarounds. One of them is ftrl-proximal optimization algorithm.
+ * This algorithm accumulates updates in a buffer vector and changes actual model
+ * weights only if updates are big enough. As result, the produced model tends to be very sparse.
+ * I order to get benefit from this option you still need to set l1. Also this is the algorithm described
+ * in famous google paper "ctr-modeling, a view from trenches".
+ *
+ * Other option is feature mask. The idea of feature mask is that you train a model with very big l1 regularization
+ * to do feature selection in a first pass. Then in a second pass you use previous model to zero unrellevant features
+ * and you can train without l1 regularization at all.
+ */
+interface FeatureSelectionOptions {
     /**
      * FTRL: Follow the Proximal Regularized Leader
      *
@@ -288,11 +297,13 @@ public interface SGDVowpalWabbitBuilder {
      * @return builder
      */
     SGDVowpalWabbitBuilder featureMask(final Path featureMask);
+}
 
-
-    // Option to exchange RAM for some quality
-    // =======================================
-
+/**
+ * Option to exchange RAM for some quality.
+ *
+ */
+interface OptionToExchangeRAMForQuality {
     /**
      * number of bits in the feature table
      *
@@ -300,10 +311,13 @@ public interface SGDVowpalWabbitBuilder {
      * @return builder
      */
     SGDVowpalWabbitBuilder bitPrecision(int bitsNum);
+}
 
-    // Misc
-    // ====
-
+/**
+ * Misc options
+ *
+ */
+interface MiscOptions {
     /**
      * Ignore label information and just test
      *
@@ -319,7 +333,18 @@ public interface SGDVowpalWabbitBuilder {
      * @return builder
      */
     SGDVowpalWabbitBuilder randomSeed(final int seed);
-
+}
+/**
+ * This interface specify small subset of available options with some additional.
+ *
+ * In 90% [1] of cases you will need only these options.
+ *
+ * Though I highly recommend to follow https:*github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments
+ * and read some tutorials.
+ */
+public interface SGDVowpalWabbitBuilder extends UpdatesOptions, RegularizationOptions, PredictionBoundaryOptions,
+        LinkAndLossOptions, FeatureEngineeringFunctions, OptionsToSaveAndLoadModel, DebuggingOptions,
+        FeatureSelectionOptions, OptionToExchangeRAMForQuality, MiscOptions {
     /**
      * Build learner
      *

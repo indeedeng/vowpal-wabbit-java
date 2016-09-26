@@ -17,8 +17,12 @@ import java.util.Arrays;
  * For better parameters documentation read: https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments
  */
 public class VowpalWabbit {
-    private static final Logger logger = Logger.getLogger(VowpalWabbit.class);
+    /**
+     * Pass this constant as namespace parameter if you want to set some feature engineering for all namespaces.
+     *
+     */
     public static final String ANY_NAMESPACE = ":";
+    private static final Logger logger = Logger.getLogger(VowpalWabbit.class);
 
     private VowpalWabbit() {
     }
@@ -27,26 +31,32 @@ public class VowpalWabbit {
         strings, all
     }
 
-    public enum Loss {
-        squared, classic, hinge, logistic, quantile, poisson
-    }
-
     public enum LDF {
         singleline, multiline
     }
 
-    public enum Link {
-        identity, logistic, glf1, poisson
-    }
-
+    /**
+     * Create builder for Vowpal Wabbit learner
+     *
+     * @return SGDVowpalWabbitBuilder
+     */
     public static SGDVowpalWabbitBuilder builder() {
         return new Builder();
     }
 
+    /**
+     * Create advanced builder for Vowpal Wabbit learner
+     *
+     * @return SGDVowpalWabbitBuilder
+     */
     public static Builder advancedBuilder() {
         return new Builder();
     }
 
+    /**
+     * Builder for Vowpal Wabbit learner.
+     *
+     */
     public static class Builder implements SGDVowpalWabbitBuilder {
         private Builder() {
         }

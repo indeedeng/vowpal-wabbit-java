@@ -3,7 +3,7 @@ package com.indeed.vw.wrapper.integration.tests;
 import com.indeed.vw.wrapper.api.ExampleBuilder;
 import com.indeed.vw.wrapper.api.SGDVowpalWabbitBuilder;
 import com.indeed.vw.wrapper.api.VowpalWabbit;
-import com.indeed.vw.wrapper.api.VowpalWabbit.Loss;
+import com.indeed.vw.wrapper.api.Loss;
 import com.indeed.vw.wrapper.integration.IntegrationSuite;
 import com.indeed.vw.wrapper.learner.VWFloatLearner;
 import com.indeed.vw.wrapper.progvalidation.Metrics;

@@ -1,4 +1,5 @@
-h1. Vowpal Wabbit Wrapper
+Vowpal Wabbit Wrapper
+====================
 
 This library contains [vowpal wabbit]() JNI wrapper and OOP api for it.
 

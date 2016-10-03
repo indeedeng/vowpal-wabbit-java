@@ -93,8 +93,8 @@ public class ExampleBuilder {
          * @param feature categorical feature
          * @return builder
          */
-        public NamespaceBuilder addCategoricalFeature(@Nonnull final String feature) {
-            Preconditions.checkArgument(!VW_CONTROL_CHARACTERS.matcher(feature).find(),
+        public NamespaceBuilder addCategoricalFeature(@Nonnull final Object feature) {
+            Preconditions.checkArgument(!VW_CONTROL_CHARACTERS.matcher(feature.toString()).find(),
                     "Bad feature name! " +
                         "Namespace=" + name + " feature=" + feature);
             features.append(feature).append(" ");
@@ -108,7 +108,7 @@ public class ExampleBuilder {
          * @param categoricalValue - categorical value
          * @return builder
          */
-        public NamespaceBuilder addCategoricalFeature(@Nonnull final String subNamespace, @Nonnull final String categoricalValue) {
+        public NamespaceBuilder addCategoricalFeature(@Nonnull final String subNamespace, @Nonnull final Object categoricalValue) {
             final String feature = subNamespace + "=" + categoricalValue;
             Preconditions.checkArgument(!VW_CONTROL_CHARACTERS.matcher(feature).find(),
                     "Bad feature name! " +

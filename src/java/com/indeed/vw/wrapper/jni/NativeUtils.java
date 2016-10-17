@@ -39,8 +39,10 @@ public class NativeUtils {
     static {
         // RedHat binaries
         final List<String> redHatAlternatives = new ArrayList<>();
-        redHatAlternatives.add("Red_Hat.6");
+        redHatAlternatives.add("CentOS.6");
         identicalOSs.put("Scientific.6", redHatAlternatives);
+        identicalOSs.put("Red_Hat.6", redHatAlternatives);
+        identicalOSs.put("RedHatEnterpriseServer.6", redHatAlternatives);
     }
 
     /**

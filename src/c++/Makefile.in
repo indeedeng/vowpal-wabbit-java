@@ -1,0 +1,19 @@
+
+jni_SRCS = $(shell find . -name "*.cc")
+jni_OBJS = $(jni_SRCS:.cc=.o)
+
+FLAGS=@CXXFLAGS@ @SHARED_OBJ_FLAGS@
+
+vw_jni.lib: $(jni_OBJS) @VW_LIB@/main.o @VW_LIB@/.libs/libvw.a @VW_LIB@/.libs/liballreduce.a
+	@CXX@ $(FLAGS) -o $@ $^ @BOOST_LIB@/lib/libboost_program_options.a -L @VW_LIB@/.libs/ @INCLUDES@ -L @prefix@/lib @VWW_LDFLAGS@
+
+%.o: %.cc  %.h
+	@CXX@ $(FLAGS) -c $< -o $@ @INCLUDES@
+
+%.o: %.cc
+	@CXX@ $(FLAGS) -c $< -o $@ @INCLUDES@
+
+.PHONY: clean
+clean:
+	rm -f vw_jni.lib
+	rm -f $(jni_SRCS:.cc=.o)

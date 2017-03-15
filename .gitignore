@@ -4,3 +4,4 @@
 /build-transient-src
 /ide-lib
 /dist
+*.o

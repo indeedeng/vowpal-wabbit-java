@@ -4,3 +4,17 @@
 /build-transient-src
 /ide-lib
 /dist
+*.o
+transient
+m4
+Makefile
+aclocal.m4
+autom4te.cache
+compile
+config.*
+configure
+install-sh
+missing
+m4
+Itmain.sh
+*.log

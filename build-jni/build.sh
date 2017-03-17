@@ -26,9 +26,9 @@ mkdir -p $BASE_SRC_DIRECTORY
 BOOST_LIB_DIR="$BASE_LIB_DIRECTORY/boost"
 VW_WRAPPER_LIB_DIR="$BASE_LIB_DIRECTORY/vw_wrapper"
 
-source $CURRENT_DIR/download-dependencies-sources.sh
+source $CURRENT_DIR/download_dependencies_sources_functions.sh
 
-VW_WRAPPER_SOURCE_DIR="$CURRENT_DIR/../c++/"
+VW_WRAPPER_SOURCE_DIR="$CURRENT_DIR/../vw_jni/"
 
 if [ -z "$BOOST_SOURCE_DIR" ]; then
   BOOST_SOURCE_DIR="$BASE_SRC_DIRECTORY/boost"
@@ -77,6 +77,7 @@ build_vw_wrapper() {
 # =============================================================================
 
 clean
+
 build_boost
 
 build_vowpal_wabbit

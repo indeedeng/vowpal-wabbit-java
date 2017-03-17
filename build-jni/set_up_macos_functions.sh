@@ -112,14 +112,4 @@ configure_macos() {
   install_brew_app "docker"
 }
 
-start_docker() {
-  echo $(docker-machine create --driver virtualbox default)
-  echo $(docker-machine start default)
-  eval $(docker-machine env default)
-}
 
-run_docker() {
-  local machine=$1
-  local script=$2
-  docker run --rm -v $(pwd):/build-scripts -v $(pwd)/../c++:/c++ $machine /bin/bash "$script"
-}

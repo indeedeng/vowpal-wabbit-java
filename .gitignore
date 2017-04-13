@@ -1,6 +1,9 @@
 *.iml
 /.idea
 /build
+/target
+/out
+/clippy-lib
 /build-transient-src
 /ide-lib
 /dist
@@ -18,3 +21,4 @@ missing
 m4
 Itmain.sh
 *.log
+.*

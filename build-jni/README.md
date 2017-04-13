@@ -13,11 +13,11 @@ Both objects have linked statically dependencies: vowpal-wabbit and boost_option
 
 To reproduce build process, you need a machine with OS X.
 
-On this machine run command.
+On this machine run:
 ```
 ./build_everything_on_macos.sh
 ```
-This command
+This script:
 
  - will install all the software needed, and
  - will run `build.sh` script in `vw-linux-build-docker-img` docker image
@@ -37,7 +37,7 @@ On this machine run:
 ./build.sh
 ```
 
-This script
+This script:
 
 - will download boost and vowpal wabbit, and
 - apply indeed patches on vowpal wabbit, and

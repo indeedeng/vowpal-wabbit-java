@@ -40,11 +40,11 @@ start_docker
 docker build -t vw-linux-build-docker-img  vw-linux-build-docker-img
 
 run_docker "vw-linux-build-docker-img" "/build-jni/build.sh"
-mv transient/lib/vw_wrapper/vw_jni.lib ../src/resources/lib/vw_jni.Linux.lib
+mv transient/lib/vw_wrapper/vw_jni.lib ../src/main/resources/lib/vw_jni.Linux.lib
 
 # =============================================================================
 # Build Macos shared object 
 # =============================================================================
 
 ./build.sh
-mv transient/lib/vw_wrapper/vw_jni.lib ../src/resources/lib/vw_jni.Darwin.lib
+mv transient/lib/vw_wrapper/vw_jni.lib ../src/main/resources/lib/vw_jni.Darwin.lib

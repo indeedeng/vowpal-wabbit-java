@@ -31,7 +31,7 @@ Build c++ binary
 ----------------
 
 Notice that we distribute already built c++ binaries together with the code.
-Please, refer [build-jni/README.md] for instructions if you want to rebuild them.
+Please, refer [build-jni/README.md](build-jni/README.md) for instructions if you want to rebuild them.
 
 Dependencies
 ------------
@@ -41,9 +41,9 @@ Dependencies
 Use it
 ------
 
-For general advices on how to train vowpal wabbit model, please refer to official [vowpal wabbit wiki] ().
+For general advices on how to train vowpal wabbit model, please refer to official [vowpal wabbit wiki] (https://github.com/JohnLangford/vowpal_wabbit/wiki).
 
-To learn how to use this wrapper and its java API, you may check [API javadocs].
+To learn how to use this wrapper and its java API, you may check [API javadocs](TODO).
 Also, integration tests may work as a reference of how to use this api.
 
 Check them:

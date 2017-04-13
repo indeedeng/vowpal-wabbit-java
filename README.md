@@ -49,7 +49,7 @@ Also, integration tests may work as a reference of how to use this api.
 Check them:
 
  - [Twitter Sentiment analysis](src/test/java/com/indeed/vw/wrapper/integration/tests/TestOnTwitterSentimentDataset.java)
- - [Movie lens 1M](src/test/java/com/indeed/vw/wrapper/integration/tests/TestOnTwitterSentimentDataset.java)
+ - [Movie lens 1M](src/test/java/com/indeed/vw/wrapper/integration/tests/TestOnMovieLensDataset.java)
 
 Tested platform
 ---------------

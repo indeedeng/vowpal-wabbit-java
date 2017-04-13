@@ -3,7 +3,6 @@ package com.indeed.vw.wrapper.learner;
 import com.indeed.vw.wrapper.api.VowpalWabbit;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 
 /**
  *

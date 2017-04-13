@@ -51,9 +51,7 @@ public abstract class IntegrationSuite {
      *
      * @throws IOException
      */
-    @Test
-    @Ignore
-    public void testGenerateVwDatasets() throws IOException {
+    public void runGenerateVwDatasets() throws IOException {
         final Path trainVwPath = Paths.get(getClass().getResource(getTrainPath()).getPath() + ".vw");
         final List<String> trainVwExamples = new ArrayList<>();
         for (final List<String> columns : readColumnsFromCsv(getTrainPath())) {

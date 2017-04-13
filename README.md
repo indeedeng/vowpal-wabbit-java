@@ -1,38 +1,69 @@
 Vowpal Wabbit Wrapper
 ====================
 
-This library contains [vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) JNI wrapper and OOP api for it.
+[Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) java wrapper and OOP api for it.
 
-How to install
---------------
-
-
-How to use
+Motivation
 ----------
 
-Check [API javadocs](https://integration.ausoff.indeed.net/hudson/job/vowpal-wabbit-wrapper/javadoc/).
+[Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) is widely used machine learning package.
 
-Also check examples:
+One one hand it is very production friendly, on another hand it has the implementation of state of art of modern machine learning research.
 
-* [Twitter Sentiment analysis](https://code.corp.indeed.com/data-science/vowpal-wabbit-wrapper/blob/master/test/java/com/indeed/vw/wrapper/integration/tests/TestOnTwitterSentimentDataset.java)
-* [Movie lens 1M](https://code.corp.indeed.com/data-science/vowpal-wabbit-wrapper/blob/master/test/java/com/indeed/vw/wrapper/integration/tests/TestOnMovieLensDataset.java)
+It has bindings to a lot of programing languages including java. However it's java binding has following problems:
 
-How to build shared objects files
----------------------------------
+ - It has a bug because of which saved model may have incorrect weights; and
+ - it requires boost library to be installed one every machine where this wrapper is used, which is not always feasible; and
+ - Its API is not very clean.
 
-Differences with official jni wrapper
--------------------------------------
-Vowpal wabbit 
+In this project we base on existing java wrapper, but address described issues.
 
-We hope to merge these two wrappers eventually.
+Build
+-----
+
+To build this library run command:
+
+```
+mvn clean install
+```
+
+Build c++ binary
+----------------
+
+Notice that we distribute already built c++ binaries together with the code.
+Please, refer [build-jni/README.md] for instructions if you want to rebuild them.
+
+Dependencies
+------------
+ - guava
+ - log4j
+
+Use it
+------
+
+For general advices on how to train vowpal wabbit model, please refer to official [vowpal wabbit wiki] ().
+
+To learn how to use this wrapper and its java API, you may check [API javadocs].
+Also, integration tests may work as a reference of how to use this api.
+
+Check them:
+
+ - [Twitter Sentiment analysis](src/test/java/com/indeed/vw/wrapper/integration/tests/TestOnTwitterSentimentDataset.java)
+ - [Movie lens 1M](src/test/java/com/indeed/vw/wrapper/integration/tests/TestOnTwitterSentimentDataset.java)
 
 Tested platform
 ---------------
-We have tested this wrapper on following platforms:
- - Yosemite
- - Ubuntu
- - CentOS 6
 
+We have tested this wrapper on following platforms:
+
+ - OS X Yosemite
+ - Ubuntu 14
+ - Enterprise Linux 5
+ - Enterprise Linux 6
+ - CentOS 5
+ - CentOS 6
+ - CentOS 7
 
 Licence
 -------
+This library is distributed under [The Apache Software License, Version 2.0](LICENCE).

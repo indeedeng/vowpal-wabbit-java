@@ -20,7 +20,7 @@ On this machine run:
 This script:
 
  - will install all the software needed, and
- - will run `build.sh` script in `vw-linux-build-docker-img` docker image
+ - will run `build.sh` script in `vw-linux-build-docker-img` docker image, and
  - will run `build.sh` script under OS X.
 
  You may find result files in `${PROJECT_DIR}/src/main/resources/lib`

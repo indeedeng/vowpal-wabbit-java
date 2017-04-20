@@ -66,6 +66,6 @@ We have tested this wrapper on following platforms:
 
 License
 -------
-This library is distributed under [The Apache Software License, Version 2.0](LICENSE).
-
-VW binaries are distributed under [BSD (revised) license](VW_LICENSE)
+- This library is distributed under [The Apache Software License, Version 2.0](LICENSE).
+- VW binaries are distributed under [BSD (revised) license](VW_LICENSE)
+- Boost binaries are distributed under [Boost Software License](BOOST_LICENSE)

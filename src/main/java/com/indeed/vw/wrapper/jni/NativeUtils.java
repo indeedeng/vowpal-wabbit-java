@@ -14,9 +14,9 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * Simple library class for working with JNI (Java Native Interface),
- * see <a href="http://adamheinrich.com/blog/2012/how-to-load-native-jni-library-from-jar/">here.
+ * see <a href="http://adamheinrich.com/blog/2012/how-to-load-native-jni-library-from-jar/">here</a>.
  *
- * @author Adam Heirnich &lt;adam@adamh.cz&gt;, <a href="http://www.adamh.cz">http://www.adamh.cz
+ * @author Adam Heirnich &lt;adam@adamh.cz&gt;, <a href="http://www.adamh.cz">http://www.adamh.cz</a>
  * @author Jon Morra
  * @author artem@indeed.com
  */
@@ -82,7 +82,7 @@ public class NativeUtils {
 
     /**
      * Loads library from current JAR archive
-     * <p/>
+     * <p>
      * The file from JAR is copied into system temporary directory and then loaded. The temporary file is deleted after exiting.
      * Method uses String as filename because the pathname is "abstract", not system-dependent.
      *

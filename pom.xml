@@ -13,7 +13,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>IQL Server</name>
+    <name>Vowpal Wabbit Wrapper</name>
     <url>http://github.com/indeedeng</url>
 
     <licenses>
@@ -23,6 +23,17 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <excludePackageNames>com.indeed.vw.wrapper.learner:com.indeed.vw.wrapper.jni</excludePackageNames>
+                    <show>package</show>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>

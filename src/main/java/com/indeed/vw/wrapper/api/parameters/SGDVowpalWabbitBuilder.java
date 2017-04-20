@@ -336,7 +336,7 @@ interface MiscOptions {
     SGDVowpalWabbitBuilder randomSeed(final int seed);
 }
 /**
- * This interface specify small subset of available options with some additional. <p>
+ * This interface specify small subset of available options with some additional documentation. <p>
  *
  * In 90% [1] of cases you will need only these options. <p>
  *

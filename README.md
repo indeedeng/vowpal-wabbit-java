@@ -64,7 +64,7 @@ We have tested this wrapper on following platforms:
  - CentOS 6
  - CentOS 7
 
-Licence
+License
 -------
 This library is distributed under [The Apache Software License, Version 2.0](LICENSE).
 

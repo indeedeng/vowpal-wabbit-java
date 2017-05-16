@@ -23,6 +23,14 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+	<scm>
+		<url>https://github.com/indeedeng/vowpal-wabbit-java</url>
+		<connection>scm:git:https://github.com/indeedeng/vowpal-wabbit-java.git</connection>
+		<developerConnection>scm:git:git@github.com:indeedeng/vowpal-wabbit-java.git</developerConnection>
+	</scm>
+
+
     <build>
         <plugins>
             <plugin>

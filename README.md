@@ -51,6 +51,11 @@ Check them:
  - [Twitter Sentiment analysis](src/test/java/com/indeed/vw/wrapper/integration/tests/TestOnTwitterSentimentDataset.java)
  - [Movie lens 1M](src/test/java/com/indeed/vw/wrapper/integration/tests/TestOnMovieLensDataset.java)
 
+Get help
+--------
+
+Feel free to create an issue in this project.
+
 Tested platform
 ---------------
 

@@ -12,6 +12,15 @@
     <packaging>jar</packaging>
 
     <name>Vowpal Wabbit Wrapper</name>
+    <description>
+	    Vowpal wabbit is a very effective machine learning library (https://github.com/JohnLangford/vowpal_wabbit/wiki).
+	    It implements several state of art algorithms in a very efficient way.
+	    
+	    This java library provides a JNI OOP interface to vowpal wabbit.
+	    
+	    It depends only on log4j and guava. You don't need vowpal wabbit to be installed if you use this wrapper.
+    </description>
+
     <url>http://github.com/indeedeng</url>
 
     <licenses>

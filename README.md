@@ -1,7 +1,7 @@
 Vowpal Wabbit Wrapper
 ====================
 
-[Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) java wrapper and OOP api for it.
+[Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) java wrapper and a friendly API for it.
 
 Motivation
 ----------
@@ -10,11 +10,11 @@ Motivation
 
 One one hand it is very production friendly, on another hand it has the implementation of state of art of modern machine learning research.
 
-It has bindings to a lot of programing languages including java. However it's java binding has following problems:
+It has bindings to a lot of programing languages including java. However its java binding has following problems:
 
- - It has a bug because of which saved model may have incorrect weights; and
- - it requires boost library to be installed one every machine where this wrapper is used, which is not always feasible; and
- - Its API is not very clean.
+ - it has a bug because of which saved model may have incorrect weights; and
+ - it requires boost library to be installed on every machine where this wrapper is used, which is not always feasible; and
+ - its API is too low-level, it requires you to operate with the strings instead of providing a more convenient domain abstraction.
 
 In this project we base on existing java wrapper, but address described issues.
 
@@ -27,10 +27,10 @@ To build this library run command:
 mvn clean install
 ```
 
-Build c++ binary
+Build C++ binary
 ----------------
 
-Notice that we distribute already built c++ binaries together with the code.
+Notice that we distribute already built C++ binaries together with the code.
 Please, refer [build-jni/README.md](build-jni/README.md) for instructions if you want to rebuild them.
 
 Dependencies

@@ -1,66 +1,65 @@
 Vowpal Wabbit Wrapper
 ====================
-
-[Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) java wrapper and a friendly API for it.
-
-Motivation
+ 
+A java wrapper and friendly API for the [Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) machine learning package.
+ 
+Background
 ----------
-
-[Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) is a widely used machine learning package.
-
-One on hand it is very production friendly, on another hand it has the implementation of state of art of the modern machine learning research.
-
-It has bindings to a lot of programing languages including java. However its java binding has following problems:
-
- - it has a bug because of which saved model may have incorrect weights; and
- - it requires boost library to be installed on every machine where this wrapper is used, which is not always feasible; and
- - its API is too low-level, it requires you to operate with the strings instead of providing a more convenient domain abstraction.
-
-In this project we base on the existing java wrapper, but addresses the described issues.
-
-Build
+ 
+ 
+The Vowpal Wabbit (VP) package is very production friendly and it implements the state of the art in modern machine learning research.
+ 
+The existing java binding for VP has drawbacks:
+ 
+ - Because of a bug, saved models may have incorrect weights
+ - It requires the boost library to be installed on every machine where the wrapper is used, which is not always feasible
+ - its API is  low-level, requiring you to operate with strings instead of providing a more convenient domain abstraction
+ 
+This project addresses these drawbacks.
+ 
+Building the library
 -----
-
-To build this library run command:
-
+ 
+To build this library run the following command:
+ 
 ```
 mvn clean install
 ```
-
-Build C++ binary
-----------------
-
-Notice that we distribute already built C++ binaries together with the code.
-Please, refer [build-jni/README.md](build-jni/README.md) for instructions if you want to rebuild them.
-
+ 
 Dependencies
 ------------
  - guava
  - log4j
-
-Use it
+ 
+Rebuilding C++ binaries
+----------------
+ 
+This distribution includes pre-built C++ binaries along with the code.
+You can rebuild the binaries from source if necessary. Refer to [build-jni/README.md](build-jni/README.md) for instructions.
+ 
+ 
+Using the library
 ------
-
-For general advices on how to train vowpal wabbit model, please refer to the official [vowpal wabbit wiki](https://github.com/JohnLangford/vowpal_wabbit/wiki).
-
-To learn how to use this wrapper and its java API, you may check [API javadocs](http://opensource.indeedeng.io/vowpal-wabbit-java).
-Also, integration tests may work as a reference of how to use this api.
-
-Check them:
-
+ 
+Refer to the official [vowpal wabbit wiki](https://github.com/JohnLangford/vowpal_wabbit/wiki) for general instructions and advice on training the Vowpal Wabbit model.
+ 
+Refer to [API javadocs](http://opensource.indeedeng.io/vowpal-wabbit-java) for instructions specific to this wrapper and java API.
+ 
+The following integration tests provide references for using the API.
+ 
  - [Twitter Sentiment analysis](src/test/java/com/indeed/vw/wrapper/integration/tests/TestOnTwitterSentimentDataset.java)
  - [Movie lens 1M](src/test/java/com/indeed/vw/wrapper/integration/tests/TestOnMovieLensDataset.java)
-
-Get help
+ 
+Reporting issues
 --------
-
-Feel free to create an issue in this project.
-
+ 
+Create an [issue](https://github.com/indeedeng/vowpal-wabbit-java/issues) in this project if you encounter issues or need help.
+ 
 Tested platform
 ---------------
-
+ 
 We have tested this wrapper on the following platforms:
-
+ 
  - OS X Yosemite
  - Ubuntu 14
  - Enterprise Linux 5
@@ -68,7 +67,7 @@ We have tested this wrapper on the following platforms:
  - CentOS 5
  - CentOS 6
  - CentOS 7
-
+ 
 License
 -------
 - This library is distributed under [The Apache Software License, Version 2.0](LICENSE).

@@ -41,7 +41,7 @@ Dependencies
 Use it
 ------
 
-For general advices on how to train vowpal wabbit model, please refer to the official [vowpal wabbit wiki] (https://github.com/JohnLangford/vowpal_wabbit/wiki).
+For general advices on how to train vowpal wabbit model, please refer to the official [vowpal wabbit wiki](https://github.com/JohnLangford/vowpal_wabbit/wiki).
 
 To learn how to use this wrapper and its java API, you may check [API javadocs](http://opensource.indeedeng.io/vowpal-wabbit-java).
 Also, integration tests may work as a reference of how to use this api.

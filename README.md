@@ -6,9 +6,9 @@ Vowpal Wabbit Wrapper
 Motivation
 ----------
 
-[Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) is widely used machine learning package.
+[Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) is a widely used machine learning package.
 
-One one hand it is very production friendly, on another hand it has the implementation of state of art of modern machine learning research.
+One on hand it is very production friendly, on another hand it has the implementation of state of art of the modern machine learning research.
 
 It has bindings to a lot of programing languages including java. However its java binding has following problems:
 
@@ -16,7 +16,7 @@ It has bindings to a lot of programing languages including java. However its jav
  - it requires boost library to be installed on every machine where this wrapper is used, which is not always feasible; and
  - its API is too low-level, it requires you to operate with the strings instead of providing a more convenient domain abstraction.
 
-In this project we base on existing java wrapper, but address described issues.
+In this project we base on the existing java wrapper, but addresses the described issues.
 
 Build
 -----
@@ -41,7 +41,7 @@ Dependencies
 Use it
 ------
 
-For general advices on how to train vowpal wabbit model, please refer to official [vowpal wabbit wiki] (https://github.com/JohnLangford/vowpal_wabbit/wiki).
+For general advices on how to train vowpal wabbit model, please refer to the official [vowpal wabbit wiki] (https://github.com/JohnLangford/vowpal_wabbit/wiki).
 
 To learn how to use this wrapper and its java API, you may check [API javadocs](http://opensource.indeedeng.io/vowpal-wabbit-java).
 Also, integration tests may work as a reference of how to use this api.
@@ -59,7 +59,7 @@ Feel free to create an issue in this project.
 Tested platform
 ---------------
 
-We have tested this wrapper on following platforms:
+We have tested this wrapper on the following platforms:
 
  - OS X Yosemite
  - Ubuntu 14

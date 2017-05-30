@@ -7,9 +7,9 @@ Background
 ----------
  
  
-The Vowpal Wabbit (VP) package is very production friendly and it implements the state of the art in modern machine learning research.
+The Vowpal Wabbit (VW) package is very production friendly and it implements the state of the art in modern machine learning research.
  
-The existing java binding for VP has drawbacks:
+The existing java binding for VW has drawbacks:
  
  - Because of a bug, saved models may have incorrect weights
  - It requires the boost library to be installed on every machine where the wrapper is used, which is not always feasible

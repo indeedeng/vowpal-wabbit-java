@@ -5,16 +5,31 @@
 #ifndef _Included_com_indeed_vw_wrapper_learner_VWLearners
 #define _Included_com_indeed_vw_wrapper_learner_VWLearners
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 /*
  * Class:     com_indeed_vw_wrapper_learner_VWLearners
  * Method:    initialize
  * Signature: (Ljava/lang/String;)J
  */
-JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize
-(JNIEnv *, jobject, jstring);
+JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize__Ljava_lang_String_2
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     com_indeed_vw_wrapper_learner_VWLearners
+ * Method:    initialize
+ * Signature: ([Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize___3Ljava_lang_String_2
+  (JNIEnv *, jclass, jobjectArray);
+
+/*
+ * Class:     com_indeed_vw_wrapper_learner_VWLearners
+ * Method:    getReturnType
+ * Signature: (J)Lcom/indeed/vw/wrapper/learner/VWLearners/VWReturnType;
+ */
+JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_getReturnType
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_indeed_vw_wrapper_learner_VWLearners
@@ -22,15 +37,7 @@ JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_closeInstance
-(JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_indeed_vw_wrapper_learner_VWLearners
- * Method:    getReturnType
- * Signature: (J)V
- */
-JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_getReturnType
-(JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 #ifdef __cplusplus
 }

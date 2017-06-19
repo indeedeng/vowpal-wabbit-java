@@ -1,7 +1,6 @@
 package com.indeed.vw.wrapper.learner;
 
 import com.indeed.vw.wrapper.jni.NativeUtils;
-import org.apache.commons.lang.ArrayUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -113,12 +112,12 @@ public final class VWLearners {
     private static long initializeVWJni(final List<String> args) {
         long nativePointer;
         try {
-            nativePointer = initialize(args.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
+            nativePointer = initialize(args.toArray(new String[]{}));
             loadedNativeLibrary = true;
         }
         catch (final UnsatisfiedLinkError e) {
             loadNativeLibrary();
-            nativePointer = initialize(args.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
+            nativePointer = initialize(args.toArray(new String[]{}));
         }
         return nativePointer;
     }

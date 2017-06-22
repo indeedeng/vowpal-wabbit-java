@@ -1386,15 +1386,29 @@ public class VowpalWabbit {
         }
 
         /**
-         * Get command line arguments will be passes to VWLearner <p>
+         * Get command arguments will be passes to VWLearner <p>
          *
          * @return command line arguments
          */
-        public List<String> getCommand() {
+        public List<String> getCommandArguments() {
+            final List<String> args = Lists.newArrayList(argumentsStrings);
             if (!verbose) {
-                argumentsStrings.add("--quiet");
+                args.add("--quiet");
             }
-            return argumentsStrings;
+            return args;
+        }
+
+        /**
+         * Get command option will be passes to VWLearner <p>
+         *
+         * @return command options
+         */
+        public String getCommand() {
+            final List<String> args = Lists.newArrayList(argumentsStrings);
+            if (!verbose) {
+                args.add("--quiet");
+            }
+            return Joiner.on(" ").join(args.subList(1, args.size()));
         }
 
         /**
@@ -1403,9 +1417,8 @@ public class VowpalWabbit {
          */
         @Override
         public VWFloatLearner buildFloatLearner() {
-            final List<String> args = getCommand();
-            logger.info("Vowpal wabbit command: " + args);
-            return (VWFloatLearner) VWLearners.create(args);
+            logger.info("Vowpal wabbit command: " + getCommand());
+            return (VWFloatLearner) VWLearners.create(getCommandArguments());
         }
 
         /**
@@ -1413,9 +1426,8 @@ public class VowpalWabbit {
          * @return VWIntLearner object
          */
         public VWIntLearner buildIntLearner() {
-            final List<String> args = getCommand();
-            logger.info("Vowpal wabbit command: " + args);
-            return (VWIntLearner) VWLearners.create(args);
+            logger.info("Vowpal wabbit command: " + getCommand());
+            return (VWIntLearner) VWLearners.create(getCommandArguments());
         }
 
         /**
@@ -1423,9 +1435,8 @@ public class VowpalWabbit {
          * @return VWFloatArrayLearner object
          */
         public VWFloatArrayLearner buildFloatArrayLearner() {
-            final List<String> args = getCommand();
-            logger.info("Vowpal wabbit command: " + args);
-            return (VWFloatArrayLearner) VWLearners.create(args);
+            logger.info("Vowpal wabbit command: " + getCommand());
+            return (VWFloatArrayLearner) VWLearners.create(getCommandArguments());
         }
 
         /**
@@ -1433,9 +1444,8 @@ public class VowpalWabbit {
          * @return VWIntArrayLearner object
          */
         public VWIntArrayLearner buildIntArrayLearner() {
-            final List<String> args = getCommand();
-            logger.info("Vowpal wabbit command: " + args);
-            return (VWIntArrayLearner) VWLearners.create(args);
+            logger.info("Vowpal wabbit command: " + getCommand());
+            return (VWIntArrayLearner) VWLearners.create(getCommandArguments());
         }
     }
 }

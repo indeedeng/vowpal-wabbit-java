@@ -649,6 +649,18 @@ public class VowpalWabbit {
         }
 
         /**
+         * Output human-readable final regressor with feature names <p>
+         *
+         * @param model path where to store readable model
+         * @return builder
+         */
+        @Override
+        public SGDVowpalWabbitBuilder invertHash(final Path model) {
+            argumentsStringBuilder.append("--invert_hash " + model + " ");
+            return this;
+        }
+
+        /**
          * save extra state so learning can be resumed later with new data <p>
          *
          * @return builder

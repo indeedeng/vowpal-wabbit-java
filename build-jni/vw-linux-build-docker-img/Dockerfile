@@ -1,4 +1,4 @@
-FROM centos:6
+FROM centos:5
 
 RUN yum update -q -y
 RUN yum install -y epel-release
@@ -30,7 +30,7 @@ RUN wget http://ftp.gnu.org/gnu/automake/automake-1.15.tar.gz
 RUN tar xvzf automake-1.15.tar.gz
 RUN cd /automake-1.15 && ./configure && make && make install
 
-RUN wget https://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.gz
+RUN wget http://ftpmirror.gnu.org/libtool/libtool-2.4.6.tar.gz
 RUN tar xvzf libtool-2.4.6.tar.gz
 RUN cd /libtool-2.4.6 && ./configure && make && make install
 

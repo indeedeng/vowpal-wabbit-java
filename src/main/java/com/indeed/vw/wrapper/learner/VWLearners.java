@@ -3,7 +3,6 @@ package com.indeed.vw.wrapper.learner;
 import com.indeed.vw.wrapper.jni.NativeUtils;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -24,33 +23,11 @@ public final class VWLearners {
     private VWLearners() {}
 
     /**
-     * Construct a VW Predictor.  The goal here is to provide a typesafe way of getting an predictor
+     * This is the only way to construct a VW Predictor.  The goal here is to provide a typesafe way of getting an predictor
      * which will return the correct output type given the command specified.
      * <pre>
      * {@code
-     *     VWIntLearner vw = VWLearners.create(Arrays.asList("vw", "--cb", "4"));
-     * }
-     * </pre>
-     *
-     * NOTE: It is very important to note that if this method results in a {@link java.lang.ClassCastException} then there
-     * WILL be a memory leak as the exception occurs in the calling method not this method due to type erasures.  It is therefore
-     * imperative that if the caller of this method is unsure of the type returned that it should specify <code>T</code>
-     * as {@link VWLearner} and do the casting on it's side so that closing the method can be guaranteed.
-     * @param args The VW initialization command arguments.
-     * @param <T> The type of learner expected.  Note that this type implicitly specifies the output type of the learner.
-     * @return A VW Learner
-     */
-    public static <T extends VWLearner> T create(final List<String> args) {
-        final long nativePointer = initializeVWJni(args);
-        return create(nativePointer, "Unknown VW return type using arguments: " + args);
-    }
-
-    /**
-     * Construct a VW Predictor.  The goal here is to provide a typesafe way of getting an predictor
-     * which will return the correct output type given the command specified.
-     * <pre>
-     * {@code
-     *     VWIntLearner vw = VWLearners.create("--cb 4");
+     *     VWIntLearner vw = VWFactory.createVWLearner("--cb 4");
      * }
      * </pre>
      *
@@ -62,13 +39,9 @@ public final class VWLearners {
      * @param <T> The type of learner expected.  Note that this type implicitly specifies the output type of the learner.
      * @return A VW Learner
      */
+    @SuppressWarnings("unchecked")
     public static <T extends VWLearner> T create(final String command) {
         final long nativePointer = initializeVWJni(command);
-        return create(nativePointer, "Unknown VW return type using command: " + command);
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T extends VWLearner> T create(final long nativePointer, final String exceptionMessage) {
         final VWReturnType returnType = getReturnType(nativePointer);
 
         switch (returnType) {
@@ -80,7 +53,7 @@ public final class VWLearners {
             default:
                 // Doing this will allow for all cases when a C object is made to be closed.
                 closeInstance(nativePointer);
-                throw new IllegalArgumentException(exceptionMessage);
+                throw new IllegalArgumentException("Unknown VW return type using command: " + command);
         }
     }
 
@@ -99,25 +72,6 @@ public final class VWLearners {
         catch (final UnsatisfiedLinkError e) {
             loadNativeLibrary();
             nativePointer = initialize(command);
-        }
-        return nativePointer;
-    }
-
-    /**
-     * @param args The command line arguments that are passed to VW, including the name of the program, see
-     *                <a href="https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments">here
-     *                for more information
-     * @return The pointer to the native object created on the C side
-     */
-    private static long initializeVWJni(final List<String> args) {
-        long nativePointer;
-        try {
-            nativePointer = initialize(args.toArray(new String[]{}));
-            loadedNativeLibrary = true;
-        }
-        catch (final UnsatisfiedLinkError e) {
-            loadNativeLibrary();
-            nativePointer = initialize(args.toArray(new String[]{}));
         }
         return nativePointer;
     }
@@ -142,8 +96,8 @@ public final class VWLearners {
             }
         }
     }
+
     private static native long initialize(String command);
-    private static native long initialize(String args[]);
     private static native VWReturnType getReturnType(long nativePointer);
 
     // Closing needs to be done here when initialization fails and by VWBase

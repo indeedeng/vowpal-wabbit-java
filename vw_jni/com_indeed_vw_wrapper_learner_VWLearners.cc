@@ -1,13 +1,11 @@
 #include <vw.h>
-#include <stdio.h>
-#include <unistd.h>
 #include "jni_base_learner.h"
 #include "com_indeed_vw_wrapper_learner_VWLearners.h"
 
 #define RETURN_TYPE "com/indeed/vw/wrapper/learner/VWLearners$VWReturnType"
 #define RETURN_TYPE_INSTANCE "L" RETURN_TYPE ";"
 
-JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize__Ljava_lang_String_2(JNIEnv *env, jclass cls, jstring command)
+JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize(JNIEnv *env, jobject obj, jstring command)
 { jlong vwPtr = 0;
   try
   { vw* vwInstance = VW::initialize(env->GetStringUTFChars(command, NULL));
@@ -19,25 +17,7 @@ JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize
   return vwPtr;
 }
 
-JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize___3Ljava_lang_String_2(JNIEnv *env, jclass cls, jobjectArray jargs)
-{ jlong vwPtr = 0;
-  try
-  { jint argc = env->GetArrayLength(jargs);
-    char **argv = (char**) calloc(argc, sizeof(char*));
-    for (int i = 0; i < argc; i++)
-    { jstring jarg = (jstring) (env->GetObjectArrayElement(jargs, i));
-      argv[i] = strdup(env->GetStringUTFChars(jarg, nullptr));
-    }
-    vw* vwInstance = VW::initialize(argc, argv);
-    vwPtr = (jlong)vwInstance;
-  }
-  catch(...)
-  { rethrow_cpp_exception_as_java_exception(env);
-  }
-  return vwPtr;
-}
-
-JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_closeInstance(JNIEnv *env, jclass cls, jlong vwPtr)
+JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_closeInstance(JNIEnv *env, jobject obj, jlong vwPtr)
 { try
   { VW::sync_stats(*((vw*)vwPtr));
     VW::finish(*((vw*)vwPtr));
@@ -47,7 +27,7 @@ JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_closeInstan
   }
 }
 
-JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_getReturnType(JNIEnv *env, jclass cls, jlong vwPtr)
+JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_getReturnType(JNIEnv *env, jobject obj, jlong vwPtr)
 { jclass clVWReturnType = env->FindClass(RETURN_TYPE);
   jfieldID field;
   vw* vwInstance = (vw*)vwPtr;

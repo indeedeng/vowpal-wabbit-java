@@ -256,6 +256,14 @@ interface DebuggingOptions {
     SGDVowpalWabbitBuilder readableModel(final Path model);
 
     /**
+     * Output human-readable final regressor with feature names <p>
+     *
+     * @param model path where to write readable model
+     * @return builder
+     */
+    SGDVowpalWabbitBuilder invertHash(final Path model);
+
+    /**
      * Make vowpal wabbit writing debug and performance information to stderr <p>
      *
      * @return builder

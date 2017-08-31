@@ -696,7 +696,8 @@ public class VowpalWabbit {
          */
         @Override
         public SGDVowpalWabbitBuilder invertHash(final Path model) {
-            argumentsStringBuilder.append("--invert_hash " + model + " ");
+            argumentsStrings.add("--invert_hash");
+            argumentsStrings.add(model.toString());
             return this;
         }
 

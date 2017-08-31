@@ -4,7 +4,7 @@ import com.indeed.vw.wrapper.api.parameters.Link;
 import com.indeed.vw.wrapper.api.parameters.Loss;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -18,7 +18,7 @@ public class VowpalWabbitBuilderTest {
                 .link(Link.logistic)
                 .lossFunction(Loss.logistic)
                 .l2(0.0001).getCommand();
-        final String expected = "--adaptive --invariant --link logistic --loss_function logistic --l2 1.0E-4  --quiet";
+        final String expected = "--adaptive --invariant --link logistic --loss_function logistic --l2 1.0E-4 --quiet";
         assertEquals(expected, command);
     }
 }

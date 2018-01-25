@@ -2,21 +2,18 @@ diff --git a/vowpalwabbit/gd.cc b/vowpalwabbit/gd.cc
 index 464816a..0790c9d 100644
 --- a/vowpalwabbit/gd.cc
 +++ b/vowpalwabbit/gd.cc
-@@ -570,7 +570,8 @@ void sync_weights(vw& all)
- }
- 
- void save_load_regressor(vw& all, io_buf& model_file, bool read, bool text)
--{ uint64_t length = (uint64_t)1 << all.num_bits;
-+{ sync_weights(all);
-+  uint64_t length = (uint64_t)1 << all.num_bits;
-   uint64_t stride = (uint64_t)1 << all.reg.stride_shift;
+@@ -692,6 +692,7 @@
+     return;
+   }
+
++  sync_weights(all);
    uint64_t i = 0;
    uint32_t old_i = 0;
-@@ -644,7 +645,7 @@ void save_load_regressor(vw& all, io_buf& model_file, bool read, bool text)
- void save_load_online_state(vw& all, io_buf& model_file, bool read, bool text, gd* g)
- { //vw& all = *g.all;
+   uint64_t length = (uint64_t)1 << all.num_bits;
+@@ -825,6 +826,7 @@
+   //vw& all = *g.all;
    stringstream msg;
--
+
 +  sync_weights(all);
    msg << "initial_t " << all.initial_t << "\n";
    bin_text_read_write_fixed(model_file, (char*)&all.initial_t, sizeof(all.initial_t),

@@ -3,7 +3,7 @@
 #  This script was mainly written by Jon Morra.
 #  It contains helper function to configure MacOS build enviroment.
 #
-#  Check original version in https://github.com/JohnLangford/vowpal_wabbit/blob/8.2.1/java/src/main/bin/build.sh
+#  Check original version in https://github.com/JohnLangford/vowpal_wabbit/blob/8.5.0/java/src/main/bin/build.sh
 # =============================================================================
 
 # =============================================================================

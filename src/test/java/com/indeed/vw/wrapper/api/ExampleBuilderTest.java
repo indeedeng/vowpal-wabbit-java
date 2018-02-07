@@ -39,7 +39,7 @@ public class ExampleBuilderTest {
         final ExampleBuilder exampleBuilder = ExampleBuilder.create();
         exampleBuilder.label(-1);
         exampleBuilder
-                .createNamespace("user_id")
+                .createNamespace("")
                 .addCategoricalFeature("uid123");
         exampleBuilder
                 .createNamespace("ad_id")
@@ -48,7 +48,7 @@ public class ExampleBuilderTest {
                 .createNamespace("query")
                 .addTextAsFeatures("query word and so on");
         assertEquals(
-                "-1.0 |user_id uid123 |ad_id ad123 |query query word and so on",
+                "-1.0 | uid123 |ad_id ad123 |query query word and so on",
                 exampleBuilder.toString());
     }
 }

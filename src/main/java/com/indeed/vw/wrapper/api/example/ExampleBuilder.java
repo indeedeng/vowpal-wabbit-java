@@ -261,27 +261,28 @@ public class ExampleBuilder {
     }
 
     public NamespaceBuilder createNamespace(@Nonnull final String namespace) {
-        Preconditions.checkArgument(!namespace.isEmpty(), "Namespace should not be empty!");
         Preconditions.checkArgument(!VW_CONTROL_CHARACTERS.matcher(namespace).find(),
                 "Bad namespace name!" +
                         "Namespace=" + namespace);
-        Preconditions.checkArgument(doNotCheckNamespaces || !namespaceFirstCharacters.contains(namespace.charAt(0)),
-                        "Please use a unique first character for each namespace. \n" +
-                        "This is necessary because vowpal wabbit options like '--keep', '--quadratic', '--cubic' \n" +
-                        "only look at the first character of the namespace for performance reasons.\n" +
-                        "If you want to have multiple namespaces that start with same character - " +
-                        "create ExampleBuilder instance using ExampleBuilder.createAndDoNotCheckNamespace() method.\n" +
-                        "These namespaces start with same character: " + namespace + ", " +
-                                namespaceThatStartWithSameCharacter(namespace));
+        if (!namespace.isEmpty()) {
+            Preconditions.checkArgument(doNotCheckNamespaces || !namespaceFirstCharacters.contains(namespace.charAt(0)),
+                    "Please use a unique first character for each namespace. \n" +
+                            "This is necessary because vowpal wabbit options like '--keep', '--quadratic', '--cubic' \n" +
+                            "only look at the first character of the namespace for performance reasons.\n" +
+                            "If you want to have multiple namespaces that start with same character - " +
+                            "create ExampleBuilder instance using ExampleBuilder.createAndDoNotCheckNamespace() method.\n" +
+                            "These namespaces start with same character: " + namespace + ", " +
+                            namespaceThatStartWithSameCharacter(namespace));
+            namespaceFirstCharacters.add(namespace.charAt(0));
+        }
         final NamespaceBuilder namespaceBuilder = new NamespaceBuilder(this, namespace);
         namespaceBuilders.add(namespaceBuilder);
-        namespaceFirstCharacters.add(namespace.charAt(0));
         return namespaceBuilder;
     }
 
     private String namespaceThatStartWithSameCharacter(final String namespace) {
         for (final NamespaceBuilder anotherNameSpace : namespaceBuilders) {
-            if (namespace.charAt(0) == anotherNameSpace.name.charAt(0)) {
+            if (!anotherNameSpace.name.isEmpty() && namespace.charAt(0) == anotherNameSpace.name.charAt(0)) {
                 return anotherNameSpace.name;
             }
         }

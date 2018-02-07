@@ -1438,6 +1438,7 @@ public class VowpalWabbit {
          *
          * @return VWIntLearner object
          */
+        @Override
         public VWIntLearner buildIntLearner() {
             logger.info("Vowpal wabbit command: " + getCommand());
             return (VWIntLearner) VWLearners.create(getCommandArguments());

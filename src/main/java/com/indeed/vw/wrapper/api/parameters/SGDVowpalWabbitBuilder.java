@@ -1,6 +1,7 @@
 package com.indeed.vw.wrapper.api.parameters;
 
 import com.indeed.vw.wrapper.learner.VWFloatLearner;
+import com.indeed.vw.wrapper.learner.VWIntLearner;
 
 import java.nio.file.Path;
 
@@ -360,6 +361,8 @@ public interface SGDVowpalWabbitBuilder extends UpdatesOptions, RegularizationOp
      * @return VWFloatLearner instance
      */
     VWFloatLearner buildFloatLearner();
+
+    VWIntLearner buildIntLearner();
 }
 
 // [1] - this number is calculated using Data Science.

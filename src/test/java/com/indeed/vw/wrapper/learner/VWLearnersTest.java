@@ -1,19 +1,12 @@
 package com.indeed.vw.wrapper.learner;
 
 import com.indeed.vw.wrapper.api.VowpalWabbit;
-import com.indeed.vw.wrapper.api.example.ExampleBuilder;
 import com.indeed.vw.wrapper.api.parameters.VWUtility;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.log4j.lf5.util.StreamUtils;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import javax.annotation.Nonnull;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 
 /**

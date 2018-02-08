@@ -1,10 +1,4 @@
-FROM centos:5
-
-# CentOS 5 reached EOL, we need to update repo URL
-RUN sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf
-RUN sed -i 's/mirrorlist/#mirrorlist/' /etc/yum.repos.d/*.repo
-RUN sed -i 's|#baseurl=http://mirror.centos.org/centos/$releasever|baseurl=http://vault.centos.org/5.11|' /etc/yum.repos.d/*.repo
-
+FROM centos:6
 
 RUN yum update -q -y
 RUN yum install -y epel-release

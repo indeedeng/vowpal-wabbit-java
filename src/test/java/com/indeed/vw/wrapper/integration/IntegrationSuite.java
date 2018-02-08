@@ -74,6 +74,7 @@ public abstract class IntegrationSuite {
      *
      * @throws IOException
      */
+    @Ignore
     @Test
     public void testReadModelTrainedInCommandLine() throws IOException {
         final Path modelPath = Paths.get(getClass().getResource(getModelPath()).getPath());
@@ -100,6 +101,7 @@ public abstract class IntegrationSuite {
      *
      * @throws IOException
      */
+    @Ignore
     @Test
     public void testInteractingTroughJava() throws IOException {
         try (final VWFloatLearner learner = configureVowpalWabbit().verbose().buildFloatLearner()) {
@@ -129,6 +131,7 @@ public abstract class IntegrationSuite {
      *
      * @throws IOException
      */
+    @Ignore
     @Test
     public void testSaveAndReadModelFile() throws IOException {
         final Path modelPath = Paths.get(tmpDir.toString(), "model.bin");

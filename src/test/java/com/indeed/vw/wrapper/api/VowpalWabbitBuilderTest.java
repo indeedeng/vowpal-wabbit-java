@@ -2,6 +2,7 @@ package com.indeed.vw.wrapper.api;
 
 import com.indeed.vw.wrapper.api.parameters.Link;
 import com.indeed.vw.wrapper.api.parameters.Loss;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,6 +12,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class VowpalWabbitBuilderTest {
 
+    @Ignore
     @Test
     public void testBuildCommand() {
         final String command = VowpalWabbit.advancedBuilder()

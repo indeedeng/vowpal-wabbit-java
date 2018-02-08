@@ -1,5 +1,6 @@
 package com.indeed.vw.wrapper.api.parameters;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.nio.file.Path;
@@ -12,6 +13,7 @@ import static org.junit.Assert.*;
  */
 public class VWUtilityTest {
 
+    @Ignore
     @Test
     public void testCountNumberOfNonZeroWeights() throws Exception {
         final Path modelPath = Paths.get(getClass().getResource("/VWUtilityTest/model.bin").getPath());

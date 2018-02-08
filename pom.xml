@@ -4,11 +4,11 @@
     <parent>
         <groupId>com.indeed</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>19</version>
+        <version>22</version>
     </parent>
 
     <artifactId>vw-wrapper</artifactId>
-    <version>5.1.0</version>
+    <version>5.1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Vowpal Wabbit Wrapper</name>

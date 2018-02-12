@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
  *
  */
 public class ExampleBuilderTest {
-
     @Ignore
     @Test
     public void testBuildExample1() {
@@ -53,5 +52,40 @@ public class ExampleBuilderTest {
         assertEquals(
                 "-1.0 | uid123 |ad_id ad123 |query query word and so on",
                 exampleBuilder.toString());
+    }
+
+    @Ignore
+    @Test (expected = IllegalArgumentException.class)
+    public void testNameSpaceIllegalCharacterAsterisk() {
+        final ExampleBuilder exampleBuilder = ExampleBuilder.create();
+        exampleBuilder.createNamespace("a*b");
+    }
+
+    @Ignore
+    @Test (expected = IllegalArgumentException.class)
+    public void testNameSpaceIllegalCharacterHat() {
+        final ExampleBuilder exampleBuilder = ExampleBuilder.create();
+        exampleBuilder.createNamespace("a^b");
+    }
+
+    @Ignore
+    @Test (expected = IllegalArgumentException.class)
+    public void testNameSpaceIllegalCharactePiper() {
+        final ExampleBuilder exampleBuilder = ExampleBuilder.create();
+        exampleBuilder.createNamespace("a|b");
+    }
+
+    @Ignore
+    @Test (expected = IllegalArgumentException.class)
+    public void testNameSpaceIllegalCharacteSpace() {
+        final ExampleBuilder exampleBuilder = ExampleBuilder.create();
+        exampleBuilder.createNamespace("a b");
+    }
+
+    @Ignore
+    @Test (expected = IllegalArgumentException.class)
+    public void testNameSpaceIllegalCharacteColon() {
+        final ExampleBuilder exampleBuilder = ExampleBuilder.create();
+        exampleBuilder.createNamespace("a:b");
     }
 }

@@ -12,7 +12,6 @@ import static org.junit.Assert.assertEquals;
  */
 public class VowpalWabbitBuilderTest {
 
-    @Ignore
     @Test
     public void testBuildCommand() {
         final String command = VowpalWabbit.advancedBuilder()

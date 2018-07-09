@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  */
 public class ExampleBuilder {
 
-    private static final Pattern VW_CONTROL_CHARACTERS = Pattern.compile("[\\s:\\*\\^\\|]+");
+    private static final Pattern VW_CONTROL_CHARACTERS = Pattern.compile("[\\s:\\|]+");
 
     private final boolean doNotCheckNamespaces;
 

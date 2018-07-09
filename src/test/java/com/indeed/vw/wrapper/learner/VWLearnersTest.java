@@ -15,7 +15,6 @@ import java.io.*;
  */
 public class VWLearnersTest {
 
-    @Ignore
     @Test
     public void testCreateTwoLearners() throws Exception {
         try(final VWFloatLearner learnerOuter = VowpalWabbit.builder()
@@ -28,7 +27,6 @@ public class VWLearnersTest {
         }
     }
 
-    @Ignore
     @Test
     public void testCreateModelFileWithWhiteSpace() throws IOException {
         final File tempFile = File.createTempFile("file with whitespace", ".txt");
@@ -40,7 +38,6 @@ public class VWLearnersTest {
         }
     }
 
-    @Ignore
     @Test
     public void testReadfromModelFile() throws IOException {
         try(final VWFloatLearner learner = VowpalWabbit.builder()
@@ -50,7 +47,6 @@ public class VWLearnersTest {
         }
     }
 
-    @Ignore
     @Test
     public void testIntLearner() throws IOException {
         try(final VWIntLearner learner = VowpalWabbit.builder()

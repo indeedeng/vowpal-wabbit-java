@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
  *
  */
 public class ExampleBuilderTest {
-    @Ignore
     @Test
     public void testBuildExample1() {
         ExampleBuilder example1 = ExampleBuilder.create()
@@ -35,7 +34,6 @@ public class ExampleBuilderTest {
         assertEquals(expected, example1.toString());
     }
 
-    @Ignore
     @Test
     public void testBuildExample2() {
         final ExampleBuilder exampleBuilder = ExampleBuilder.create();
@@ -54,35 +52,18 @@ public class ExampleBuilderTest {
                 exampleBuilder.toString());
     }
 
-    @Ignore
-    @Test (expected = IllegalArgumentException.class)
-    public void testNameSpaceIllegalCharacterAsterisk() {
-        final ExampleBuilder exampleBuilder = ExampleBuilder.create();
-        exampleBuilder.createNamespace("a*b");
-    }
-
-    @Ignore
-    @Test (expected = IllegalArgumentException.class)
-    public void testNameSpaceIllegalCharacterHat() {
-        final ExampleBuilder exampleBuilder = ExampleBuilder.create();
-        exampleBuilder.createNamespace("a^b");
-    }
-
-    @Ignore
     @Test (expected = IllegalArgumentException.class)
     public void testNameSpaceIllegalCharactePiper() {
         final ExampleBuilder exampleBuilder = ExampleBuilder.create();
         exampleBuilder.createNamespace("a|b");
     }
 
-    @Ignore
     @Test (expected = IllegalArgumentException.class)
     public void testNameSpaceIllegalCharacteSpace() {
         final ExampleBuilder exampleBuilder = ExampleBuilder.create();
         exampleBuilder.createNamespace("a b");
     }
 
-    @Ignore
     @Test (expected = IllegalArgumentException.class)
     public void testNameSpaceIllegalCharacteColon() {
         final ExampleBuilder exampleBuilder = ExampleBuilder.create();

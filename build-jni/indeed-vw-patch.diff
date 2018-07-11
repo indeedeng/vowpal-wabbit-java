@@ -1,20 +1,21 @@
 diff --git a/vowpalwabbit/gd.cc b/vowpalwabbit/gd.cc
-index 464816a..0790c9d 100644
+index 7d747644..01ff2f83 100644
 --- a/vowpalwabbit/gd.cc
 +++ b/vowpalwabbit/gd.cc
-@@ -692,6 +692,7 @@
-     return;
-   }
-
+@@ -587,6 +587,7 @@ template<class T>
+ void save_load_regressor(vw& all, io_buf& model_file, bool read, bool text, T& weights)
+ {
+ 	size_t brw = 1;
 +  sync_weights(all);
-   uint64_t i = 0;
-   uint32_t old_i = 0;
-   uint64_t length = (uint64_t)1 << all.num_bits;
-@@ -825,6 +826,7 @@
-   //vw& all = *g.all;
-   stringstream msg;
-
+ 
+ 	if (all.print_invert)   //write readable model with feature names
+ 	{
+@@ -732,7 +733,7 @@ void save_load_online_state(vw& all, io_buf& model_file, bool read, bool text, g
+ void save_load_online_state(vw& all, io_buf& model_file, bool read, bool text, gd* g)
+ { //vw& all = *g.all;
+ 	stringstream msg;
+-
 +  sync_weights(all);
-   msg << "initial_t " << all.initial_t << "\n";
-   bin_text_read_write_fixed(model_file, (char*)&all.initial_t, sizeof(all.initial_t),
-                             "", read, msg, text);
+ 	msg << "initial_t " << all.initial_t << "\n";
+ 	bin_text_read_write_fixed(model_file, (char*)&all.initial_t, sizeof(all.initial_t),
+ 		"", read, msg, text);

@@ -1,7 +1,7 @@
 package com.indeed.vw.wrapper.api.parameters;
 
 import com.indeed.vw.wrapper.learner.VWFloatLearner;
-import com.indeed.vw.wrapper.learner.VWIntLearner;
+import com.indeed.vw.wrapper.learner.VWLearner;
 
 import java.nio.file.Path;
 
@@ -359,10 +359,17 @@ public interface SGDVowpalWabbitBuilder extends UpdatesOptions, RegularizationOp
      * Build learner <p>
      *
      * @return VWFloatLearner instance
+     * @deprecated use {@link #build()} instead.
      */
+    @Deprecated
     VWFloatLearner buildFloatLearner();
 
-    VWIntLearner buildIntLearner();
+    /**
+     * Build learner <p>
+     *
+     * @return VWLearner instance
+     */
+    <T extends VWLearner> T build();
 }
 
 // [1] - this number is calculated using Data Science.

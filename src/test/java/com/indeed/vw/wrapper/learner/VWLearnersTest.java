@@ -49,7 +49,7 @@ public class VWLearnersTest {
 
     @Test
     public void testIntLearner() throws IOException {
-        try(final VWIntLearner learner = VowpalWabbit.builder()
+        try(final VWIntLearner learner = VowpalWabbit.advancedBuilder()
                 .initialRegressor(VWUtility.getFilePathFromRelativePath("/VWLearnerTest/classifier.model")
                 ).buildIntLearner()) {
             Assert.assertEquals(2, learner.predict("| d e f"));

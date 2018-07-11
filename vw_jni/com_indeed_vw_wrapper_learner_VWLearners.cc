@@ -7,19 +7,7 @@
 #define RETURN_TYPE "com/indeed/vw/wrapper/learner/VWLearners$VWReturnType"
 #define RETURN_TYPE_INSTANCE "L" RETURN_TYPE ";"
 
-JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize__Ljava_lang_String_2(JNIEnv *env, jclass cls, jstring command)
-{ jlong vwPtr = 0;
-  try
-  { vw* vwInstance = VW::initialize(env->GetStringUTFChars(command, NULL));
-    vwPtr = (jlong)vwInstance;
-  }
-  catch(...)
-  { rethrow_cpp_exception_as_java_exception(env);
-  }
-  return vwPtr;
-}
-
-JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize___3Ljava_lang_String_2(JNIEnv *env, jclass cls, jobjectArray jargs)
+JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize(JNIEnv *env, jclass cls, jobjectArray jargs)
 { jlong vwPtr = 0;
   try
   { jint argc = env->GetArrayLength(jargs);
@@ -34,38 +22,78 @@ JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize
   catch(...)
   { rethrow_cpp_exception_as_java_exception(env);
   }
-  return vwPtr;
 }
 
-JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_closeInstance(JNIEnv *env, jclass cls, jlong vwPtr)
+JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_performRemainingPasses(JNIEnv *env, jclass obj, jlong vwPtr)
 { try
-  { VW::sync_stats(*((vw*)vwPtr));
-    VW::finish(*((vw*)vwPtr));
+  { vw* vwInstance = (vw*)vwPtr;
+    if (vwInstance->numpasses > 1)
+      { adjust_used_index(*vwInstance);
+        vwInstance->do_reset_source = true;
+        VW::start_parser(*vwInstance);
+        LEARNER::generic_driver(*vwInstance);
+        VW::end_parser(*vwInstance);
+      }
   }
   catch(...)
   { rethrow_cpp_exception_as_java_exception(env);
   }
 }
 
-JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_getReturnType(JNIEnv *env, jclass cls, jlong vwPtr)
+
+JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_closeInstance(JNIEnv *env, jclass obj, jlong vwPtr)
+{ try
+  { vw* vwInstance = (vw*)vwPtr;
+    VW::finish(*vwInstance);
+  }
+  catch(...)
+  { rethrow_cpp_exception_as_java_exception(env);
+  }
+}
+
+JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_saveModel(JNIEnv *env, jclass obj, jlong vwPtr, jstring filename)
+{ try
+  {
+    const char* utf_string = env->GetStringUTFChars(filename, NULL);
+    std::string filenameCpp(utf_string);
+    env->ReleaseStringUTFChars(filename, utf_string);
+    env->DeleteLocalRef(filename);
+    VW::save_predictor(*(vw*)vwPtr, filenameCpp);
+  }
+  catch(...)
+  { rethrow_cpp_exception_as_java_exception(env);
+  }
+}
+
+JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_getReturnType(JNIEnv *env, jclass obj, jlong vwPtr)
 { jclass clVWReturnType = env->FindClass(RETURN_TYPE);
   jfieldID field;
   vw* vwInstance = (vw*)vwPtr;
-  if (vwInstance->p->lp.parse_label == simple_label.parse_label)
-  { if (vwInstance->lda > 0)
-      field = env->GetStaticFieldID(clVWReturnType , "VWFloatArrayType", RETURN_TYPE_INSTANCE);
-    else
-      field = env->GetStaticFieldID(clVWReturnType , "VWFloatType", RETURN_TYPE_INSTANCE);
+  switch (vwInstance->l->pred_type)
+  { case prediction_type::prediction_type_t::action_probs:
+      field = env->GetStaticFieldID(clVWReturnType , "ActionProbs", RETURN_TYPE_INSTANCE);
+      break;
+    case prediction_type::prediction_type_t::action_scores:
+      field = env->GetStaticFieldID(clVWReturnType , "ActionScores", RETURN_TYPE_INSTANCE);
+      break;
+    case prediction_type::prediction_type_t::multiclass:
+      field = env->GetStaticFieldID(clVWReturnType , "Multiclass", RETURN_TYPE_INSTANCE);
+      break;
+    case prediction_type::prediction_type_t::multilabels:
+      field = env->GetStaticFieldID(clVWReturnType , "Multilabels", RETURN_TYPE_INSTANCE);
+      break;
+    case prediction_type::prediction_type_t::prob:
+      field = env->GetStaticFieldID(clVWReturnType , "Prob", RETURN_TYPE_INSTANCE);
+      break;
+    case prediction_type::prediction_type_t::scalar:
+      field = env->GetStaticFieldID(clVWReturnType , "Scalar", RETURN_TYPE_INSTANCE);
+      break;
+    case prediction_type::prediction_type_t::scalars:
+      field = env->GetStaticFieldID(clVWReturnType , "Scalars", RETURN_TYPE_INSTANCE);
+      break;
+    default:
+      field = env->GetStaticFieldID(clVWReturnType , "Unknown", RETURN_TYPE_INSTANCE);
   }
-  else if (vwInstance->p->lp.parse_label == MULTILABEL::multilabel.parse_label)
-    field = env->GetStaticFieldID(clVWReturnType , "VWIntArrayType", RETURN_TYPE_INSTANCE);
-  else if (vwInstance->p->lp.parse_label == MULTICLASS::mc_label.parse_label ||
-           vwInstance->p->lp.parse_label == CB::cb_label.parse_label ||
-           vwInstance->p->lp.parse_label == CB_EVAL::cb_eval.parse_label ||
-           vwInstance->p->lp.parse_label == COST_SENSITIVE::cs_label.parse_label)
-    field = env->GetStaticFieldID(clVWReturnType , "VWIntType", RETURN_TYPE_INSTANCE);
-  else
-    field = env->GetStaticFieldID(clVWReturnType , "Unknown", RETURN_TYPE_INSTANCE);
+
   return env->GetStaticObjectField(clVWReturnType, field);
 }
-

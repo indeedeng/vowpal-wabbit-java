@@ -10,23 +10,15 @@ extern "C" {
 /*
  * Class:     com_indeed_vw_wrapper_learner_VWLearners
  * Method:    initialize
- * Signature: (Ljava/lang/String;)J
+ * Signature:  ()[Ljava/lang/String;
  */
-JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize__Ljava_lang_String_2
-  (JNIEnv *, jclass, jstring);
-
-/*
- * Class:     com_indeed_vw_wrapper_learner_VWLearners
- * Method:    initialize
- * Signature: ([Ljava/lang/String;)J
- */
-JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize___3Ljava_lang_String_2
-  (JNIEnv *, jclass, jobjectArray);
+JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize
+  (JNIEnv *env, jclass cls, jobjectArray jargs);
 
 /*
  * Class:     com_indeed_vw_wrapper_learner_VWLearners
  * Method:    getReturnType
- * Signature: (J)Lcom/indeed/vw/wrapper/learner/VWLearners/VWReturnType;
+ * Signature: (J)LvowpalWabbit/learner/VWLearners/VWReturnType;
  */
 JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_getReturnType
   (JNIEnv *, jclass, jlong);
@@ -39,6 +31,33 @@ JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_getRetur
 JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_closeInstance
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     com_indeed_vw_wrapper_learner_VWLearners
+ * Method:    performRemainingPasses
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_performRemainingPasses
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_indeed_vw_wrapper_learner_VWLearners
+ * Method:    saveModel
+ * Signature: (JLjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_saveModel
+  (JNIEnv *, jclass, jlong, jstring);
+
+#ifdef __cplusplus
+}
+#endif
+#endif
+/* Header for class com_indeed_vw_wrapper_learner_VWLearners_VWReturnType */
+
+#ifndef _Included_com_indeed_vw_wrapper_learner_VWLearners_VWReturnType
+#define _Included_com_indeed_vw_wrapper_learner_VWLearners_VWReturnType
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifdef __cplusplus
 }
 #endif

@@ -1,3 +1,22 @@
+diff --git a/vowpalwabbit/Makefile.am b/vowpalwabbit/Makefile.am
+index 1b5b75d6..1dcfce76 100644
+--- a/vowpalwabbit/Makefile.am
++++ b/vowpalwabbit/Makefile.am
+@@ -1,4 +1,4 @@
+-lib_LTLIBRARIES = liballreduce.la libvw.la libvw_c_wrapper.la
++lib_LTLIBRARIES = liballreduce.la libvw.la
+ 
+ liballreduce_la_SOURCES = allreduce_sockets.cc allreduce_threads.cc vw_exception.cc
+ 
+@@ -17,7 +17,7 @@ ACLOCAL_AMFLAGS = -I acinclude.d
+ AM_CXXFLAGS = ${BOOST_CPPFLAGS} ${ZLIB_CPPFLAGS} ${PTHREAD_CFLAGS} -Wall -Wno-unused-local-typedefs
+ LIBS = ${BOOST_LDFLAGS} ${BOOST_PROGRAM_OPTIONS_LIB} ${ZLIB_LDFLAGS} ${PTHREAD_LIBS}
+ 
+-CXXOPTIMIZE = 
++CXXOPTIMIZE =
+ 
+ if PROFILE
+ CXXOPTIMIZE += -pg
 diff --git a/vowpalwabbit/gd.cc b/vowpalwabbit/gd.cc
 index 7d747644..01ff2f83 100644
 --- a/vowpalwabbit/gd.cc

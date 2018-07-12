@@ -39,15 +39,6 @@ public class VWLearnersTest {
     }
 
     @Test
-    public void testReadfromModelFile() throws IOException {
-        try(final VWFloatLearner learner = VowpalWabbit.builder()
-                .initialRegressor(VWUtility.getFilePathFromRelativePath("/VWLearnerTest/model.8.5.0")
-                ).buildFloatLearner()) {
-            Assert.assertEquals(0.6569876670837402, learner.predict("| price:.23 sqft:.25 age:.05 2006"), 0);
-        }
-    }
-
-    @Test
     public void testIntLearner() throws IOException {
         try(final VWIntLearner learner = VowpalWabbit.advancedBuilder()
                 .initialRegressor(VWUtility.getFilePathFromRelativePath("/VWLearnerTest/classifier.model")

@@ -18,6 +18,7 @@ JNIEXPORT jlong JNICALL Java_com_indeed_vw_wrapper_learner_VWLearners_initialize
     }
     vw* vwInstance = VW::initialize(argc, argv);
     vwPtr = (jlong)vwInstance;
+    return vwPtr;
   }
   catch(...)
   { rethrow_cpp_exception_as_java_exception(env);

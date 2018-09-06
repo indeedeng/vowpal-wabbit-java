@@ -11,7 +11,7 @@ download_vowpal_wabbit_if_needed() {
   if [ ! -d "$VOWPAL_WABBIT_SOURCE_DIR" ]; then
     git clone https://github.com/JohnLangford/vowpal_wabbit.git "$VOWPAL_WABBIT_SOURCE_DIR"
     cd $VOWPAL_WABBIT_SOURCE_DIR
-    git checkout tags/8.2.0 -b indeed-vw-patch
+    git checkout 10bd09ab06f59291e04ad7805e88fd3e693b7159 -b indeed-vw-patch
     git apply "$CURRENT_DIR/indeed-vw-patch.diff"
   fi
 }

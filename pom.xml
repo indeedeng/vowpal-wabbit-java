@@ -3,9 +3,10 @@
 
     <parent>
         <groupId>com.indeed</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>22</version>
+        <artifactId>common-parent</artifactId>
+        <version>19</version>
     </parent>
+
 
     <artifactId>vw-wrapper</artifactId>
     <version>5.1.4-SNAPSHOT</version>

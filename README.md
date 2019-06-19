@@ -1,7 +1,7 @@
 Vowpal Wabbit Wrapper
 ====================
 
-![NetflixOSS Lifecycle](https://img.shields.io/osslifecycle/indeedeng/vowpal-wabbit-java.svg)
+![OSS Lifecycle](https://img.shields.io/osslifecycle/indeedeng/vowpal-wabbit-java.svg)
 
 A java wrapper and friendly API for the [Vowpal wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) machine learning package.
 

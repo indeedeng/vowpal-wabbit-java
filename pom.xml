@@ -9,7 +9,7 @@
 
 
     <artifactId>vw-wrapper</artifactId>
-    <version>5.1.4-SNAPSHOT</version>
+    <version>5.1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Vowpal Wabbit Wrapper</name>
@@ -43,6 +43,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
                 <configuration>
                     <excludePackageNames>com.indeed.vw.wrapper.learner:com.indeed.vw.wrapper.jni</excludePackageNames>
                     <show>package</show>

@@ -1,6 +1,7 @@
 package com.indeed.vw.wrapper.jni;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -21,7 +22,7 @@ import java.io.UnsupportedEncodingException;
  * @author artem@indeed.com
  */
 public class NativeUtils {
-    private static final Logger logger = Logger.getLogger(NativeUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(NativeUtils.class);
 
     /**
      * Private constructor - this class will never be instanced

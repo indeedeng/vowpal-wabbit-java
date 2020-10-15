@@ -10,7 +10,7 @@
 
 
     <artifactId>vw-wrapper</artifactId>
-    <version>5.1.7-SNAPSHOT</version>
+    <version>5.1.7-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>Vowpal Wabbit Wrapper</name>

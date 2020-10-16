@@ -5,20 +5,21 @@
         <groupId>com.indeed</groupId>
         <artifactId>common-parent</artifactId>
         <version>19</version>
+        <relativePath>common-parent-19.pom</relativePath>
     </parent>
 
 
     <artifactId>vw-wrapper</artifactId>
-    <version>5.1.7-SNAPSHOT</version>
+    <version>5.1.7-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>Vowpal Wabbit Wrapper</name>
     <description>
 	    Vowpal wabbit is a very effective machine learning library (https://github.com/JohnLangford/vowpal_wabbit/wiki).
 	    It implements several state of art algorithms in a very efficient way.
-	    
+
 	    This java library provides a JNI OOP interface to vowpal wabbit.
-	    
+
 	    It depends only on log4j and guava. You don't need vowpal wabbit to be installed if you use this wrapper.
     </description>
 
@@ -39,18 +40,18 @@
 	</scm>
 
 
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <excludePackageNames>com.indeed.vw.wrapper.learner:com.indeed.vw.wrapper.jni</excludePackageNames>
-                    <show>package</show>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+                <!--<version>3.1.1</version>-->
+                <!--<configuration>-->
+                    <!--<excludePackageNames>com.indeed.vw.wrapper.learner:com.indeed.vw.wrapper.jni</excludePackageNames>-->
+                    <!--<show>package</show>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>

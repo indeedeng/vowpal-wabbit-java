@@ -11,7 +11,7 @@ extern "C"
 /*
  * Class:     com_indeed_vw_wrapper_learner_VWActionProbsLearner
  * Method:    predict
- * Signature: (Ljava/lang/String;ZJ)LvowpalWabbit/responses/ActionProbs;
+ * Signature: (Ljava/lang/String;ZJ)Lcom/indeed/vw/wrapper/learners/ActionProbs;
  */
 JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWActionProbsLearner_predict
 (JNIEnv *, jobject, jstring, jboolean, jlong);
@@ -19,7 +19,7 @@ JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWActionProbsLearne
 /*
  * Class:     com_indeed_vw_wrapper_learner_VWActionProbsLearner
  * Method:    predictMultiline
- * Signature: ([Ljava/lang/String;ZJ)LvowpalWabbit/responses/ActionProbs;
+ * Signature: ([Ljava/lang/String;ZJ)Lcom/indeed/vw/wrapper/learner/ActionProbs;
  */
 JNIEXPORT jobject JNICALL Java_com_indeed_vw_wrapper_learner_VWActionProbsLearner_predictMultiline
 (JNIEnv *, jobject, jobjectArray, jboolean, jlong);

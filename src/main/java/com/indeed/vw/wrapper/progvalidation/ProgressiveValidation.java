@@ -1,7 +1,5 @@
 package com.indeed.vw.wrapper.progvalidation;
 
-import org.apache.log4j.Logger;
-
 import java.text.DecimalFormat;
 
 /**

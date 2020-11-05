@@ -1,7 +1,8 @@
 package com.indeed.vw.wrapper.progvalidation;
 
 import com.google.common.base.Joiner;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class Metrics {
     }
 
     private final List<ProgressiveValidation> validationMetrics;
-    private static final Logger logger = Logger.getLogger(ProgressiveValidation.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProgressiveValidation.class);
     protected int examplesCount = 0;
     private final int printScoreEveryNExamples;
 

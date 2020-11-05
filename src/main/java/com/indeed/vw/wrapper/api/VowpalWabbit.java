@@ -10,7 +10,8 @@ import com.indeed.vw.wrapper.learner.VWFloatLearner;
 import com.indeed.vw.wrapper.learner.VWIntLearner;
 import com.indeed.vw.wrapper.learner.VWLearner;
 import com.indeed.vw.wrapper.learner.VWLearners;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class VowpalWabbit {
      * Pass this constant as namespace parameter if you want to set some feature engineering for all namespaces. <p> <p>
      */
     public static final String ANY_NAMESPACE = ":";
-    private static final Logger logger = Logger.getLogger(VowpalWabbit.class);
+    private static final Logger logger = LoggerFactory.getLogger(VowpalWabbit.class);
 
     private VowpalWabbit() {
     }

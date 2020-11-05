@@ -9,16 +9,16 @@
 
 
     <artifactId>vw-wrapper</artifactId>
-    <version>5.1.4-SNAPSHOT</version>
+    <version>5.1.7-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>Vowpal Wabbit Wrapper</name>
     <description>
 	    Vowpal wabbit is a very effective machine learning library (https://github.com/JohnLangford/vowpal_wabbit/wiki).
 	    It implements several state of art algorithms in a very efficient way.
-	    
+
 	    This java library provides a JNI OOP interface to vowpal wabbit.
-	    
+
 	    It depends only on log4j and guava. You don't need vowpal wabbit to be installed if you use this wrapper.
     </description>
 
@@ -43,6 +43,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
                 <configuration>
                     <excludePackageNames>com.indeed.vw.wrapper.learner:com.indeed.vw.wrapper.jni</excludePackageNames>
                     <show>package</show>
@@ -54,10 +55,21 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
+    	</dependency>
+	<dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.28</version>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.indeed</groupId>
+        <artifactId>common-parent</artifactId>
+        <version>19</version>
+        <relativePath>common-parent-19.pom</relativePath>
+    </parent>
+
+
+    <artifactId>vw-wrapper</artifactId>
+    <version>5.1.7-RELEASE</version>
+    <packaging>jar</packaging>
+
+    <name>Vowpal Wabbit Wrapper</name>
+    <description>
+	    Vowpal wabbit is a very effective machine learning library (https://github.com/JohnLangford/vowpal_wabbit/wiki).
+	    It implements several state of art algorithms in a very efficient way.
+
+	    This java library provides a JNI OOP interface to vowpal wabbit.
+
+	    It depends only on log4j and guava. You don't need vowpal wabbit to be installed if you use this wrapper.
+    </description>
+
+    <url>http://github.com/indeedeng</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+	<scm>
+		<url>https://github.com/indeedeng/vowpal-wabbit-java</url>
+		<connection>scm:git:https://github.com/indeedeng/vowpal-wabbit-java.git</connection>
+		<developerConnection>scm:git:git@github.com:indeedeng/vowpal-wabbit-java.git</developerConnection>
+	</scm>
+
+
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+                <!--<version>3.1.1</version>-->
+                <!--<configuration>-->
+                    <!--<excludePackageNames>com.indeed.vw.wrapper.learner:com.indeed.vw.wrapper.jni</excludePackageNames>-->
+                    <!--<show>package</show>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+    	</dependency>
+	<dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.28</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit-dep</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

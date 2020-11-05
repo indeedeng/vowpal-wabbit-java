@@ -5,6 +5,7 @@
         <groupId>com.indeed</groupId>
         <artifactId>common-parent</artifactId>
         <version>19</version>
+        <relativePath>common-parent-19.pom</relativePath>
     </parent>
 
 
@@ -39,18 +40,18 @@
 	</scm>
 
 
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <excludePackageNames>com.indeed.vw.wrapper.learner:com.indeed.vw.wrapper.jni</excludePackageNames>
-                    <show>package</show>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+                <!--<version>3.1.1</version>-->
+                <!--<configuration>-->
+                    <!--<excludePackageNames>com.indeed.vw.wrapper.learner:com.indeed.vw.wrapper.jni</excludePackageNames>-->
+                    <!--<show>package</show>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>

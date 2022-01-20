@@ -1,25 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.indeed</groupId>
-        <artifactId>common-parent</artifactId>
-        <version>19</version>
-    </parent>
-
-
+    <groupId>com.indeed</groupId>
     <artifactId>vw-wrapper</artifactId>
     <version>5.1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Vowpal Wabbit Wrapper</name>
     <description>
-	    Vowpal wabbit is a very effective machine learning library (https://github.com/JohnLangford/vowpal_wabbit/wiki).
-	    It implements several state of art algorithms in a very efficient way.
-	    
-	    This java library provides a JNI OOP interface to vowpal wabbit.
-	    
-	    It depends only on log4j and guava. You don't need vowpal wabbit to be installed if you use this wrapper.
+        Vowpal wabbit is a very effective machine learning library (https://github.com/JohnLangford/vowpal_wabbit/wiki).
+        It implements several state of art algorithms in a very efficient way.
+        
+        This java library provides a JNI OOP interface to vowpal wabbit.
+        
+        It depends only on log4j and guava. You don't need vowpal wabbit to be installed if you use this wrapper.
     </description>
 
     <url>http://github.com/indeedeng</url>
@@ -32,17 +26,26 @@
         </license>
     </licenses>
 
-	<scm>
-		<url>https://github.com/indeedeng/vowpal-wabbit-java</url>
-		<connection>scm:git:https://github.com/indeedeng/vowpal-wabbit-java.git</connection>
-		<developerConnection>scm:git:git@github.com:indeedeng/vowpal-wabbit-java.git</developerConnection>
-	</scm>
+    <scm>
+        <url>https://github.com/indeedeng/vowpal-wabbit-java</url>
+        <connection>scm:git:https://github.com/indeedeng/vowpal-wabbit-java.git</connection>
+        <developerConnection>scm:git:git@github.com:indeedeng/vowpal-wabbit-java.git</developerConnection>
+    </scm>
 
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <autoVersionSubmodules>true</autoVersionSubmodules>
+    </properties>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
                     <excludePackageNames>com.indeed.vw.wrapper.learner:com.indeed.vw.wrapper.jni</excludePackageNames>
                     <show>package</show>
@@ -54,26 +57,31 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
+            <version>16.0.1</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
+            <version>1.3.9</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit-dep</artifactId>
+            <version>4.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
+            <version>1.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
